@@ -6,4 +6,8 @@ Public Class Ribbon1
 
     End Sub
 
+    Private Sub BtnRibbonLogin_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonLogin.Click
+        Dim login = New LoginForm()
+        login.ShowDialog()
+    End Sub
 End Class
