@@ -179,6 +179,13 @@
   <ItemGroup>
     <AppDesigner Include="My Project\" />
     <Compile Include="Common.vb" />
+    <Compile Include="FormCloudFiles.Designer.vb">
+      <DependentUpon>FormCloudFiles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCloudFiles.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HttpRequest.vb" />
     <Compile Include="LoginForm.Designer.vb">
       <DependentUpon>LoginForm.vb</DependentUpon>
     </Compile>
@@ -194,6 +201,9 @@
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="FormCloudFiles.resx">
+      <DependentUpon>FormCloudFiles.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +239,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="WordProofreadTools_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

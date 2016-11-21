@@ -62,11 +62,14 @@
         Me.GayRibbonEditPositoin = Me.Factory.CreateRibbonGallery
         Me.GayRibbonEditSpace = Me.Factory.CreateRibbonGallery
         Me.GayRibbonEditOther = Me.Factory.CreateRibbonGallery
+        Me.Group5 = Me.Factory.CreateRibbonGroup
+        Me.CbxRobbinCloudFiles = Me.Factory.CreateRibbonCheckBox
         Me.Tab1.SuspendLayout()
         Me.TabProofread.SuspendLayout()
         Me.Group2.SuspendLayout()
         Me.Group3.SuspendLayout()
         Me.Group4.SuspendLayout()
+        Me.Group5.SuspendLayout()
         Me.SuspendLayout()
         '
         'Tab1
@@ -86,6 +89,7 @@
         Me.TabProofread.Groups.Add(Me.Group2)
         Me.TabProofread.Groups.Add(Me.Group3)
         Me.TabProofread.Groups.Add(Me.Group4)
+        Me.TabProofread.Groups.Add(Me.Group5)
         Me.TabProofread.Label = "编校工具"
         Me.TabProofread.Name = "TabProofread"
         '
@@ -198,6 +202,17 @@
         Me.GayRibbonEditOther.Name = "GayRibbonEditOther"
         Me.GayRibbonEditOther.ShowImage = True
         '
+        'Group5
+        '
+        Me.Group5.Items.Add(Me.CbxRobbinCloudFiles)
+        Me.Group5.Label = "窗口"
+        Me.Group5.Name = "Group5"
+        '
+        'CbxRobbinCloudFiles
+        '
+        Me.CbxRobbinCloudFiles.Label = "云端文件"
+        Me.CbxRobbinCloudFiles.Name = "CbxRobbinCloudFiles"
+        '
         'Ribbon1
         '
         Me.Name = "Ribbon1"
@@ -214,6 +229,8 @@
         Me.Group3.PerformLayout()
         Me.Group4.ResumeLayout(False)
         Me.Group4.PerformLayout()
+        Me.Group5.ResumeLayout(False)
+        Me.Group5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -234,6 +251,8 @@
     Friend WithEvents GayRibbonEditPositoin As Microsoft.Office.Tools.Ribbon.RibbonGallery
     Friend WithEvents GayRibbonEditSpace As Microsoft.Office.Tools.Ribbon.RibbonGallery
     Friend WithEvents GayRibbonEditOther As Microsoft.Office.Tools.Ribbon.RibbonGallery
+    Friend WithEvents Group5 As Microsoft.Office.Tools.Ribbon.RibbonGroup
+    Friend WithEvents CbxRobbinCloudFiles As Microsoft.Office.Tools.Ribbon.RibbonCheckBox
 End Class
 
 Partial Class ThisRibbonCollection
