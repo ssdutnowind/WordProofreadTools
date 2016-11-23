@@ -167,12 +167,16 @@
         Me.GayRibbonEditChange.Image = CType(resources.GetObject("GayRibbonEditChange.Image"), System.Drawing.Image)
         RibbonDropDownItemImpl1.Image = CType(resources.GetObject("RibbonDropDownItemImpl1.Image"), System.Drawing.Image)
         RibbonDropDownItemImpl1.Label = "改正"
+        RibbonDropDownItemImpl1.Tag = "1-1"
         RibbonDropDownItemImpl2.Image = CType(resources.GetObject("RibbonDropDownItemImpl2.Image"), System.Drawing.Image)
         RibbonDropDownItemImpl2.Label = "删除"
+        RibbonDropDownItemImpl2.Tag = "1-2"
         RibbonDropDownItemImpl3.Image = CType(resources.GetObject("RibbonDropDownItemImpl3.Image"), System.Drawing.Image)
         RibbonDropDownItemImpl3.Label = "增补"
+        RibbonDropDownItemImpl3.Tag = "1-3"
         RibbonDropDownItemImpl4.Image = CType(resources.GetObject("RibbonDropDownItemImpl4.Image"), System.Drawing.Image)
         RibbonDropDownItemImpl4.Label = "改正上下角"
+        RibbonDropDownItemImpl4.Tag = "1-4"
         Me.GayRibbonEditChange.Items.Add(RibbonDropDownItemImpl1)
         Me.GayRibbonEditChange.Items.Add(RibbonDropDownItemImpl2)
         Me.GayRibbonEditChange.Items.Add(RibbonDropDownItemImpl3)

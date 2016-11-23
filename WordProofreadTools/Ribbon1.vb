@@ -1,4 +1,5 @@
-﻿Imports Microsoft.Office.Tools.Ribbon
+﻿Imports System.Windows.Forms
+Imports Microsoft.Office.Tools.Ribbon
 
 Public Class Ribbon1
 
@@ -16,20 +17,8 @@ Public Class Ribbon1
         login.ShowDialog()
     End Sub
 
-    ''' <summary>
-    ''' 导出目录
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub BtnRibbonExportContents_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonExportContents.Click
-        Dim contentList = Globals.ThisAddIn.Application.ActiveDocument.TablesOfContents
-        If contentList.Count > 0 Then
-            Dim contents = contentList(1)
-            Common.Log(contents.Range.Text)
-        Else
-            Common.ShowAlert("当前文档内没有目录！", "Warning")
-        End If
-    End Sub
+
+#Region "同步窗口显示"
 
     ''' <summary>
     ''' 切换云端窗格显示
@@ -44,6 +33,96 @@ Public Class Ribbon1
         End If
     End Sub
 
+#End Region
 
+
+#Region "导出功能"
+
+    ''' <summary>
+    ''' 导出目录
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub BtnRibbonExportContents_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonExportContents.Click
+        Dim contentList = Globals.ThisAddIn.Application.ActiveDocument.TablesOfContents
+        If contentList.Count > 0 Then
+            Dim dialog = New SaveFileDialog()
+            dialog.Filter = "文本文件|*.txt"
+            dialog.FileName = "导出文档目录.txt"
+            dialog.Title = "请选择导出的目录文件"
+            '确定后开始导出
+            If dialog.ShowDialog() = DialogResult.OK Then
+                '只获取第一个目录
+                Dim contents = contentList(1)
+                Dim fileName = dialog.FileName
+                Dim content = contents.Range.Text
+                Try
+                    My.Computer.FileSystem.WriteAllText(fileName, content, False)
+                    Common.ShowAlert("导出目录成功！")
+                Catch ex As Exception
+                    Common.ShowAlert(ex.Message, "Error")
+                End Try
+            End If
+        Else
+            Common.ShowAlert("当前文档内没有目录，请先插入目录后再导出！", "Warning")
+        End If
+    End Sub
+
+
+    ''' <summary>
+    ''' 导出索引
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub BtnRibbonExportIndex_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonExportIndex.Click
+        Dim indexs = Globals.ThisAddIn.Application.ActiveDocument.Indexes
+        If indexs.Count > 0 Then
+            Dim dialog = New SaveFileDialog()
+            dialog.Filter = "文本文件|*.txt"
+            dialog.FileName = "导出文档索引.txt"
+            dialog.Title = "请选择导出的索引文件"
+            '确定后开始导出
+            If dialog.ShowDialog() = DialogResult.OK Then
+                Dim index = indexs(1)
+                Dim fileName = dialog.FileName
+                Dim content = index.Range.Text
+                Try
+                    My.Computer.FileSystem.WriteAllText(fileName, content, False)
+                    Common.ShowAlert("导出索引成功！")
+                Catch ex As Exception
+                    Common.ShowAlert(ex.Message, "Error")
+                End Try
+            End If
+        Else
+            Common.ShowAlert("当前文档内没有索引，请先插入索引后再导出！", "Warning")
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 导出摘要
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub BtnRibbonExprotAbstract_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonExprotAbstract.Click
+
+        'Dim ctrls = Globals.ThisAddIn.Application.ActiveDocument.ContentControls
+        'For Each ctrl In ctrls
+        '    ctrl.
+        'Next
+        'Return
+
+
+        'Dim properties = DirectCast(Globals.ThisAddIn.Application.ActiveDocument.BuiltInDocumentProperties, Microsoft.Office.Core.DocumentProperties)
+
+        'Common.Log(properties.Item("Subject").Value)
+        'Dim dialog = New SaveFileDialog()
+        'dialog.Filter = "文本文件|*.txt"
+        '    dialog.FileName = "导出文档索引.txt"
+        '    dialog.Title = "请选择导出的索引文件"
+
+
+    End Sub
+
+#End Region
 
 End Class
