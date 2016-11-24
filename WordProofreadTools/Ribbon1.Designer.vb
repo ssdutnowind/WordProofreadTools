@@ -64,12 +64,15 @@
         Me.GayRibbonEditOther = Me.Factory.CreateRibbonGallery
         Me.Group5 = Me.Factory.CreateRibbonGroup
         Me.CbxRobbinCloudFiles = Me.Factory.CreateRibbonCheckBox
+        Me.Group6 = Me.Factory.CreateRibbonGroup
+        Me.BtnRibbonProofread = Me.Factory.CreateRibbonButton
         Me.Tab1.SuspendLayout()
         Me.TabProofread.SuspendLayout()
         Me.Group2.SuspendLayout()
         Me.Group3.SuspendLayout()
         Me.Group4.SuspendLayout()
         Me.Group5.SuspendLayout()
+        Me.Group6.SuspendLayout()
         Me.SuspendLayout()
         '
         'Tab1
@@ -90,6 +93,7 @@
         Me.TabProofread.Groups.Add(Me.Group3)
         Me.TabProofread.Groups.Add(Me.Group4)
         Me.TabProofread.Groups.Add(Me.Group5)
+        Me.TabProofread.Groups.Add(Me.Group6)
         Me.TabProofread.Label = "编校工具"
         Me.TabProofread.Name = "TabProofread"
         '
@@ -159,7 +163,7 @@
         Me.Group4.Items.Add(Me.GayRibbonEditPositoin)
         Me.Group4.Items.Add(Me.GayRibbonEditSpace)
         Me.Group4.Items.Add(Me.GayRibbonEditOther)
-        Me.Group4.Label = "校对"
+        Me.Group4.Label = "审校"
         Me.Group4.Name = "Group4"
         '
         'GayRibbonEditChange
@@ -217,6 +221,20 @@
         Me.CbxRobbinCloudFiles.Label = "云端文件"
         Me.CbxRobbinCloudFiles.Name = "CbxRobbinCloudFiles"
         '
+        'Group6
+        '
+        Me.Group6.Items.Add(Me.BtnRibbonProofread)
+        Me.Group6.Label = "Group6"
+        Me.Group6.Name = "Group6"
+        '
+        'BtnRibbonProofread
+        '
+        Me.BtnRibbonProofread.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
+        Me.BtnRibbonProofread.Image = CType(resources.GetObject("BtnRibbonProofread.Image"), System.Drawing.Image)
+        Me.BtnRibbonProofread.Label = "添加审校意见"
+        Me.BtnRibbonProofread.Name = "BtnRibbonProofread"
+        Me.BtnRibbonProofread.ShowImage = True
+        '
         'Ribbon1
         '
         Me.Name = "Ribbon1"
@@ -235,6 +253,8 @@
         Me.Group4.PerformLayout()
         Me.Group5.ResumeLayout(False)
         Me.Group5.PerformLayout()
+        Me.Group6.ResumeLayout(False)
+        Me.Group6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -257,6 +277,8 @@
     Friend WithEvents GayRibbonEditOther As Microsoft.Office.Tools.Ribbon.RibbonGallery
     Friend WithEvents Group5 As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents CbxRobbinCloudFiles As Microsoft.Office.Tools.Ribbon.RibbonCheckBox
+    Friend WithEvents Group6 As Microsoft.Office.Tools.Ribbon.RibbonGroup
+    Friend WithEvents BtnRibbonProofread As Microsoft.Office.Tools.Ribbon.RibbonButton
 End Class
 
 Partial Class ThisRibbonCollection

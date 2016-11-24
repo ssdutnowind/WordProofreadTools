@@ -123,6 +123,31 @@ Public Class Ribbon1
 
     End Sub
 
+    Private Sub BtnRibbonProofread_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonProofread.Click
+        Dim selection = Globals.ThisAddIn.Application.Selection
+        If (selection.Text.Count <= 0) Then
+            Common.ShowAlert("请选择内容！", "Warning")
+            Return
+        End If
+
+        Dim comment = Globals.ThisAddIn.Application.ActiveDocument.Comments.Add(selection.Range, "AAAAA")
+
+        comment.Author = "张主编"
+
+
+        '' 图片形式拷贝到内存
+        'selection.CopyAsPicture()
+        '' 判断一下是否有图片
+        'If Clipboard.ContainsImage() Then
+        '    Dim image = Clipboard.GetData(DataFormats.Bitmap)
+        'Else
+        '    Common.ShowAlert("生成文档片段快照失败，请稍候重试！", "Error")
+        'End If
+
+        'Dim dialog = New FormProofread()
+        'dialog.ShowDialog()
+    End Sub
+
 #End Region
 
 End Class

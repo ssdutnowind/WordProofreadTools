@@ -185,6 +185,12 @@
     <Compile Include="FormCloudFiles.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="FormProofread.Designer.vb">
+      <DependentUpon>FormProofread.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProofread.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HttpRequest.vb" />
     <Compile Include="LoginForm.Designer.vb">
       <DependentUpon>LoginForm.vb</DependentUpon>
@@ -203,6 +209,9 @@
     </Compile>
     <EmbeddedResource Include="FormCloudFiles.resx">
       <DependentUpon>FormCloudFiles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProofread.resx">
+      <DependentUpon>FormProofread.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>
@@ -263,7 +272,7 @@
     <ManifestKeyFile>WordProofreadTools_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>82F0C4CD15D744890D2C13E5BA92EE2EA0AB17F1</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D93220C75D036246A0CC62494BB3F48F6CE9E4DB</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a Visual Basic project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
