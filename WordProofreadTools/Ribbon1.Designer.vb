@@ -46,6 +46,11 @@
         Dim RibbonDropDownItemImpl2 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
         Dim RibbonDropDownItemImpl3 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
         Dim RibbonDropDownItemImpl4 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
+        Dim RibbonDropDownItemImpl5 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
+        Dim RibbonDropDownItemImpl6 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
+        Dim RibbonDropDownItemImpl7 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
+        Dim RibbonDropDownItemImpl8 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
+        Dim RibbonDropDownItemImpl9 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
         Me.Tab1 = Me.Factory.CreateRibbonTab
         Me.Group1 = Me.Factory.CreateRibbonGroup
         Me.TabProofread = Me.Factory.CreateRibbonTab
@@ -62,17 +67,18 @@
         Me.GayRibbonEditPositoin = Me.Factory.CreateRibbonGallery
         Me.GayRibbonEditSpace = Me.Factory.CreateRibbonGallery
         Me.GayRibbonEditOther = Me.Factory.CreateRibbonGallery
+        Me.Group6 = Me.Factory.CreateRibbonGroup
+        Me.GayRibbonTemplateCreate = Me.Factory.CreateRibbonGallery
+        Me.BtnRibbonTemplateManage = Me.Factory.CreateRibbonButton
         Me.Group5 = Me.Factory.CreateRibbonGroup
         Me.CbxRobbinCloudFiles = Me.Factory.CreateRibbonCheckBox
-        Me.Group6 = Me.Factory.CreateRibbonGroup
-        Me.BtnRibbonProofread = Me.Factory.CreateRibbonButton
         Me.Tab1.SuspendLayout()
         Me.TabProofread.SuspendLayout()
         Me.Group2.SuspendLayout()
         Me.Group3.SuspendLayout()
         Me.Group4.SuspendLayout()
-        Me.Group5.SuspendLayout()
         Me.Group6.SuspendLayout()
+        Me.Group5.SuspendLayout()
         Me.SuspendLayout()
         '
         'Tab1
@@ -92,8 +98,8 @@
         Me.TabProofread.Groups.Add(Me.Group2)
         Me.TabProofread.Groups.Add(Me.Group3)
         Me.TabProofread.Groups.Add(Me.Group4)
-        Me.TabProofread.Groups.Add(Me.Group5)
         Me.TabProofread.Groups.Add(Me.Group6)
+        Me.TabProofread.Groups.Add(Me.Group5)
         Me.TabProofread.Label = "编校工具"
         Me.TabProofread.Name = "TabProofread"
         '
@@ -210,6 +216,43 @@
         Me.GayRibbonEditOther.Name = "GayRibbonEditOther"
         Me.GayRibbonEditOther.ShowImage = True
         '
+        'Group6
+        '
+        Me.Group6.Items.Add(Me.GayRibbonTemplateCreate)
+        Me.Group6.Items.Add(Me.BtnRibbonTemplateManage)
+        Me.Group6.Label = "模板"
+        Me.Group6.Name = "Group6"
+        '
+        'GayRibbonTemplateCreate
+        '
+        Me.GayRibbonTemplateCreate.ColumnCount = 3
+        Me.GayRibbonTemplateCreate.Image = CType(resources.GetObject("GayRibbonTemplateCreate.Image"), System.Drawing.Image)
+        RibbonDropDownItemImpl5.Image = CType(resources.GetObject("RibbonDropDownItemImpl5.Image"), System.Drawing.Image)
+        RibbonDropDownItemImpl5.Label = "AAAA模板"
+        RibbonDropDownItemImpl6.Image = CType(resources.GetObject("RibbonDropDownItemImpl6.Image"), System.Drawing.Image)
+        RibbonDropDownItemImpl6.Label = "BBBBB模板"
+        RibbonDropDownItemImpl7.Image = CType(resources.GetObject("RibbonDropDownItemImpl7.Image"), System.Drawing.Image)
+        RibbonDropDownItemImpl7.Label = "CCCCC模板"
+        RibbonDropDownItemImpl8.Image = CType(resources.GetObject("RibbonDropDownItemImpl8.Image"), System.Drawing.Image)
+        RibbonDropDownItemImpl8.Label = "DDDDD模板"
+        RibbonDropDownItemImpl9.Image = CType(resources.GetObject("RibbonDropDownItemImpl9.Image"), System.Drawing.Image)
+        RibbonDropDownItemImpl9.Label = "EEEEE模板"
+        Me.GayRibbonTemplateCreate.Items.Add(RibbonDropDownItemImpl5)
+        Me.GayRibbonTemplateCreate.Items.Add(RibbonDropDownItemImpl6)
+        Me.GayRibbonTemplateCreate.Items.Add(RibbonDropDownItemImpl7)
+        Me.GayRibbonTemplateCreate.Items.Add(RibbonDropDownItemImpl8)
+        Me.GayRibbonTemplateCreate.Items.Add(RibbonDropDownItemImpl9)
+        Me.GayRibbonTemplateCreate.Label = "从模板创建"
+        Me.GayRibbonTemplateCreate.Name = "GayRibbonTemplateCreate"
+        Me.GayRibbonTemplateCreate.ShowImage = True
+        '
+        'BtnRibbonTemplateManage
+        '
+        Me.BtnRibbonTemplateManage.Image = CType(resources.GetObject("BtnRibbonTemplateManage.Image"), System.Drawing.Image)
+        Me.BtnRibbonTemplateManage.Label = "模板管理"
+        Me.BtnRibbonTemplateManage.Name = "BtnRibbonTemplateManage"
+        Me.BtnRibbonTemplateManage.ShowImage = True
+        '
         'Group5
         '
         Me.Group5.Items.Add(Me.CbxRobbinCloudFiles)
@@ -220,20 +263,6 @@
         '
         Me.CbxRobbinCloudFiles.Label = "云端文件"
         Me.CbxRobbinCloudFiles.Name = "CbxRobbinCloudFiles"
-        '
-        'Group6
-        '
-        Me.Group6.Items.Add(Me.BtnRibbonProofread)
-        Me.Group6.Label = "Group6"
-        Me.Group6.Name = "Group6"
-        '
-        'BtnRibbonProofread
-        '
-        Me.BtnRibbonProofread.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
-        Me.BtnRibbonProofread.Image = CType(resources.GetObject("BtnRibbonProofread.Image"), System.Drawing.Image)
-        Me.BtnRibbonProofread.Label = "添加审校意见"
-        Me.BtnRibbonProofread.Name = "BtnRibbonProofread"
-        Me.BtnRibbonProofread.ShowImage = True
         '
         'Ribbon1
         '
@@ -251,10 +280,10 @@
         Me.Group3.PerformLayout()
         Me.Group4.ResumeLayout(False)
         Me.Group4.PerformLayout()
-        Me.Group5.ResumeLayout(False)
-        Me.Group5.PerformLayout()
         Me.Group6.ResumeLayout(False)
         Me.Group6.PerformLayout()
+        Me.Group5.ResumeLayout(False)
+        Me.Group5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -278,7 +307,8 @@
     Friend WithEvents Group5 As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents CbxRobbinCloudFiles As Microsoft.Office.Tools.Ribbon.RibbonCheckBox
     Friend WithEvents Group6 As Microsoft.Office.Tools.Ribbon.RibbonGroup
-    Friend WithEvents BtnRibbonProofread As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents GayRibbonTemplateCreate As Microsoft.Office.Tools.Ribbon.RibbonGallery
+    Friend WithEvents BtnRibbonTemplateManage As Microsoft.Office.Tools.Ribbon.RibbonButton
 End Class
 
 Partial Class ThisRibbonCollection

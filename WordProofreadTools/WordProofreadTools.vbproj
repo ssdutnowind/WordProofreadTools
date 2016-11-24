@@ -25,19 +25,42 @@
     <ProjectGuid>{10BA419C-18CE-4C84-90FE-16E203ED7787}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>WordProofreadTools</RootNamespace>
-    <AssemblyName>WordProofreadTools</AssemblyName>
-    <LoadBehavior>3</LoadBehavior>
+    <AssemblyName>Word编审工具</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
     <StartupObject>
     </StartupObject>
+    <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <BootstrapperComponentsLocation>HomeSite</BootstrapperComponentsLocation>
+    <PublishUrl>发布\</PublishUrl>
+    <InstallUrl />
+    <TargetCulture>zh-chs</TargetCulture>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>days</UpdateIntervalUnits>
+    <ProductName>WordProofreadTools</ProductName>
+    <PublisherName />
+    <SupportUrl />
+    <FriendlyName>WordProofreadTools</FriendlyName>
+    <OfficeApplicationDescription />
+    <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>
   <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.VSTORuntime.4.0">
       <Visible>False</Visible>
-      <ProductName>Microsoft Visual Studio 2010 Tools for Office Runtime %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft Visual Studio 2010 Tools for Office Runtime %28x86 和 x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
@@ -80,7 +103,7 @@
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>WordProofreadTools.xml</DocumentationFile>
+    <DocumentationFile>Word编审工具.xml</DocumentationFile>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
@@ -109,7 +132,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>WordProofreadTools.xml</DocumentationFile>
+    <DocumentationFile>Word编审工具.xml</DocumentationFile>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
@@ -119,6 +142,8 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="Awesomium.Core, Version=1.6.6.0, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214" />
+    <Reference Include="Awesomium.Windows.Forms, Version=1.6.6.0, Culture=neutral, PublicKeyToken=9bd24830fbe304a0, processorArchitecture=x86" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -185,19 +210,25 @@
     <Compile Include="FormCloudFiles.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="FormLogin.Designer.vb">
+      <DependentUpon>FormLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormProofread.Designer.vb">
       <DependentUpon>FormProofread.vb</DependentUpon>
     </Compile>
     <Compile Include="FormProofread.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HttpRequest.vb" />
-    <Compile Include="LoginForm.Designer.vb">
-      <DependentUpon>LoginForm.vb</DependentUpon>
+    <Compile Include="FormTemplate.Designer.vb">
+      <DependentUpon>FormTemplate.vb</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.vb">
+    <Compile Include="FormTemplate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HttpRequest.vb" />
     <Compile Include="Ribbon1.Designer.vb">
       <DependentUpon>Ribbon1.vb</DependentUpon>
     </Compile>
@@ -210,16 +241,20 @@
     <EmbeddedResource Include="FormCloudFiles.resx">
       <DependentUpon>FormCloudFiles.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormProofread.resx">
       <DependentUpon>FormProofread.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
-      <DependentUpon>LoginForm.vb</DependentUpon>
+    <EmbeddedResource Include="FormTemplate.resx">
+      <DependentUpon>FormTemplate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon1.resx">
       <DependentUpon>Ribbon1.vb</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.vb</DependentUpon>
     </None>
@@ -252,6 +287,9 @@
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Templates\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -272,7 +310,7 @@
     <ManifestKeyFile>WordProofreadTools_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D93220C75D036246A0CC62494BB3F48F6CE9E4DB</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>82F0C4CD15D744890D2C13E5BA92EE2EA0AB17F1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a Visual Basic project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

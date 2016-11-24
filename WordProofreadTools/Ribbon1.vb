@@ -13,7 +13,7 @@ Public Class Ribbon1
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub BtnRibbonLogin_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonLogin.Click
-        Dim login = New LoginForm()
+        Dim login = New FormLogin()
         login.ShowDialog()
     End Sub
 
@@ -123,7 +123,7 @@ Public Class Ribbon1
 
     End Sub
 
-    Private Sub BtnRibbonProofread_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonProofread.Click
+    Private Sub BtnRibbonProofread_Click(sender As Object, e As RibbonControlEventArgs)
         Dim selection = Globals.ThisAddIn.Application.Selection
         If (selection.Text.Count <= 0) Then
             Common.ShowAlert("请选择内容！", "Warning")
@@ -146,6 +146,11 @@ Public Class Ribbon1
 
         'Dim dialog = New FormProofread()
         'dialog.ShowDialog()
+    End Sub
+
+    Private Sub BtnRibbonTemplateManage_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonTemplateManage.Click
+        Dim dialog = New FormTemplate()
+        dialog.ShowDialog()
     End Sub
 
 #End Region
