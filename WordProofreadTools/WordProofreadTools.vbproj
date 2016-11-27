@@ -222,6 +222,12 @@
     <Compile Include="FormProofread.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormTaskProperty.Designer.vb">
+      <DependentUpon>FormTaskProperty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormTaskProperty.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormTemplate.Designer.vb">
       <DependentUpon>FormTemplate.vb</DependentUpon>
     </Compile>
@@ -246,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProofread.resx">
       <DependentUpon>FormProofread.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTaskProperty.resx">
+      <DependentUpon>FormTaskProperty.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTemplate.resx">
       <DependentUpon>FormTemplate.vb</DependentUpon>

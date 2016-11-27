@@ -72,6 +72,7 @@
         Me.BtnRibbonTemplateManage = Me.Factory.CreateRibbonButton
         Me.Group5 = Me.Factory.CreateRibbonGroup
         Me.CbxRobbinCloudFiles = Me.Factory.CreateRibbonCheckBox
+        Me.Button1 = Me.Factory.CreateRibbonButton
         Me.Tab1.SuspendLayout()
         Me.TabProofread.SuspendLayout()
         Me.Group2.SuspendLayout()
@@ -220,6 +221,7 @@
         '
         Me.Group6.Items.Add(Me.GayRibbonTemplateCreate)
         Me.Group6.Items.Add(Me.BtnRibbonTemplateManage)
+        Me.Group6.Items.Add(Me.Button1)
         Me.Group6.Label = "模板"
         Me.Group6.Name = "Group6"
         '
@@ -261,8 +263,13 @@
         '
         'CbxRobbinCloudFiles
         '
-        Me.CbxRobbinCloudFiles.Label = "云端文件"
+        Me.CbxRobbinCloudFiles.Label = "任务窗口"
         Me.CbxRobbinCloudFiles.Name = "CbxRobbinCloudFiles"
+        '
+        'Button1
+        '
+        Me.Button1.Label = "Button1"
+        Me.Button1.Name = "Button1"
         '
         'Ribbon1
         '
@@ -309,6 +316,7 @@
     Friend WithEvents Group6 As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents GayRibbonTemplateCreate As Microsoft.Office.Tools.Ribbon.RibbonGallery
     Friend WithEvents BtnRibbonTemplateManage As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents Button1 As Microsoft.Office.Tools.Ribbon.RibbonButton
 End Class
 
 Partial Class ThisRibbonCollection

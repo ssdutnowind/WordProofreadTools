@@ -160,6 +160,7 @@ Partial Class FormTemplate
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.BtnOK)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False

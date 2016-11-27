@@ -153,6 +153,11 @@ Public Class Ribbon1
         dialog.ShowDialog()
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As RibbonControlEventArgs) Handles Button1.Click
+        Dim dialog = New FormTaskProperty()
+        dialog.ShowDialog()
+    End Sub
+
 #End Region
 
 End Class
