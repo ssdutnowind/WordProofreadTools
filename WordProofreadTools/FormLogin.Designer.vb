@@ -24,12 +24,13 @@ Partial Class FormLogin
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormLogin))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TxtUsename = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TxtPassword = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.BtnLogin = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
+        Me.LblMessage = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -38,39 +39,39 @@ Partial Class FormLogin
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(-1, -1)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(306, 103)
+        Me.PictureBox1.Size = New System.Drawing.Size(306, 78)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
-        'TextBox1
+        'TxtUsename
         '
-        Me.TextBox1.Location = New System.Drawing.Point(107, 130)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(185, 21)
-        Me.TextBox1.TabIndex = 1
+        Me.TxtUsename.Location = New System.Drawing.Point(107, 98)
+        Me.TxtUsename.Name = "TxtUsename"
+        Me.TxtUsename.Size = New System.Drawing.Size(185, 21)
+        Me.TxtUsename.TabIndex = 1
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(48, 133)
+        Me.Label1.Location = New System.Drawing.Point(48, 101)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(53, 12)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "用户名："
         '
-        'TextBox2
+        'TxtPassword
         '
-        Me.TextBox2.Location = New System.Drawing.Point(107, 168)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(185, 21)
-        Me.TextBox2.TabIndex = 3
-        Me.TextBox2.UseSystemPasswordChar = True
+        Me.TxtPassword.Location = New System.Drawing.Point(107, 136)
+        Me.TxtPassword.Name = "TxtPassword"
+        Me.TxtPassword.Size = New System.Drawing.Size(185, 21)
+        Me.TxtPassword.TabIndex = 3
+        Me.TxtPassword.UseSystemPasswordChar = True
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(60, 171)
+        Me.Label2.Location = New System.Drawing.Point(60, 139)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(41, 12)
         Me.Label2.TabIndex = 4
@@ -94,23 +95,34 @@ Partial Class FormLogin
         Me.BtnCancel.Text = "取消"
         Me.BtnCancel.UseVisualStyleBackColor = True
         '
+        'LblMessage
+        '
+        Me.LblMessage.AutoSize = True
+        Me.LblMessage.ForeColor = System.Drawing.Color.Red
+        Me.LblMessage.Location = New System.Drawing.Point(105, 171)
+        Me.LblMessage.Name = "LblMessage"
+        Me.LblMessage.Size = New System.Drawing.Size(0, 12)
+        Me.LblMessage.TabIndex = 7
+        '
         'FormLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(304, 242)
+        Me.Controls.Add(Me.LblMessage)
         Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.BtnLogin)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.TxtPassword)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.TxtUsename)
         Me.Controls.Add(Me.PictureBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormLogin"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "用户登录"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -119,10 +131,11 @@ Partial Class FormLogin
     End Sub
 
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents TxtUsename As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents TxtPassword As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents BtnLogin As System.Windows.Forms.Button
     Friend WithEvents BtnCancel As System.Windows.Forms.Button
+    Friend WithEvents LblMessage As System.Windows.Forms.Label
 End Class
