@@ -1,11 +1,12 @@
 ﻿Imports System.Windows.Forms
 
-Module Common
+Module CommonModule
     ''' <summary>
     ''' 服务器地址
     ''' </summary>
     Public ServerPath As String = ""
 
+    Public WithEvents loginForm As FormLogin = New FormLogin()
 
     ''' <summary>
     ''' 云端文件窗格
@@ -16,14 +17,14 @@ Module Common
     ''' 显示云端文件窗格
     ''' </summary>
     Public Sub ShowCloudFilesPane()
-        Common.PaneCloudFiles.Visible = True
+        CommonModule.PaneCloudFiles.Visible = True
     End Sub
 
     ''' <summary>
     ''' 隐藏云端文件窗格
     ''' </summary>
     Public Sub HideCloudFilesPane()
-        Common.PaneCloudFiles.Visible = False
+        CommonModule.PaneCloudFiles.Visible = False
     End Sub
 
     ''' <summary>

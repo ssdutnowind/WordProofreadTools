@@ -2,6 +2,8 @@
 Imports Newtonsoft.Json
 
 Public Class FormLogin
+    Public Event UserLogin(ByVal sender As Object)
+
     ''' <summary>
     ''' 取消关闭登录
     ''' </summary>
@@ -63,6 +65,8 @@ Public Class FormLogin
                 UserInfo.userId = json.data.userId
                 UserInfo.userName = json.data.userName
                 UserInfo.token = json.data.token
+
+                RaiseEvent UserLogin(Me)
             Else
                 ' 失败
                 LblMessage.Text = jsonPublic.msg

@@ -2,6 +2,8 @@
 Imports Microsoft.Office.Tools.Ribbon
 
 Public Class Ribbon1
+    Private WithEvents loginForm As FormLogin = CommonModule.loginForm
+
 
     Private Sub Ribbon1_Load(ByVal sender As System.Object, ByVal e As RibbonUIEventArgs) Handles MyBase.Load
 
@@ -13,8 +15,7 @@ Public Class Ribbon1
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub BtnRibbonLogin_Click(sender As Object, e As RibbonControlEventArgs) Handles BtnRibbonLogin.Click
-        Dim login = New FormLogin()
-        login.ShowDialog()
+        CommonModule.loginForm.ShowDialog()
     End Sub
 
 
@@ -27,9 +28,9 @@ Public Class Ribbon1
     ''' <param name="e"></param>
     Private Sub CbxRobbinCloudFiles_Click(sender As Object, e As RibbonControlEventArgs) Handles CbxRobbinCloudFiles.Click
         If Me.CbxRobbinCloudFiles.Checked Then
-            Common.ShowCloudFilesPane()
+            CommonModule.ShowCloudFilesPane()
         Else
-            Common.HideCloudFilesPane()
+            CommonModule.HideCloudFilesPane()
         End If
     End Sub
 
@@ -58,13 +59,13 @@ Public Class Ribbon1
                 Dim content = contents.Range.Text
                 Try
                     My.Computer.FileSystem.WriteAllText(fileName, content, False)
-                    Common.ShowAlert("导出目录成功！")
+                    CommonModule.ShowAlert("导出目录成功！")
                 Catch ex As Exception
-                    Common.ShowAlert(ex.Message, "Error")
+                    CommonModule.ShowAlert(ex.Message, "Error")
                 End Try
             End If
         Else
-            Common.ShowAlert("当前文档内没有目录，请先插入目录后再导出！", "Warning")
+            CommonModule.ShowAlert("当前文档内没有目录，请先插入目录后再导出！", "Warning")
         End If
     End Sub
 
@@ -88,13 +89,13 @@ Public Class Ribbon1
                 Dim content = index.Range.Text
                 Try
                     My.Computer.FileSystem.WriteAllText(fileName, content, False)
-                    Common.ShowAlert("导出索引成功！")
+                    CommonModule.ShowAlert("导出索引成功！")
                 Catch ex As Exception
-                    Common.ShowAlert(ex.Message, "Error")
+                    CommonModule.ShowAlert(ex.Message, "Error")
                 End Try
             End If
         Else
-            Common.ShowAlert("当前文档内没有索引，请先插入索引后再导出！", "Warning")
+            CommonModule.ShowAlert("当前文档内没有索引，请先插入索引后再导出！", "Warning")
         End If
     End Sub
 
@@ -126,7 +127,7 @@ Public Class Ribbon1
     Private Sub BtnRibbonProofread_Click(sender As Object, e As RibbonControlEventArgs)
         Dim selection = Globals.ThisAddIn.Application.Selection
         If (selection.Text.Count <= 0) Then
-            Common.ShowAlert("请选择内容！", "Warning")
+            CommonModule.ShowAlert("请选择内容！", "Warning")
             Return
         End If
 
@@ -158,6 +159,15 @@ Public Class Ribbon1
         dialog.ShowDialog()
     End Sub
 
+#End Region
+
+
+#Region "用户事件"
+    Public Sub OnUserLogin(ByVal sender As Object) Handles loginForm.UserLogin
+        CommonModule.Log("Ribbon1：用户登录")
+        'Me.StartFromScratch
+        'Globals.ThisAddIn.Application.COMAddIns
+    End Sub
 #End Region
 
 End Class

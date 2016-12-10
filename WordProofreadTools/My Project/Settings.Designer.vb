@@ -55,7 +55,7 @@ Partial Friend NotInheritable Class MySettings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("http://localhost")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("http://localhost:3000/api/")>  _
     Public Property Server() As String
         Get
             Return CType(Me("Server"),String)

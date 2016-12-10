@@ -5,7 +5,7 @@ Imports System.Net
 Public Class HttpRequest
     Public Function DoSendRequest(ByVal cmd As String, Optional ByVal params As Hashtable = Nothing, Optional ByVal method As String = "GET")
         ' 完整请求地址
-        Dim path As String = Common.ServerPath + cmd + ".json"
+        Dim path As String = CommonModule.ServerPath + cmd + ".json"
 
         ' 请求参数
         Dim postData As String = ""
@@ -19,20 +19,20 @@ Public Class HttpRequest
         End If
         ' 请求对象
         Dim request As WebRequest
-        Common.Log("下发请求=====")
+        CommonModule.Log("下发请求=====")
         If (method = "GET") Then
             If (postData.Length) Then
                 path += "?" + postData
             End If
             request = WebRequest.Create(path)
             request.Method = "GET"
-            Common.Log("请求地址：" + path)
+            CommonModule.Log("请求地址：" + path)
         Else
             request = WebRequest.Create(path)
             ' 请求方法
             request.Method = "POST"
-            Common.Log("请求地址：" + path)
-            Common.Log("请求数据：" + postData)
+            CommonModule.Log("请求地址：" + path)
+            CommonModule.Log("请求数据：" + postData)
             Dim byteArray As Byte() = Encoding.UTF8.GetBytes(postData)
             ' ContentType
             request.ContentType = "application/x-www-form-urlencoded"
@@ -53,12 +53,12 @@ Public Class HttpRequest
         End Try
 
         ' Display the status.
-        Common.Log("应答状态：" + CType(response, HttpWebResponse).StatusDescription)
+        CommonModule.Log("应答状态：" + CType(response, HttpWebResponse).StatusDescription)
         Dim dataStream = response.GetResponseStream()
         Dim reader As New StreamReader(dataStream)
         Dim responseFromServer As String = reader.ReadToEnd()
         ' Display the content.
-        Common.Log("应答内容：" + responseFromServer)
+        CommonModule.Log("应答内容：" + responseFromServer)
         ' Clean up the streams.
         reader.Close()
         dataStream.Close()

@@ -52,7 +52,6 @@
         Dim RibbonDropDownItemImpl8 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
         Dim RibbonDropDownItemImpl9 As Microsoft.Office.Tools.Ribbon.RibbonDropDownItem = Me.Factory.CreateRibbonDropDownItem
         Me.Tab1 = Me.Factory.CreateRibbonTab
-        Me.Group1 = Me.Factory.CreateRibbonGroup
         Me.TabProofread = Me.Factory.CreateRibbonTab
         Me.Group2 = Me.Factory.CreateRibbonGroup
         Me.BtnRibbonLogin = Me.Factory.CreateRibbonButton
@@ -70,9 +69,9 @@
         Me.Group6 = Me.Factory.CreateRibbonGroup
         Me.GayRibbonTemplateCreate = Me.Factory.CreateRibbonGallery
         Me.BtnRibbonTemplateManage = Me.Factory.CreateRibbonButton
+        Me.Button1 = Me.Factory.CreateRibbonButton
         Me.Group5 = Me.Factory.CreateRibbonGroup
         Me.CbxRobbinCloudFiles = Me.Factory.CreateRibbonCheckBox
-        Me.Button1 = Me.Factory.CreateRibbonButton
         Me.Tab1.SuspendLayout()
         Me.TabProofread.SuspendLayout()
         Me.Group2.SuspendLayout()
@@ -85,14 +84,8 @@
         'Tab1
         '
         Me.Tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
-        Me.Tab1.Groups.Add(Me.Group1)
         Me.Tab1.Label = "TabAddIns"
         Me.Tab1.Name = "Tab1"
-        '
-        'Group1
-        '
-        Me.Group1.Label = "Group1"
-        Me.Group1.Name = "Group1"
         '
         'TabProofread
         '
@@ -255,6 +248,11 @@
         Me.BtnRibbonTemplateManage.Name = "BtnRibbonTemplateManage"
         Me.BtnRibbonTemplateManage.ShowImage = True
         '
+        'Button1
+        '
+        Me.Button1.Label = "Button1"
+        Me.Button1.Name = "Button1"
+        '
         'Group5
         '
         Me.Group5.Items.Add(Me.CbxRobbinCloudFiles)
@@ -265,11 +263,6 @@
         '
         Me.CbxRobbinCloudFiles.Label = "任务窗口"
         Me.CbxRobbinCloudFiles.Name = "CbxRobbinCloudFiles"
-        '
-        'Button1
-        '
-        Me.Button1.Label = "Button1"
-        Me.Button1.Name = "Button1"
         '
         'Ribbon1
         '
@@ -296,7 +289,6 @@
     End Sub
 
     Friend WithEvents Tab1 As Microsoft.Office.Tools.Ribbon.RibbonTab
-    Friend WithEvents Group1 As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents TabProofread As Microsoft.Office.Tools.Ribbon.RibbonTab
     Friend WithEvents Group2 As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents BtnRibbonLogin As Microsoft.Office.Tools.Ribbon.RibbonButton

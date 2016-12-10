@@ -3,16 +3,18 @@
     Private WithEvents taskPaneCloudFiles As Microsoft.Office.Tools.CustomTaskPane
 
     Private Sub ThisAddIn_Startup() Handles Me.Startup
-        Common.Log("系统初始化……")
+        CommonModule.Log("系统初始化……")
         '初始化配置
-        Common.ServerPath = My.Settings.Item("Server")
-        Common.Log("[读取配置]服务器路径：" + Common.ServerPath)
+        CommonModule.ServerPath = My.Settings.Item("Server")
+        CommonModule.Log("[读取配置]服务器路径：" + CommonModule.ServerPath)
 
         '初始化云端文件窗格
         Dim cloudFiles = New FormCloudFiles()
         taskPaneCloudFiles = Me.CustomTaskPanes.Add(cloudFiles, "云端文件")
         taskPaneCloudFiles.Width = 250
-        Common.PaneCloudFiles = taskPaneCloudFiles
+        CommonModule.PaneCloudFiles = taskPaneCloudFiles
+
+
 
     End Sub
 
@@ -28,5 +30,4 @@
     Private Sub ThisAddIn_Shutdown() Handles Me.Shutdown
 
     End Sub
-
 End Class
