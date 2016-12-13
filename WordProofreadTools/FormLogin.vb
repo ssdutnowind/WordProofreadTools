@@ -31,47 +31,51 @@ Public Class FormLogin
             Return
         End If
         Me.LblMessage.Text = ""
-        ' 请求参数
-        Dim params = New Hashtable()
-        params.Add("userName", userName)
-        params.Add("password", password)
-        ' 下发请求
-        Dim request = New HttpRequest()
-        Dim response = request.DoSendRequest("doLogin", params)
-        If (String.IsNullOrEmpty(response)) Then
-            LblMessage.Text = "登录请求失败！"
-            Return
-        Else
-            ' 解析应答
-            Dim jsonPublic As ResponsePublic
-            Dim json As ResponseDoLogin
 
-            Try
-                jsonPublic = JsonConvert.DeserializeObject(Of ResponsePublic)(response)
-            Catch ex As Exception
-                LblMessage.Text = "登录请求失败！"
-                Return
-            End Try
-            If (jsonPublic.code = "00") Then
-                ' 成功
-                Try
-                    json = JsonConvert.DeserializeObject(Of ResponseDoLogin)(response)
-                Catch ex As Exception
-                    LblMessage.Text = "登录请求失败！"
-                    Return
-                End Try
+        '' 请求参数
+        'Dim params = New Hashtable()
+        'params.Add("userName", userName)
+        'params.Add("password", password)
+        '' 下发请求
+        'Dim request = New HttpRequest()
+        'Dim response = request.DoSendRequest("doLogin", params)
+        'If (String.IsNullOrEmpty(response)) Then
+        '    LblMessage.Text = "登录请求失败！"
+        '    Return
+        'Else
+        '    ' 解析应答
+        '    Dim jsonPublic As ResponsePublic
+        '    Dim json As ResponseDoLogin
 
-                UserInfo.nickName = json.data.nickName
-                UserInfo.userId = json.data.userId
-                UserInfo.userName = json.data.userName
-                UserInfo.token = json.data.token
+        '    Try
+        '        jsonPublic = JsonConvert.DeserializeObject(Of ResponsePublic)(response)
+        '    Catch ex As Exception
+        '        LblMessage.Text = "登录请求失败！"
+        '        Return
+        '    End Try
+        '    If (jsonPublic.code = "00") Then
+        '        ' 成功
+        '        Try
+        '            json = JsonConvert.DeserializeObject(Of ResponseDoLogin)(response)
+        '        Catch ex As Exception
+        '            LblMessage.Text = "登录请求失败！"
+        '            Return
+        '        End Try
 
-                RaiseEvent UserLogin(Me)
-            Else
-                ' 失败
-                LblMessage.Text = jsonPublic.msg
-            End If
-        End If
+        '        UserInfo.nickName = json.data.nickName
+        '        UserInfo.userId = json.data.userId
+        '        UserInfo.userName = json.data.userName
+        '        UserInfo.token = json.data.token
 
+        '        RaiseEvent UserLogin(Me)
+        '    Else
+        '        ' 失败
+        '        LblMessage.Text = jsonPublic.msg
+        '    End If
+        'End If
+
+        RaiseEvent UserLogin(Me)
+
+        Me.Close()
     End Sub
 End Class

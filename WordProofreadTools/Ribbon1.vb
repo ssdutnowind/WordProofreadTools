@@ -165,8 +165,10 @@ Public Class Ribbon1
 #Region "用户事件"
     Public Sub OnUserLogin(ByVal sender As Object) Handles loginForm.UserLogin
         CommonModule.Log("Ribbon1：用户登录")
-        'Me.StartFromScratch
-        'Globals.ThisAddIn.Application.COMAddIns
+
+        'Me.TabInsert.Visible
+        'Me.TabHome.Visible = False
+        'Me.RibbonUI.ActivateTabMso("TabHome")
     End Sub
 #End Region
 

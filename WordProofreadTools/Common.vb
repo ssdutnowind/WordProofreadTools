@@ -44,13 +44,13 @@ Module CommonModule
     Public Function ShowAlert(msg As String, Optional type As String = "Info")
         Select Case type
             Case "Warning"
-                Return MessageBox.Show(msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return MessageBox.Show(msg, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Exit Select
             Case "Error"
-                Return MessageBox.Show(msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return MessageBox.Show(msg, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Select
             Case "Question"
-                Return MessageBox.Show(msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Question)
+                Return MessageBox.Show(msg, "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                 Exit Select
             Case Else
                 Return MessageBox.Show(msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information)

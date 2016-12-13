@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+  <ribbon>
+    <tabs>
+      <tab idMso="TabAddIns" />
+      <tab id="TabProofread" label="编校工具">
+        <group id="Group2" label="用户账户">
+          <button id="BtnRibbonLogin" onAction="BtnRibbonLogin_Click" getEnabled="GetLoginEnabled" label="账户登录" />
+          <button id="BtnRibbonLogout" onAction="BtnRibbonLogout_Click" getEnabled="GetLogoutEnabled" label="账户退出" />
+          <button id="BtnRibbonSetting" getEnabled="GetLogoutEnabled" label="设置" />
+        </group>
+        <group id="Group3" label="导出">
+          <button id="BtnRibbonExportContents" onAction="BtnRibbonExportContents_Click" label="导出目录" />
+          <button id="BtnRibbonExportIndex" onAction="BtnRibbonExportIndex_Click" label="导出索引" />
+          <button id="BtnRibbonExprotAbstract" onAction="BtnRibbonExprotAbstract_Click" label="导出摘要" />
+        </group>
+        <group id="Group4" label="审校">
+          <gallery id="GayRibbonEditChange" label="字符改动">
+            <item id="__id1" label="改正" />
+            <item id="__id2" label="删除" />
+            <item id="__id3" label="增补" />
+            <item id="__id4" label="改正上下角" />
+          </gallery>
+          <gallery id="GayRibbonEditPositoin" label="方向位置" />
+          <gallery id="GayRibbonEditSpace" label="字符间距" />
+          <gallery id="GayRibbonEditOther" label="其它" />
+        </group>
+        <group id="Group6" label="模板">
+          <gallery id="GayRibbonTemplateCreate" label="从模板创建" columns="3">
+            <item id="__id5" label="AAAA模板" />
+            <item id="__id6" label="BBBBB模板" />
+            <item id="__id7" label="CCCCC模板" />
+            <item id="__id8" label="DDDDD模板" />
+            <item id="__id9" label="EEEEE模板" />
+          </gallery>
+          <button id="BtnRibbonTemplateManage" onAction="BtnRibbonTemplateManage_Click" label="模板管理" />
+          <button id="Button1" onAction="Button1_Click" label="Button1" showImage="false" />
+        </group>
+        <group id="Group5" label="窗口">
+          <checkBox id="CbxRobbinTaskWindow" onAction="CbxRobbinTaskWindow_Click" getPressed="GetTaskWindowChecked" label="任务窗口" />
+        </group>
+      </tab>
+      <!-- 内置Tab ↓ -->
+      <tab idMso="TabInsert" label="插入" getVisible="GetBuildinVisible" />
+      <tab idMso="TabHome" label="开始" getVisible="GetBuildinVisible" />
+      <tab idMso="TabWordDesign" label="设计"  getVisible="GetBuildinVisible" />
+      <tab idMso="TabPageLayoutWord" label="布局" getVisible="GetBuildinVisible" />
+      <tab idMso="TabReferences" label="引用" getVisible="GetBuildinVisible" />
+      <tab idMso="TabMailings" label="邮件" getVisible="GetBuildinVisible" />
+      <tab idMso="TabReviewWord" label="审阅" getVisible="GetBuildinVisible" />
+      <tab idMso="TabView" label="视图" getVisible="GetBuildinVisible" />
+      <tab idMso="TabDeveloper" label="开发工具" getVisible="GetBuildinVisible" />
+      <tab idMso="TabAddIns" label="加载项" getVisible="GetBuildinVisible" />
+      <!-- 内置Tab ↑ -->
+    </tabs>
+  </ribbon>
+</customUI>

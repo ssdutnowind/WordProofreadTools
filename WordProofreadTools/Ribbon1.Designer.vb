@@ -72,6 +72,12 @@
         Me.Button1 = Me.Factory.CreateRibbonButton
         Me.Group5 = Me.Factory.CreateRibbonGroup
         Me.CbxRobbinCloudFiles = Me.Factory.CreateRibbonCheckBox
+        Me.TabInsert = Me.Factory.CreateRibbonTab
+        Me.TabHome = Me.Factory.CreateRibbonTab
+        Me.TabWordDesign = Me.Factory.CreateRibbonTab
+        Me.TabPageLayoutWord = Me.Factory.CreateRibbonTab
+        Me.TabReferences = Me.Factory.CreateRibbonTab
+        Me.TabMailings = Me.Factory.CreateRibbonTab
         Me.Tab1.SuspendLayout()
         Me.TabProofread.SuspendLayout()
         Me.Group2.SuspendLayout()
@@ -79,6 +85,12 @@
         Me.Group4.SuspendLayout()
         Me.Group6.SuspendLayout()
         Me.Group5.SuspendLayout()
+        Me.TabInsert.SuspendLayout()
+        Me.TabHome.SuspendLayout()
+        Me.TabWordDesign.SuspendLayout()
+        Me.TabPageLayoutWord.SuspendLayout()
+        Me.TabReferences.SuspendLayout()
+        Me.TabMailings.SuspendLayout()
         Me.SuspendLayout()
         '
         'Tab1
@@ -264,12 +276,61 @@
         Me.CbxRobbinCloudFiles.Label = "任务窗口"
         Me.CbxRobbinCloudFiles.Name = "CbxRobbinCloudFiles"
         '
+        'TabInsert
+        '
+        Me.TabInsert.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
+        Me.TabInsert.ControlId.OfficeId = "TabInsert"
+        Me.TabInsert.Label = "插入"
+        Me.TabInsert.Name = "TabInsert"
+        Me.TabInsert.Visible = False
+        '
+        'TabHome
+        '
+        Me.TabHome.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
+        Me.TabHome.ControlId.OfficeId = "TabHome"
+        Me.TabHome.Label = "开始"
+        Me.TabHome.Name = "TabHome"
+        '
+        'TabWordDesign
+        '
+        Me.TabWordDesign.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
+        Me.TabWordDesign.ControlId.OfficeId = "TabWordDesign"
+        Me.TabWordDesign.Label = "设计"
+        Me.TabWordDesign.Name = "TabWordDesign"
+        '
+        'TabPageLayoutWord
+        '
+        Me.TabPageLayoutWord.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
+        Me.TabPageLayoutWord.ControlId.OfficeId = "TabPageLayoutWord"
+        Me.TabPageLayoutWord.Label = "布局"
+        Me.TabPageLayoutWord.Name = "TabPageLayoutWord"
+        '
+        'TabReferences
+        '
+        Me.TabReferences.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
+        Me.TabReferences.ControlId.OfficeId = "TabReferences"
+        Me.TabReferences.Label = "引用"
+        Me.TabReferences.Name = "TabReferences"
+        '
+        'TabMailings
+        '
+        Me.TabMailings.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
+        Me.TabMailings.ControlId.OfficeId = "TabMailings"
+        Me.TabMailings.Label = "邮件"
+        Me.TabMailings.Name = "TabMailings"
+        '
         'Ribbon1
         '
         Me.Name = "Ribbon1"
         Me.RibbonType = "Microsoft.Word.Document"
         Me.Tabs.Add(Me.Tab1)
         Me.Tabs.Add(Me.TabProofread)
+        Me.Tabs.Add(Me.TabInsert)
+        Me.Tabs.Add(Me.TabHome)
+        Me.Tabs.Add(Me.TabWordDesign)
+        Me.Tabs.Add(Me.TabPageLayoutWord)
+        Me.Tabs.Add(Me.TabReferences)
+        Me.Tabs.Add(Me.TabMailings)
         Me.Tab1.ResumeLayout(False)
         Me.Tab1.PerformLayout()
         Me.TabProofread.ResumeLayout(False)
@@ -284,6 +345,18 @@
         Me.Group6.PerformLayout()
         Me.Group5.ResumeLayout(False)
         Me.Group5.PerformLayout()
+        Me.TabInsert.ResumeLayout(False)
+        Me.TabInsert.PerformLayout()
+        Me.TabHome.ResumeLayout(False)
+        Me.TabHome.PerformLayout()
+        Me.TabWordDesign.ResumeLayout(False)
+        Me.TabWordDesign.PerformLayout()
+        Me.TabPageLayoutWord.ResumeLayout(False)
+        Me.TabPageLayoutWord.PerformLayout()
+        Me.TabReferences.ResumeLayout(False)
+        Me.TabReferences.PerformLayout()
+        Me.TabMailings.ResumeLayout(False)
+        Me.TabMailings.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -309,6 +382,12 @@
     Friend WithEvents GayRibbonTemplateCreate As Microsoft.Office.Tools.Ribbon.RibbonGallery
     Friend WithEvents BtnRibbonTemplateManage As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents Button1 As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents TabInsert As Microsoft.Office.Tools.Ribbon.RibbonTab
+    Friend WithEvents TabHome As Microsoft.Office.Tools.Ribbon.RibbonTab
+    Friend WithEvents TabWordDesign As Microsoft.Office.Tools.Ribbon.RibbonTab
+    Friend WithEvents TabPageLayoutWord As Microsoft.Office.Tools.Ribbon.RibbonTab
+    Friend WithEvents TabReferences As Microsoft.Office.Tools.Ribbon.RibbonTab
+    Friend WithEvents TabMailings As Microsoft.Office.Tools.Ribbon.RibbonTab
 End Class
 
 Partial Class ThisRibbonCollection

@@ -239,6 +239,9 @@
     </Compile>
     <Compile Include="HttpRequest.vb" />
     <Compile Include="JSON.vb" />
+    <Compile Include="Ribbon.vb">
+      <XmlRibbon>true</XmlRibbon>
+    </Compile>
     <Compile Include="Ribbon1.Designer.vb">
       <DependentUpon>Ribbon1.vb</DependentUpon>
     </Compile>
@@ -303,6 +306,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ribbon.xml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
