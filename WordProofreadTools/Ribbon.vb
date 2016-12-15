@@ -15,6 +15,7 @@
 
 '有关详细信息，请参见 Visual Studio Tools for Office 帮助中的功能区 XML 文档。
 
+Imports System.Drawing
 Imports Microsoft.Office.Core
 
 <Runtime.InteropServices.ComVisible(True)>
@@ -98,6 +99,41 @@ Public Class Ribbon
         Me.ribbon.Invalidate()
     End Sub
 
+#End Region
+
+#Region "图标"
+
+    Public Function GetIcons(ByVal control As Office.IRibbonControl) As Bitmap
+
+        Select Case control.Id
+            Case "BtnRibbonLogin"
+                Return New Bitmap(My.Resources.icon_login)
+            Case "BtnRibbonLogout"
+                Return New Bitmap(My.Resources.icon_logout)
+            Case "BtnRibbonSetting"
+                Return New Bitmap(My.Resources.icon_setting)
+            Case "BtnRibbonExportContents"
+                Return New Bitmap(My.Resources.icon_export_contents)
+            Case "BtnRibbonExportIndex"
+                Return New Bitmap(My.Resources.icon_export_index)
+        End Select
+
+
+
+        Return Nothing
+    End Function
+
+    Public Function GetCheckingIcon(ByVal control As Office.IRibbonControl) As Bitmap
+        Dim id As String = control.Id
+        Dim icon As String = id.Replace("BtnChecking", "icon")
+        Dim res = My.Resources.ResourceManager.GetObject(icon)
+        If IsNothing(res) Then
+            Return New Bitmap(My.Resources.icon_1_1)
+        Else
+            Return CType(res, Bitmap)
+        End If
+        Return Nothing
+    End Function
 #End Region
 
 
