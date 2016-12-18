@@ -3,15 +3,15 @@
   <ribbon>
     <tabs>
       <tab idMso="TabAddIns" />
-      <tab id="TabProofread" label="工具">
+      <tab id="TabProofread" label="编审工具">
         <group id="Group2" label="用户账户">
           <button id="BtnRibbonLogin" onAction="BtnRibbonLogin_Click" getEnabled="GetLoginEnabled" label="账户登录" getImage="GetIcons" />
           <button id="BtnRibbonLogout" onAction="BtnRibbonLogout_Click" getEnabled="GetLogoutEnabled" label="账户退出" getImage="GetIcons" />
           <button id="BtnRibbonSetting" getEnabled="GetLogoutEnabled" label="设置"  getImage="GetIcons"/>
         </group>
         <group id="Group3" label="导出">
-          <button id="BtnRibbonExportContents" onAction="BtnRibbonExportContents_Click" label="导出目录" />
-          <button id="BtnRibbonExportIndex" onAction="BtnRibbonExportIndex_Click" label="导出索引" />
+          <button id="BtnRibbonExportContents" onAction="BtnRibbonExportContents_Click" label="导出目录" getImage="GetIcons" />
+          <button id="BtnRibbonExportIndex" onAction="BtnRibbonExportIndex_Click" label="导出索引" getImage="GetIcons" />
         </group>
         <group id="Group6" label="模板">
           <gallery id="GayRibbonTemplateCreate" label="从模板创建" columns="3">
@@ -27,35 +27,35 @@
           <checkBox id="CbxRobbinTaskWindow" onAction="CbxRobbinTaskWindow_Click" getPressed="GetTaskWindowChecked" label="任务窗口" />
         </group>
       </tab>
-      <tab id="TabChecking" label="快速审校">
+      <tab id="TabChecking" label="快速批注">
         <group id="G_Checking1" label="字符改动">
-          <button id="BtnChecking_1_1" onAction="BtnChecking_Click" label="改正&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_1_2" onAction="BtnChecking_Click" label="删除&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_1_3" onAction="BtnChecking_Click" label="增补&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_1_4" onAction="BtnChecking_Click" label="改正上下角" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_1_1" onAction="BtnChecking_Click" label="改正&#13;" tag="改正" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_1_2" onAction="BtnChecking_Click" label="删除&#13;" tag="删除" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_1_3" onAction="BtnChecking_Click" label="增补&#13;" tag="增补" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_1_4" onAction="BtnChecking_Click" label="改正上下角" tag="改正上下角" size ="large" showImage="true" getImage="GetCheckingIcon" />
         </group>
         <group id="G_Checking2" label="方向位置">
-          <button id="BtnChecking_2_1" onAction="BtnChecking_Click" label="转正&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_2" onAction="BtnChecking_Click" label="对调&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_3" onAction="BtnChecking_Click" label="接排&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_4" onAction="BtnChecking_Click" label="另起段&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_5" onAction="BtnChecking_Click" label="转移&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_6" onAction="BtnChecking_Click" label="上下移&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_7" onAction="BtnChecking_Click" label="左右移&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_8" onAction="BtnChecking_Click" label="排齐&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_9" onAction="BtnChecking_Click" label="排阶梯形&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_10" onAction="BtnChecking_Click" label="正图&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_1" onAction="BtnChecking_Click" label="转正&#13;" tag="转正" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_2" onAction="BtnChecking_Click" label="对调&#13;" tag="对调" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_3" onAction="BtnChecking_Click" label="接排&#13;" tag="接排" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_4" onAction="BtnChecking_Click" label="另起段&#13;" tag="另起段" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_5" onAction="BtnChecking_Click" label="转移&#13;" tag="转移" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_6" onAction="BtnChecking_Click" label="上下移&#13;" tag="上下移" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_7" onAction="BtnChecking_Click" label="左右移&#13;" tag="左右移" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_8" onAction="BtnChecking_Click" label="排齐&#13;" tag="排齐" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_9" onAction="BtnChecking_Click" label="排阶梯形&#13;" tag="排阶梯形" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_2_10" onAction="BtnChecking_Click" label="正图&#13;" tag="正图" size ="large" showImage="true" getImage="GetCheckingIcon" />
         </group>
         <group id="G_Checking3" label="字符间距">
-          <button id="BtnChecking_3_1" onAction="BtnChecking_Click" label="加大空距&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_3_2" onAction="BtnChecking_Click" label="减小空距&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_3_3" onAction="BtnChecking_Click" label="空字距&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_3_4" onAction="BtnChecking_Click" label="分开&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_3_1" onAction="BtnChecking_Click" label="加大空距&#13;" tag="加大空距" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_3_2" onAction="BtnChecking_Click" label="减小空距&#13;" tag="减小空距" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_3_3" onAction="BtnChecking_Click" label="空字距&#13;" tag="空字距" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_3_4" onAction="BtnChecking_Click" label="分开&#13;" tag="分开" size ="large" showImage="true" getImage="GetCheckingIcon" />
         </group>
         <group id="G_Checking4" label="其它">
-          <button id="BtnChecking_4_1" onAction="BtnChecking_Click" label="保留&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_4_2" onAction="BtnChecking_Click" label="代替&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_4_3" onAction="BtnChecking_Click" label="说明&#13;" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_4_1" onAction="BtnChecking_Click" label="保留&#13;" tag="保留" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_4_2" onAction="BtnChecking_Click" label="代替&#13;" tag="代替" size ="large" showImage="true" getImage="GetCheckingIcon" />
+          <button id="BtnChecking_4_3" onAction="BtnChecking_Click" label="说明&#13;" tag="说明" size ="large" showImage="true" getImage="GetCheckingIcon" />
         </group>
       </tab>
       <!-- 内置Tab ↓ -->

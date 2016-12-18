@@ -16,6 +16,7 @@
 '有关详细信息，请参见 Visual Studio Tools for Office 帮助中的功能区 XML 文档。
 
 Imports System.Drawing
+Imports System.Windows.Forms
 Imports Microsoft.Office.Core
 
 <Runtime.InteropServices.ComVisible(True)>
@@ -103,6 +104,11 @@ Public Class Ribbon
 
 #Region "图标"
 
+    ''' <summary>
+    ''' 获取图标
+    ''' </summary>
+    ''' <param name="control"></param>
+    ''' <returns></returns>
     Public Function GetIcons(ByVal control As Office.IRibbonControl) As Bitmap
 
         Select Case control.Id
@@ -123,6 +129,11 @@ Public Class Ribbon
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' 获取快速批注图标
+    ''' </summary>
+    ''' <param name="control"></param>
+    ''' <returns></returns>
     Public Function GetCheckingIcon(ByVal control As Office.IRibbonControl) As Bitmap
         Dim id As String = control.Id
         Dim icon As String = id.Replace("BtnChecking", "icon")
@@ -165,12 +176,87 @@ Public Class Ribbon
         End If
     End Sub
 
-
+    ''' <summary>
+    ''' 任务窗格
+    ''' </summary>
+    ''' <param name="control"></param>
+    ''' <param name="isChecked"></param>
     Public Sub CbxRobbinTaskWindow_Click(ByVal control As Office.IRibbonControl, ByVal isChecked As Boolean)
         If isChecked Then
             CommonModule.ShowCloudFilesPane()
         Else
             CommonModule.HideCloudFilesPane()
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 快速批注
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnChecking_Click(ByVal control As Office.IRibbonControl)
+        Dim app = Globals.ThisAddIn.Application
+        Dim sel = app.Selection()
+        Dim label = control.Tag
+        Dim range = sel.Range()
+        Dim comment = app.ActiveDocument.Comments.Add(range, label + "： ")
+        comment.Author = "XXX主编"
+
+    End Sub
+
+    ''' <summary>
+    ''' 导出目录
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnRibbonExportContents_Click(ByVal control As Office.IRibbonControl)
+        Dim contentList = Globals.ThisAddIn.Application.ActiveDocument.TablesOfContents
+        If contentList.Count > 0 Then
+            Dim dialog = New SaveFileDialog()
+            dialog.Filter = "文本文件|*.txt"
+            dialog.FileName = "导出文档目录.txt"
+            dialog.Title = "请选择导出的目录文件"
+            '确定后开始导出
+            If dialog.ShowDialog() = DialogResult.OK Then
+                '只获取第一个目录
+                Dim contents = contentList(1)
+                Dim fileName = dialog.FileName
+                Dim content = contents.Range.Text
+                Try
+                    My.Computer.FileSystem.WriteAllText(fileName, content, False)
+                    CommonModule.ShowAlert("导出目录成功！")
+                Catch ex As Exception
+                    CommonModule.ShowAlert(ex.Message, "Error")
+                End Try
+            End If
+        Else
+            CommonModule.ShowAlert("当前文档内没有目录，请先插入目录后再导出！", "Warning")
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 导出索引
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnRibbonExportIndex_Click(ByVal control As Office.IRibbonControl)
+        Dim indexs = Globals.ThisAddIn.Application.ActiveDocument.Indexes
+        If indexs.Count > 0 Then
+            Dim dialog = New SaveFileDialog()
+            dialog.Filter = "文本文件|*.txt"
+            dialog.FileName = "导出文档索引.txt"
+            dialog.Title = "请选择导出的索引文件"
+            '确定后开始导出
+            If dialog.ShowDialog() = DialogResult.OK Then
+                Dim index = indexs(1)
+                Dim fileName = dialog.FileName
+                Dim content = index.Range.Text
+                Try
+                    My.Computer.FileSystem.WriteAllText(fileName, content, False)
+                    CommonModule.ShowAlert("导出索引成功！")
+                Catch ex As Exception
+                    CommonModule.ShowAlert(ex.Message, "Error")
+                End Try
+            End If
+        Else
+            CommonModule.ShowAlert("当前文档内没有索引，请先插入索引后再导出！", "Warning")
         End If
     End Sub
 
