@@ -16,7 +16,24 @@
         taskPaneCloudFiles.Width = 250
         CommonModule.PaneCloudFiles = taskPaneCloudFiles
 
+        For Each arg As String In Environment.GetCommandLineArgs
+            ' 如果有token参数
+            If (arg.IndexOf("token") >= 1) Then
+                Dim token As String = ""
+                Dim task As String = ""
+                arg = arg.Substring(arg.LastIndexOf("/") + 1)
+                Dim params = arg.Split(",")
+                For Each param As String In params
+                    If (param.IndexOf("token") >= 0) Then
+                        token = param.Substring(6)
+                    ElseIf (param.IndexOf("task") >= 0) Then
+                        task = param.Substring(5)
+                    End If
+                Next
 
+                MsgBox("token: " + token + vbCrLf + "task: " + task)
+            End If
+        Next
 
     End Sub
 
