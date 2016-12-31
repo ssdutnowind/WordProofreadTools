@@ -3,59 +3,92 @@
   <ribbon>
     <tabs>
       <tab idMso="TabAddIns" />
-      <tab id="TabProofread" label="编审工具">
-        <group id="Group2" label="用户账户">
-          <button id="BtnRibbonLogin" onAction="BtnRibbonLogin_Click" getEnabled="GetLoginEnabled" label="账户登录" getImage="GetIcons" />
-          <button id="BtnRibbonLogout" onAction="BtnRibbonLogout_Click" getEnabled="GetLogoutEnabled" label="账户退出" getImage="GetIcons" />
-          <button id="BtnRibbonSetting" getEnabled="GetLogoutEnabled" label="设置"  getImage="GetIcons"/>
+      <tab id="TabEdit" label="编辑加工" getVisible="GetEditTabVisible">
+        <group id="GroupTask1" label="任务管理">
+          <button id="BtnUpload1" label="上传稿件" size="large" showImage="true" getImage="GetIcons" getEnabled="GetEditUploadEnable" />
         </group>
-        <group id="Group3" label="导出">
-          <button id="BtnRibbonExportContents" onAction="BtnRibbonExportContents_Click" label="导出目录" getImage="GetIcons" />
-          <button id="BtnRibbonExportIndex" onAction="BtnRibbonExportIndex_Click" label="导出索引" getImage="GetIcons" />
+        <group id="GroupDocument" label="文档管理">
+          <button id="BtnExportContents" label="导出目录" onAction="BtnRibbonExportContents_Click" showImage="true" getImage="GetIcons" />
+          <button id="BtnExportIndex" label="导出索引" onAction="BtnRibbonExportIndex_Click" showImage="true" getImage="GetIcons" />
+          <button id="BtnExportAbstract" label="导出摘要" showImage="true" getImage="GetIcons" />
         </group>
-        <group id="Group6" label="模板">
-          <gallery id="GayRibbonTemplateCreate" label="从模板创建" columns="3">
-            <item id="__id5" label="AAAA模板" />
-            <item id="__id6" label="BBBBB模板" />
-            <item id="__id7" label="CCCCC模板" />
-            <item id="__id8" label="DDDDD模板" />
-            <item id="__id9" label="EEEEE模板" />
-          </gallery>
-          <button id="BtnRibbonTemplateManage" onAction="BtnRibbonTemplateManage_Click" label="模板管理" />
-        </group>
-        <group id="Group5" label="窗口">
-          <checkBox id="CbxRobbinTaskWindow" onAction="CbxRobbinTaskWindow_Click" getPressed="GetTaskWindowChecked" label="任务窗口" />
-        </group>
+        <group id="GroupAssist" label="辅助工具" />
       </tab>
-      <tab id="TabChecking" label="快速批注">
-        <group id="G_Checking1" label="字符改动">
-          <button id="BtnChecking_1_1" onAction="BtnChecking_Click" label="改正&#13;" tag="改正" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_1_2" onAction="BtnChecking_Click" label="删除&#13;" tag="删除" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_1_3" onAction="BtnChecking_Click" label="增补&#13;" tag="增补" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_1_4" onAction="BtnChecking_Click" label="改正上下角" tag="改正上下角" size ="large" showImage="true" getImage="GetCheckingIcon" />
+      <tab id="TabChecking" label="审稿校对" getVisible="GetCheckingTabVisible">
+        <group id="GroupTask2" label="任务管理">
+          <button id="BtnUpload2" label="上传稿件" size="large" showImage="true" getImage="GetIcons" />
         </group>
-        <group id="G_Checking2" label="方向位置">
-          <button id="BtnChecking_2_1" onAction="BtnChecking_Click" label="转正&#13;" tag="转正" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_2" onAction="BtnChecking_Click" label="对调&#13;" tag="对调" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_3" onAction="BtnChecking_Click" label="接排&#13;" tag="接排" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_4" onAction="BtnChecking_Click" label="另起段&#13;" tag="另起段" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_5" onAction="BtnChecking_Click" label="转移&#13;" tag="转移" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_6" onAction="BtnChecking_Click" label="上下移&#13;" tag="上下移" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_7" onAction="BtnChecking_Click" label="左右移&#13;" tag="左右移" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_8" onAction="BtnChecking_Click" label="排齐&#13;" tag="排齐" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_9" onAction="BtnChecking_Click" label="排阶梯形&#13;" tag="排阶梯形" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_2_10" onAction="BtnChecking_Click" label="正图&#13;" tag="正图" size ="large" showImage="true" getImage="GetCheckingIcon" />
-        </group>
-        <group id="G_Checking3" label="字符间距">
-          <button id="BtnChecking_3_1" onAction="BtnChecking_Click" label="加大空距&#13;" tag="加大空距" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_3_2" onAction="BtnChecking_Click" label="减小空距&#13;" tag="减小空距" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_3_3" onAction="BtnChecking_Click" label="空字距&#13;" tag="空字距" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_3_4" onAction="BtnChecking_Click" label="分开&#13;" tag="分开" size ="large" showImage="true" getImage="GetCheckingIcon" />
-        </group>
-        <group id="G_Checking4" label="其它">
-          <button id="BtnChecking_4_1" onAction="BtnChecking_Click" label="保留&#13;" tag="保留" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_4_2" onAction="BtnChecking_Click" label="代替&#13;" tag="代替" size ="large" showImage="true" getImage="GetCheckingIcon" />
-          <button id="BtnChecking_4_3" onAction="BtnChecking_Click" label="说明&#13;" tag="说明" size ="large" showImage="true" getImage="GetCheckingIcon" />
+        <group id="Group5" label="审稿工具" />
+        <group id="Group6" label="校对工具">
+          <button id="BtnChecking_1_1" label="改正" tag="改正" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <button id="BtnChecking_1_2" label="删除" tag="删除" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <button id="BtnChecking_1_3" label="增补" tag="增补" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <button id="BtnChecking_1_4" label="改正上下角" tag="改正上下角" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <separator id="Separator4" />
+          <button id="BtnChecking_2_1" label="转正" tag="转正" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <button id="BtnChecking_2_2" label="对调" tag="对调" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <button id="BtnChecking_2_3" label="接排" tag="接排" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <button id="BtnChecking_2_4" label="另起段" tag="另起段" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <splitButton id="SplitButton8">
+            <button id="BtnChecking_2_5" label="转移" tag="行间附近" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            <menu id="SplitButton8__mnu">
+              <button id="BtnChecking_2_5_1" label="行间附近" tag="行间附近" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_2_5_2" label="临行首末" tag="临行首末" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_2_5_3" label="临页首末" tag="临页首末" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            </menu>
+          </splitButton>
+          <splitButton id="SplitButton9">
+            <button id="BtnChecking_2_6" label="上下移" tag="上移" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            <menu id="SplitButton9__mnu">
+              <button id="BtnChecking_2_6_1" label="上移" tag="上移" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_2_6_2" label="下移" tag="下移" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            </menu>
+          </splitButton>
+          <splitButton id="SplitButton10">
+            <button id="BtnChecking_2_7" label="左右移" tag="左移" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            <menu id="SplitButton10__mnu">
+              <button id="BtnChecking_2_7_1" label="左移" tag="左移" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_2_7_2" label="右移" tag="右移" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            </menu>
+          </splitButton>
+          <splitButton id="SplitButton11">
+            <button id="BtnChecking_2_8" label="排齐" tag="横向排齐" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            <menu id="SplitButton11__mnu">
+              <button id="BtnChecking_2_8_1" label="横向排齐" tag="横向排齐" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_2_8_2" label="纵向排齐" tag="纵向排齐" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            </menu>
+          </splitButton>
+          <button id="BtnChecking_2_9" label="阶梯形" tag="阶梯形" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <button id="BtnChecking_2_10" label="正图" tag="正图" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <separator id="Separator5" />
+          <splitButton id="SplitButton12">
+            <button id="BtnChecking_3_1" label="加大空距" tag="横向空距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            <menu id="SplitButton12__mnu">
+              <button id="BtnChecking_3_1_1" label="横向空距" tag="横向空距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_3_1_2" label="纵向空距" tag="纵向空距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            </menu>
+          </splitButton>
+          <splitButton id="SplitButton13">
+            <button id="BtnChecking_3_2" label="减小空距" tag="横向空距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            <menu id="SplitButton13__mnu">
+              <button id="BtnChecking_3_2_1" label="横向空距" tag="横向空距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_3_2_2" label="纵向空距" tag="纵向空距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            </menu>
+          </splitButton>
+          <splitButton id="SplitButton14">
+            <button id="BtnChecking_3_3" label="空x字距" tag="空1字距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            <menu id="SplitButton14__mnu">
+              <button id="BtnChecking_3_3_1" label="空1字距" tag="空1字距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_3_3_2" label="空1/2字距" tag="空1/2字距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_3_3_3" label="空1/3字距" tag="空1/3字距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+              <button id="BtnChecking_3_3_4" label="空1/4字距" tag="空1/4字距" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+            </menu>
+          </splitButton>
+          <button id="BtnChecking_3_4" label="分开" tag="分开" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <separator id="Separator6" />
+          <button id="BtnChecking_4_1" label="保留" tag="保留" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <button id="BtnChecking_4_2" label="代替" tag="代替" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <button id="BtnChecking_4_3" label="说明" tag="说明" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
         </group>
       </tab>
       <!-- 内置Tab ↓ -->

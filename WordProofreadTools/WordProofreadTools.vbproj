@@ -213,6 +213,12 @@
     <Compile Include="FormCloudFiles.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="FormDownload.Designer.vb">
+      <DependentUpon>FormDownload.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDownload.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormLogin.Designer.vb">
       <DependentUpon>FormLogin.vb</DependentUpon>
     </Compile>
@@ -254,6 +260,9 @@
     <Compile Include="UserInfo.vb" />
     <EmbeddedResource Include="FormCloudFiles.resx">
       <DependentUpon>FormCloudFiles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDownload.resx">
+      <DependentUpon>FormDownload.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.vb</DependentUpon>
@@ -308,37 +317,135 @@
     <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Ribbon.xml" />
+    <EmbeddedResource Include="Ribbon.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon_login.png" />
+    <None Include="Resources\btn_1_1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\status_online.png" />
+    <None Include="Resources\btn_1_2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\status_offline.png" />
+    <None Include="Resources\btn_1_3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cog_edit.png" />
+    <None Include="Resources\btn_1_4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\book_next.png" />
+    <None Include="Resources\btn_2_1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\database_go.png" />
+    <None Include="Resources\btn_2_2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon_1_1.png" />
+    <None Include="Resources\btn_2_3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon_1_2.png" />
+    <None Include="Resources\btn_2_4.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon_1_3.png" />
+    <None Include="Resources\btn_2_5.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon_1_4.png" />
+    <None Include="Resources\btn_2_5_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_5_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_5_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_6_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_6_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_7_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_7_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_8_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_8_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_2_10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_1_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_1_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_2_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_2_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_3_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_3_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_3_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_3_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_3_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_4_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_4_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_4_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_upload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_abstract.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_contents.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_index.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

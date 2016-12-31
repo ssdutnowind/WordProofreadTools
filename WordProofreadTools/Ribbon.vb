@@ -35,8 +35,6 @@ Public Class Ribbon
 
 #Region "可用性回调"
 
-
-
     ''' <summary>
     ''' 控制内置Ribbon Tab是否可见
     ''' </summary>
@@ -46,58 +44,52 @@ Public Class Ribbon
     End Function
 
     ''' <summary>
-    ''' 设置内置Tab显示
+    ''' 编辑Tab是否可见
     ''' </summary>
-    Public Sub SetBuildinVisible()
-        Me.buildinVisible = True
-        Me.ribbon.Invalidate()
-    End Sub
-
-    ''' <summary>
-    ''' 设置内置Tab隐藏
-    ''' </summary>
-    Public Sub SetBuildinHidden()
-        Me.buildinVisible = False
-        Me.ribbon.Invalidate()
-    End Sub
-
-    ''' <summary>
-    ''' 任务窗口
-    ''' </summary>
-    Private taskWindowChecked As Boolean = False
-    Public Function GetTaskWindowChecked(control As IRibbonControl) As Boolean
-        Return taskWindowChecked
+    Private editTabVisible As Boolean = False
+    Public Function GetEditTabVisible(control As IRibbonControl) As Boolean
+        Return editTabVisible
     End Function
 
     ''' <summary>
-    ''' 设置内置任务窗口是否显示
+    ''' 审校Tab是否课件
     ''' </summary>
-    ''' <param name="checked"></param>
-    Public Sub SetTaskWindowChecked(ByVal checked As Boolean)
-        taskWindowChecked = checked
-        Me.ribbon.Invalidate()
+    Private checkingTabVisible As Boolean = False
+    Public Function GetCheckingTabVisible(control As IRibbonControl) As Boolean
+        Return checkingTabVisible
+    End Function
+
+    ''' <summary>
+    ''' 编辑工具的上传按钮是否可用
+    ''' </summary>
+    Private editDownloadEnable As Boolean = False
+    Public Function GetEditUploadEnable(control As IRibbonControl) As Boolean
+        Return editDownloadEnable
+    End Function
+
+    ''' <summary>
+    ''' 设置普通模式（非网站启动）
+    ''' </summary>
+    Public Sub SetNormalState()
+
     End Sub
 
     ''' <summary>
-    ''' 登录窗口
+    ''' 设置编辑模式（从网站启动）
     ''' </summary>
-    Private loginEnable As Boolean = True
-    Public Function GetLoginEnabled(control As IRibbonControl) As Boolean
-        Return loginEnable
-    End Function
+    Public Sub SetEditorState()
 
-    Public Function GetLogoutEnabled(control As IRibbonControl) As Boolean
-        Return Not loginEnable
-
-    End Function
+    End Sub
 
     ''' <summary>
-    ''' 设置登录是否可用
+    ''' 设置审核模式
     ''' </summary>
-    ''' <param name="enable"></param>
-    Public Sub SetLoginEnabled(enable As Boolean)
-        loginEnable = enable
-        Me.ribbon.Invalidate()
+    Public Sub SetAuditState()
+
+    End Sub
+
+    Public Sub SetProofreadState()
+
     End Sub
 
 #End Region
@@ -112,19 +104,17 @@ Public Class Ribbon
     Public Function GetIcons(ByVal control As Office.IRibbonControl) As Bitmap
 
         Select Case control.Id
-            Case "BtnRibbonLogin"
-                Return New Bitmap(My.Resources.icon_login)
-            Case "BtnRibbonLogout"
-                Return New Bitmap(My.Resources.icon_logout)
-            Case "BtnRibbonSetting"
-                Return New Bitmap(My.Resources.icon_setting)
-            Case "BtnRibbonExportContents"
-                Return New Bitmap(My.Resources.icon_export_contents)
-            Case "BtnRibbonExportIndex"
-                Return New Bitmap(My.Resources.icon_export_index)
+            Case "BtnUpload1"
+                Return New Bitmap(My.Resources.btn_upload)
+            Case "BtnUpload2"
+                Return New Bitmap(My.Resources.btn_upload)
+            Case "BtnExportContents"
+                Return New Bitmap(My.Resources.btn_contents)
+            Case "BtnExportIndex"
+                Return New Bitmap(My.Resources.btn_index)
+            Case "BtnExportAbstract"
+                Return New Bitmap(My.Resources.btn_abstract)
         End Select
-
-
 
         Return Nothing
     End Function
@@ -136,10 +126,10 @@ Public Class Ribbon
     ''' <returns></returns>
     Public Function GetCheckingIcon(ByVal control As Office.IRibbonControl) As Bitmap
         Dim id As String = control.Id
-        Dim icon As String = id.Replace("BtnChecking", "icon")
+        Dim icon As String = id.Replace("BtnChecking", "btn")
         Dim res = My.Resources.ResourceManager.GetObject(icon)
         If IsNothing(res) Then
-            Return New Bitmap(My.Resources.icon_1_1)
+            Return New Bitmap(My.Resources.btn_1_1)
         Else
             Return CType(res, Bitmap)
         End If
@@ -155,41 +145,6 @@ Public Class Ribbon
     End Sub
 
     ''' <summary>
-    ''' 登录
-    ''' </summary>
-    ''' <param name="control"></param>
-    Public Sub BtnRibbonLogin_Click(ByVal control As Office.IRibbonControl)
-        CommonModule.loginForm.ShowDialog()
-    End Sub
-
-    ''' <summary>
-    ''' 注销
-    ''' </summary>
-    ''' <param name="control"></param>
-    Public Sub BtnRibbonLogout_Click(ByVal control As Office.IRibbonControl)
-        'TODO: 一些检查
-        If (CommonModule.ShowAlert("确定要退出登录？", "Question") = vbYes) Then
-            'TODO: 数据清理
-            Me.SetLoginEnabled(True)
-            ' 显示内置功能区
-            Me.SetBuildinVisible()
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' 任务窗格
-    ''' </summary>
-    ''' <param name="control"></param>
-    ''' <param name="isChecked"></param>
-    Public Sub CbxRobbinTaskWindow_Click(ByVal control As Office.IRibbonControl, ByVal isChecked As Boolean)
-        If isChecked Then
-            CommonModule.ShowCloudFilesPane()
-        Else
-            CommonModule.HideCloudFilesPane()
-        End If
-    End Sub
-
-    ''' <summary>
     ''' 快速批注
     ''' </summary>
     ''' <param name="control"></param>
@@ -199,7 +154,8 @@ Public Class Ribbon
         Dim label = control.Tag
         Dim range = sel.Range()
         Dim comment = app.ActiveDocument.Comments.Add(range, label + "： ")
-        comment.Author = "XXX主编"
+        Dim author = control.Id.Replace("BtnChecking_", "") + "主编"
+        comment.Author = author
 
     End Sub
 
@@ -265,14 +221,14 @@ Public Class Ribbon
 
 #Region "事件"
 
-    Public Sub OnUserLogin(ByVal sender As Object) Handles loginForm.UserLogin
-        CommonModule.Log("Ribbon：用户登录")
-        ' 隐藏内置功能区
-        Me.SetBuildinHidden()
-        ' 登录
-        Me.SetLoginEnabled(False)
+    'Public Sub OnUserLogin(ByVal sender As Object) Handles loginForm.UserLogin
+    '    CommonModule.Log("Ribbon：用户登录")
+    '    ' 隐藏内置功能区
+    '    Me.SetBuildinHidden()
+    '    ' 登录
+    '    Me.SetLoginEnabled(False)
 
-    End Sub
+    'End Sub
 
 #End Region
 

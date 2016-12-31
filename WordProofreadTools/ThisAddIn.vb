@@ -35,16 +35,10 @@
             End If
         Next
 
-    End Sub
+        'Dim download = New FormDownload()
+        'download.Show()
+        'download.StartDownload("http://localhost:3000/files/test.docx", System.Environment.CurrentDirectory + "temp/task.docx")
 
-    ''' <summary>
-    ''' 监听Pane显示隐藏
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub PaneCloudFiles_VisibleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles taskPaneCloudFiles.VisibleChanged
-        CType(Me.ribbon, Ribbon).SetTaskWindowChecked(taskPaneCloudFiles.Visible)
-        'Globals.Ribbons.Ribbon1.CbxRobbinCloudFiles.Checked = taskPaneCloudFiles.Visible
     End Sub
 
     Private Sub ThisAddIn_Shutdown() Handles Me.Shutdown
