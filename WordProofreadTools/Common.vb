@@ -1,12 +1,24 @@
 ﻿Imports System.Windows.Forms
 
 Module CommonModule
-    ''' <summary>
-    ''' 服务器地址
-    ''' </summary>
-    Public ServerPath As String = ""
+    ' 服务器地址
+    Public serverPath As String = ""
+    ' 任务ID
+    Public taskId As String = ""
+    ' 临时令牌
+    Public token As String = ""
+    ' 昵称
+    Public nickName As String = ""
+    ' 任务类型
+    Public taskType As String = ""
+    ' 任务名称
+    Public taskLabel As String = ""
+    ' 任务文件路径
+    Public taskFile As String = ""
+    ' 本地临时文件
+    Public localFile As String = ""
 
-    Public WithEvents loginForm As FormLogin = New FormLogin()
+    Public ribbon As Ribbon = Nothing
 
     ''' <summary>
     ''' 云端文件窗格

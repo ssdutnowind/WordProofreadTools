@@ -8,19 +8,18 @@ Public Class ResponsePublic
 End Class
 
 ''' <summary>
-''' 登录
+''' 查询任务
 ''' </summary>
-Public Class ResponseDoLogin
-    Public Class DoLogin
-        Public userId As String
-        Public userName As String
+Public Class ResponseQueryTask
+    Public Class QueryTask
         Public nickName As String
-        Public token As String
+        Public taskId As String
+        Public taskType As String
+        Public taskLabel As String
+        Public taskFile As String
     End Class
 
-    Public data As DoLogin
+    Public data As QueryTask
 End Class
 
-Public Class DoLogoutResponse
 
-End Class

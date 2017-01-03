@@ -5,7 +5,7 @@
       <tab idMso="TabAddIns" />
       <tab id="TabEdit" label="编辑加工" getVisible="GetEditTabVisible">
         <group id="GroupTask1" label="任务管理">
-          <button id="BtnUpload1" label="上传稿件" size="large" showImage="true" getImage="GetIcons" getEnabled="GetEditUploadEnable" />
+          <button id="BtnUpload1" label="上传稿件&#13;" size="large" showImage="true" getImage="GetIcons" getEnabled="GetEditUploadEnable" />
         </group>
         <group id="GroupDocument" label="文档管理">
           <button id="BtnExportContents" label="导出目录" onAction="BtnRibbonExportContents_Click" showImage="true" getImage="GetIcons" />
@@ -16,9 +16,16 @@
       </tab>
       <tab id="TabChecking" label="审稿校对" getVisible="GetCheckingTabVisible">
         <group id="GroupTask2" label="任务管理">
-          <button id="BtnUpload2" label="上传稿件" size="large" showImage="true" getImage="GetIcons" />
+          <button id="BtnUpload2" label="上传稿件&#13;" size="large" showImage="true" getImage="GetIcons" />
         </group>
-        <group id="Group5" label="审稿工具" />
+        <group id="Group5" label="审稿工具">
+          <splitButton idMso="ReviewAcceptChangeMenu" size="large" />
+          <splitButton idMso="ReviewRejectChangeMenu" size="large"/>
+          <button idMso="ReviewPreviousChange"/>
+          <button idMso="ReviewNextChange"/>
+          <separator id="Separator20" />
+          <menu idMso="ReviewCompareMenu" size="large" />
+        </group>
         <group id="Group6" label="校对工具">
           <button id="BtnChecking_1_1" label="改正" tag="改正" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
           <button id="BtnChecking_1_2" label="删除" tag="删除" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />

@@ -15,7 +15,7 @@ Public Class FormDownload
 
     End Sub
 
-    Dim WithEvents WC As New WebClient
+    Private WithEvents WC As New WebClient
 
     ''' <summary>
     ''' 下载文件到本地
@@ -24,7 +24,8 @@ Public Class FormDownload
     ''' <param name="path"></param>
     Public Sub StartDownload(url As String, path As String)
         Try
-            WC.DownloadFileAsync(New Uri(url), path)
+            My.Computer.FileSystem.CreateDirectory(System.Environment.CurrentDirectory + "\temp")
+            WC.DownloadFileAsync(New Uri(url), System.Environment.CurrentDirectory + "\temp\task.docx")
         Catch ex As Exception
             MsgBox(ex.ToString())
         End Try

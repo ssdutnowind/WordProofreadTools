@@ -248,16 +248,9 @@
     <Compile Include="Ribbon.vb">
       <XmlRibbon>true</XmlRibbon>
     </Compile>
-    <Compile Include="Ribbon1.Designer.vb">
-      <DependentUpon>Ribbon1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Ribbon1.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UserInfo.vb" />
     <EmbeddedResource Include="FormCloudFiles.resx">
       <DependentUpon>FormCloudFiles.vb</DependentUpon>
     </EmbeddedResource>
@@ -275,9 +268,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTemplate.resx">
       <DependentUpon>FormTemplate.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Ribbon1.resx">
-      <DependentUpon>Ribbon1.vb</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />

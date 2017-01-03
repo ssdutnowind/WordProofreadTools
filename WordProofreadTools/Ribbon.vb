@@ -24,9 +24,11 @@ Public Class Ribbon
     Implements Office.IRibbonExtensibility
 
     Private ribbon As Office.IRibbonUI
-    Private WithEvents loginForm As FormLogin = CommonModule.loginForm
 
     Public Sub New()
+        Me.editTabVisible = True
+        Me.checkingTabVisible = True
+        CommonModule.ribbon = Me
     End Sub
 
     Public Function GetCustomUI(ByVal ribbonID As String) As String Implements Office.IRibbonExtensibility.GetCustomUI
@@ -62,30 +64,42 @@ Public Class Ribbon
     ''' <summary>
     ''' 编辑工具的上传按钮是否可用
     ''' </summary>
-    Private editDownloadEnable As Boolean = False
+    Private editUploadEnable As Boolean = False
     Public Function GetEditUploadEnable(control As IRibbonControl) As Boolean
-        Return editDownloadEnable
+        Return editUploadEnable
     End Function
 
     ''' <summary>
     ''' 设置普通模式（非网站启动）
     ''' </summary>
     Public Sub SetNormalState()
-
+        Me.editTabVisible = True
+        Me.checkingTabVisible = False
+        Me.editUploadEnable = False
+        Me.buildinVisible = True
+        Me.ribbon.Invalidate()
     End Sub
 
     ''' <summary>
     ''' 设置编辑模式（从网站启动）
     ''' </summary>
     Public Sub SetEditorState()
-
+        Me.editTabVisible = True
+        Me.checkingTabVisible = False
+        Me.editUploadEnable = True
+        Me.buildinVisible = True
+        Me.ribbon.Invalidate()
     End Sub
 
     ''' <summary>
     ''' 设置审核模式
     ''' </summary>
     Public Sub SetAuditState()
-
+        Me.editTabVisible = True
+        Me.checkingTabVisible = True
+        Me.editUploadEnable = False
+        Me.buildinVisible = False
+        Me.ribbon.Invalidate()
     End Sub
 
     Public Sub SetProofreadState()

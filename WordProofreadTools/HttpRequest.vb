@@ -5,7 +5,7 @@ Imports System.Net
 Public Class HttpRequest
     Public Function DoSendRequest(ByVal cmd As String, Optional ByVal params As Hashtable = Nothing, Optional ByVal method As String = "GET")
         ' 完整请求地址
-        Dim path As String = CommonModule.ServerPath + cmd + ".json"
+        Dim path As String = CommonModule.serverPath + cmd + ".json"
 
         ' 请求参数
         Dim postData As String = ""
