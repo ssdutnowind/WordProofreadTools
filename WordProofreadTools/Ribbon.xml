@@ -109,6 +109,29 @@
       <tab idMso="TabView" label="视图" getVisible="GetBuildinVisible" />
       <tab idMso="TabDeveloper" label="开发工具" getVisible="GetBuildinVisible" />
       <tab idMso="TabAddIns" label="加载项" getVisible="GetBuildinVisible" />
+      <tab idMso="TabDrawing" label="绘图" getVisible="GetBuildinVisible" />
+      <!-- Tab Set -->
+      <tab idMso="TabSmartArtToolsDesign" getVisible="GetBuildinVisible" />
+      <tab idMso="TabSmartArtToolsFormat" getVisible="GetBuildinVisible" />
+      <tab idMso="TabChartToolsDesignNew" getVisible="GetBuildinVisible" />
+      <tab idMso="TabChartToolsFormatNew" getVisible="GetBuildinVisible" />
+      <tab idMso="TabChartToolsDesign" getVisible="GetBuildinVisible" />
+      <tab idMso="TabChartToolsLayout" getVisible="GetBuildinVisible" />
+      <tab idMso="TabChartToolsFormat" getVisible="GetBuildinVisible" />
+      <tab idMso="TabTextBoxToolsFormat" getVisible="GetBuildinVisible" />
+      <tab idMso="TabDrawingToolsFormat" getVisible="GetBuildinVisible" />
+      <tab idMso="TabDrawingToolsFormatClassic" getVisible="GetBuildinVisible" />
+      <tab idMso="TabWordArtToolsFormat" getVisible="GetBuildinVisible" />
+      <tab idMso="TabDiagramToolsFormatClassic" getVisible="GetBuildinVisible" />
+      <tab idMso="TabOrganizationChartToolsFormat" getVisible="GetBuildinVisible" />
+      <tab idMso="TabPictureToolsFormat" getVisible="GetBuildinVisible" />
+      <tab idMso="TabPictureToolsFormatClassic" getVisible="GetBuildinVisible" />
+      <tab idMso="TabTableToolsDesign" getVisible="GetBuildinVisible" />
+      <tab idMso="TabTableToolsLayout" getVisible="GetBuildinVisible" />
+      <tab idMso="TabHeaderAndFooterToolsDesign" getVisible="GetBuildinVisible" />
+      <tab idMso="TabEquationToolsDesign" getVisible="GetBuildinVisible" />
+      <tab idMso="TabInkToolsPens" getVisible="GetBuildinVisible" />
+
       <!-- 内置Tab ↑ -->
     </tabs>
   </ribbon>

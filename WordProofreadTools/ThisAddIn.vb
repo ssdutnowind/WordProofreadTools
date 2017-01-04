@@ -8,11 +8,17 @@ Public Class ThisAddIn
 
     Public ribbon As Microsoft.Office.Core.IRibbonExtensibility
 
+    ''' <summary>
+    ''' 插件初始化
+    ''' </summary>
     Private Sub ThisAddIn_Startup() Handles Me.Startup
         CommonModule.Log("系统初始化……")
         ' 初始化配置
         CommonModule.serverPath = My.Settings.Item("Server")
         CommonModule.Log("[读取配置]服务器路径：" + CommonModule.serverPath)
+
+        ' 设置默认状态
+        CommonModule.ribbon.SetNormalState()
 
         ' 参数判断
         For Each arg As String In Environment.GetCommandLineArgs
@@ -29,8 +35,6 @@ Public Class ThisAddIn
                         CommonModule.taskId = param.Substring(5)
                     End If
                 Next
-
-                MsgBox("token: " + token + vbCrLf + "task: " + task)
             End If
         Next
 
@@ -44,6 +48,9 @@ Public Class ThisAddIn
 
     End Sub
 
+    ''' <summary>
+    ''' 查询任务信息
+    ''' </summary>
     Private Sub DoQueryTask()
         ' 查询任务信息
         ' 请求参数
@@ -87,25 +94,38 @@ Public Class ThisAddIn
                 ' 任务文件
                 CommonModule.taskFile = json.data.taskFile
 
+                If (CommonModule.taskType = "02" Or CommonModule.taskType = "03" Or CommonModule.taskType = "04") Then
+                    ' 审核任务
+                    CommonModule.ribbon.SetAuditState()
+                ElseIf (CommonModule.taskType = "05" Or CommonModule.taskType = "06" Or CommonModule.taskType = "07") Then
+                    ' 校对任务
+                    CommonModule.ribbon.SetProofreadState()
+                Else
+                    ' 默认编纂任务
+                    CommonModule.ribbon.SetEditorState()
+                End If
+
                 ' 准备就绪开始下载任务文件
                 StartDownloadTask()
-            Else
-                ' 服务器返回异常消息
-                CommonModule.ShowAlert(jsonPublic.msg, "Error")
+                Else
+                    ' 服务器返回异常消息
+                    CommonModule.ShowAlert(jsonPublic.msg, "Error")
                 Return
             End If
         End If
 
     End Sub
 
+    ''' <summary>
+    ''' 开始下载任务文件
+    ''' </summary>
     Private Sub StartDownloadTask()
         Dim file As String = CommonModule.taskFile
         file = file.Substring(file.LastIndexOf("/"))
 
-        CommonModule.Log(file)
-        'Dim download = New FormDownload()
-        'download.StartDownload("http://localhost:3000/files/test.docx", "task.docx")
-        'download.ShowDialog()
+        Dim download = New FormDownload()
+        download.StartDownload(CommonModule.taskFile, file)
+        download.ShowDialog()
     End Sub
 
     Private Sub ThisAddIn_Shutdown() Handles Me.Shutdown
