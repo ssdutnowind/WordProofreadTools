@@ -15,7 +15,6 @@ Public Class ResponseQueryTask
         Public nickName As String
         Public taskId As String
         Public taskType As String
-        Public taskLabel As String
         Public taskFile As String
     End Class
 

@@ -5,18 +5,23 @@
       <tab idMso="TabAddIns" />
       <tab id="TabEdit" label="编辑加工" getVisible="GetEditTabVisible">
         <group id="GroupTask1" label="任务管理">
-          <button id="BtnUpload1" label="上传稿件&#13;" size="large" showImage="true" getImage="GetIcons" getEnabled="GetEditUploadEnable" />
+          <labelControl id="LabelEdit" getLabel="GetLabel"/>
+          <button id="BtnUpload1" label="上传稿件&#13;" onAction="BtnRibbonUpload_Click" size="large" showImage="true" getImage="GetIcons" getEnabled="GetEditUploadEnable" />
         </group>
         <group id="GroupDocument" label="文档管理">
           <button id="BtnExportContents" label="导出目录" onAction="BtnRibbonExportContents_Click" showImage="true" getImage="GetIcons" />
           <button id="BtnExportIndex" label="导出索引" onAction="BtnRibbonExportIndex_Click" showImage="true" getImage="GetIcons" />
-          <button id="BtnExportAbstract" label="导出摘要" showImage="true" getImage="GetIcons" />
+          <button id="BtnExportAbstract" label="导出摘要" onAction="BtnExportAbstract_Click" showImage="true" getImage="GetIcons" />
+          <button id="BtnExportDoc" label="导出Word" onAction="BtnExportDoc_Click" showImage="true" getImage="GetIcons" />
+          <button id="BtnExportXML" label="导出XML" onAction="BtnExportXML_Click" showImage="true" getImage="GetIcons" />
+          <button id="BtnExportPDF" label="导出PDF" onAction="BtnExportPDF_Click" showImage="true" getImage="GetIcons" />
         </group>
         <group id="GroupAssist" label="辅助工具" />
       </tab>
       <tab id="TabChecking" label="审稿校对" getVisible="GetCheckingTabVisible">
         <group id="GroupTask2" label="任务管理">
-          <button id="BtnUpload2" label="上传稿件&#13;" size="large" showImage="true" getImage="GetIcons" />
+          <labelControl id="LabelChecking" getLabel="GetLabel"/>
+          <button id="BtnUpload2" label="上传稿件&#13;" onAction="BtnRibbonUpload_Click" size="large" showImage="true" getImage="GetIcons" />
         </group>
         <group id="Group5" label="审稿工具">
           <splitButton idMso="ReviewAcceptChangeMenu" size="large" />
@@ -96,6 +101,8 @@
           <button id="BtnChecking_4_1" label="保留" tag="保留" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
           <button id="BtnChecking_4_2" label="代替" tag="代替" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
           <button id="BtnChecking_4_3" label="说明" tag="说明" showImage="true" getImage="GetCheckingIcon" onAction="BtnChecking_Click" />
+          <separator id="Separator7" />
+          <button id="BtnRemoveComment" label="清除批注&#13;" size="large" showImage="true" getImage="GetIcons" onAction="BtnRibbonRemoveComment_Click" />
         </group>
       </tab>
       <!-- 内置Tab ↓ -->

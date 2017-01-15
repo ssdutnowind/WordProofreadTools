@@ -11,8 +11,6 @@ Module CommonModule
     Public nickName As String = ""
     ' 任务类型
     Public taskType As String = ""
-    ' 任务名称
-    Public taskLabel As String = ""
     ' 任务文件路径
     Public taskFile As String = ""
     ' 本地临时文件
@@ -68,5 +66,42 @@ Module CommonModule
                 Return MessageBox.Show(msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End Select
     End Function
+
+    ''' <summary>
+    ''' 读取自定义属性
+    ''' </summary>
+    ''' <param name="propertyName"></param>
+    ''' <returns></returns>
+    Public Function ReadDocumentProperty(ByVal propertyName As String) As String
+        Dim doc = Globals.ThisAddIn.Application.ActiveDocument
+        propertyName = "vsto_" + propertyName
+        Dim properties As Office.DocumentProperties = CType(doc.CustomDocumentProperties, Office.DocumentProperties)
+        Dim prop As Office.DocumentProperty
+
+        For Each prop In properties
+            If prop.Name = propertyName Then
+                Return prop.Value.ToString()
+            End If
+        Next
+
+        Return Nothing
+    End Function
+
+    ''' <summary>
+    ''' 写入自定义属性
+    ''' </summary>
+    ''' <param name="propertyName"></param>
+    ''' <param name="value"></param>
+    Public Sub WriteDocumentProperty(ByVal propertyName As String, ByVal value As String)
+        Dim doc = Globals.ThisAddIn.Application.ActiveDocument
+        Dim properties As Microsoft.Office.Core.DocumentProperties
+        properties = CType(doc.CustomDocumentProperties, Office.DocumentProperties)
+
+        If ReadDocumentProperty(propertyName) <> Nothing Then
+            properties("vsto_" + propertyName).Delete()
+        End If
+
+        properties.Add("vsto_" + propertyName, False, Microsoft.Office.Core.MsoDocProperties.msoPropertyTypeString, value)
+    End Sub
 
 End Module

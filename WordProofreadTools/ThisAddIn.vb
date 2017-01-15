@@ -1,10 +1,11 @@
 ﻿Imports System.Collections
 Imports System.Net
+Imports Microsoft.Office.Interop.Word
 Imports Newtonsoft.Json
 
 Public Class ThisAddIn
 
-    'Public WithEvents WC As New WebClient
+    WithEvents applicationEvents As ApplicationEvents4_Event
 
     Public ribbon As Microsoft.Office.Core.IRibbonExtensibility
 
@@ -20,6 +21,9 @@ Public Class ThisAddIn
         ' 设置默认状态
         CommonModule.ribbon.SetNormalState()
 
+        ' 监听事件
+        applicationEvents = Globals.ThisAddIn.Application
+
         ' 参数判断
         For Each arg As String In Environment.GetCommandLineArgs
             ' 如果有token参数
@@ -31,8 +35,8 @@ Public Class ThisAddIn
                 For Each param As String In params
                     If (param.IndexOf("token") >= 0) Then
                         CommonModule.token = param.Substring(6)
-                    ElseIf (param.IndexOf("task") >= 0) Then
-                        CommonModule.taskId = param.Substring(5)
+                    ElseIf (param.IndexOf("taskId") >= 0) Then
+                        CommonModule.taskId = param.Substring(7)
                     End If
                 Next
             End If
@@ -89,31 +93,39 @@ Public Class ThisAddIn
                 CommonModule.nickName = json.data.nickName
                 ' 任务类型
                 CommonModule.taskType = json.data.taskType
-                ' 任务标签
-                CommonModule.taskLabel = json.data.taskLabel
                 ' 任务文件
                 CommonModule.taskFile = json.data.taskFile
 
-                If (CommonModule.taskType = "02" Or CommonModule.taskType = "03" Or CommonModule.taskType = "04") Then
-                    ' 审核任务
-                    CommonModule.ribbon.SetAuditState()
-                ElseIf (CommonModule.taskType = "05" Or CommonModule.taskType = "06" Or CommonModule.taskType = "07") Then
-                    ' 校对任务
-                    CommonModule.ribbon.SetProofreadState()
-                Else
-                    ' 默认编纂任务
-                    CommonModule.ribbon.SetEditorState()
-                End If
-
-                ' 准备就绪开始下载任务文件
-                StartDownloadTask()
-                Else
-                    ' 服务器返回异常消息
-                    CommonModule.ShowAlert(jsonPublic.msg, "Error")
+                ' 数据读取完毕，开始初始化状态
+                AfterTaskDataReaded(True)
+            Else
+                ' 服务器返回异常消息
+                CommonModule.ShowAlert(jsonPublic.msg, "Error")
                 Return
             End If
         End If
 
+    End Sub
+
+    ''' <summary>
+    ''' 解析任务属性的应答
+    ''' </summary>
+    Private Sub AfterTaskDataReaded(ByVal fromNetwork As Boolean)
+        If (CommonModule.taskType = "1" Or CommonModule.taskType = "2" Or CommonModule.taskType = "3") Then
+            ' 审核任务
+            CommonModule.ribbon.SetAuditState()
+        ElseIf (CommonModule.taskType = "6" Or CommonModule.taskType = "7" Or CommonModule.taskType = "8") Then
+            ' 校对任务
+            CommonModule.ribbon.SetProofreadState()
+        Else
+            ' 默认编纂任务
+            CommonModule.ribbon.SetEditorState()
+        End If
+
+        If (fromNetwork = True) Then
+            ' 准备就绪开始下载任务文件
+            StartDownloadTask()
+        End If
     End Sub
 
     ''' <summary>
@@ -126,6 +138,58 @@ Public Class ThisAddIn
         Dim download = New FormDownload()
         download.StartDownload(CommonModule.taskFile, file)
         download.ShowDialog()
+    End Sub
+
+    ''' <summary>
+    ''' 文档打开事件
+    ''' </summary>
+    ''' <param name="Doc"></param>
+    Private Sub applicationEvents4_DocumentOpen(doc As Document) Handles applicationEvents.DocumentOpen
+        CommonModule.Log("文档打开……")
+        Dim document = Globals.ThisAddIn.Application.ActiveDocument
+        If (String.IsNullOrEmpty(CommonModule.taskId)) Then
+            CommonModule.Log("打开本地文件……")
+            ' 没有taskId说明是本地打开文件，尝试读取response
+            Dim taskId As String = CommonModule.ReadDocumentProperty("taskId")
+            If (taskId <> Nothing) Then
+                CommonModule.Log("读取到自定义属性……")
+                CommonModule.taskId = CommonModule.ReadDocumentProperty("taskId")
+                CommonModule.taskType = CommonModule.ReadDocumentProperty("taskType")
+                CommonModule.nickName = CommonModule.ReadDocumentProperty("nickName")
+                ' 数据读取完毕，开始初始化状态
+                AfterTaskDataReaded(False)
+            End If
+        Else
+            ' 有taskId说明是网络下载后打开
+            If (Not String.IsNullOrEmpty(CommonModule.taskId)) Then
+                ' 将应答写入自定义属性
+                CommonModule.Log("即将写入自定义属性……")
+                CommonModule.WriteDocumentProperty("taskId", CommonModule.taskId)
+                CommonModule.WriteDocumentProperty("taskType", CommonModule.taskType)
+                CommonModule.WriteDocumentProperty("nickName", CommonModule.nickName)
+                doc.Save()
+            End If
+
+        End If
+
+    End Sub
+
+    ''' <summary>
+    ''' 文档关闭事件
+    ''' </summary>
+    ''' <param name="doc"></param>
+    ''' <param name="cancel"></param>
+    Private Sub applicationEvents4_DocumentOpen(doc As Document, ByRef cancel As Boolean) Handles applicationEvents.DocumentBeforeClose
+        CommonModule.Log("文件关闭……")
+        ' 设置默认状态
+        CommonModule.ribbon.SetNormalState()
+        ' 清空文件相关全局数据
+        CommonModule.token = ""
+        CommonModule.taskId = ""
+        CommonModule.nickName = ""
+        CommonModule.taskType = ""
+        CommonModule.taskFile = ""
+        CommonModule.localFile = ""
     End Sub
 
     Private Sub ThisAddIn_Shutdown() Handles Me.Shutdown

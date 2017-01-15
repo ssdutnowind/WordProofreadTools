@@ -18,6 +18,7 @@
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports Microsoft.Office.Core
+Imports Microsoft.Office.Interop.Word
 
 <Runtime.InteropServices.ComVisible(True)>
 Public Class Ribbon
@@ -128,9 +129,18 @@ Public Class Ribbon
                 Return New Bitmap(My.Resources.btn_index)
             Case "BtnExportAbstract"
                 Return New Bitmap(My.Resources.btn_abstract)
+            Case "BtnRemoveComment"
+                Return New Bitmap(My.Resources.btn_remove_comment)
+            Case "BtnExportDoc"
+                Return New Bitmap(My.Resources.btn_word)
+            Case "BtnExportXML"
+                Return New Bitmap(My.Resources.btn_xml)
+            Case "BtnExportPDF"
+                Return New Bitmap(My.Resources.btn_pdf)
+            Case Else
+                Return Nothing
         End Select
 
-        Return Nothing
     End Function
 
     ''' <summary>
@@ -149,8 +159,35 @@ Public Class Ribbon
         End If
         Return Nothing
     End Function
-#End Region
 
+    ''' <summary>
+    ''' 获取Label内容
+    ''' </summary>
+    ''' <param name="control"></param>
+    ''' <returns></returns>
+    Public Function GetLabel(ByVal control As Office.IRibbonControl) As String
+        Select Case CommonModule.taskType
+            Case "1"
+                Return "立项"
+            Case "2"
+                Return "初审"
+            Case "3"
+                Return "复审"
+            Case "4"
+                Return "终审"
+            Case "5"
+                Return "排版"
+            Case "6"
+                Return "一校"
+            Case "7"
+                Return "二校"
+            Case "8"
+                Return "三校"
+            Case Else
+                Return ""
+        End Select
+    End Function
+#End Region
 
 #Region "功能区回调"
     '在此创建回调方法。有关添加回调方法的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=271226
@@ -171,6 +208,32 @@ Public Class Ribbon
         Dim author = control.Id.Replace("BtnChecking_", "") + "主编"
         comment.Author = author
 
+    End Sub
+
+    ''' <summary>
+    ''' 上传文件
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnRibbonUpload_Click(ByVal control As Office.IRibbonControl)
+        If (CommonModule.taskId) Then
+            Dim doc = Globals.ThisAddIn.Application.ActiveDocument
+            ' 保存文档
+            doc.Save()
+
+            CommonModule.localFile = doc.Path
+            ' 获取文件大小
+            Dim info = My.Computer.FileSystem.GetFileInfo(CommonModule.localFile)
+            ' 大于100M
+            If (info.Length > 100 * 100 * 1024) Then
+                CommonModule.ShowAlert("上传文件不能大于100M！", "Warning")
+                Return
+            End If
+            'Dim shapes = doc.Shapes
+            'For Each shape In shapes
+
+            'Next
+
+        End If
     End Sub
 
     ''' <summary>
@@ -227,6 +290,72 @@ Public Class Ribbon
             End If
         Else
             CommonModule.ShowAlert("当前文档内没有索引，请先插入索引后再导出！", "Warning")
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 导出摘要
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnExportAbstract_Click(ByVal control As Office.IRibbonControl)
+
+    End Sub
+
+    ''' <summary>
+    ''' 导出Doc
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnExportDoc_Click(ByVal control As Office.IRibbonControl)
+        Dim dialog = New SaveFileDialog()
+        dialog.Filter = "Word文件|*.docx"
+        dialog.FileName = "导出Word文件.docx"
+        dialog.Title = "请选择导出的Word文件"
+        '确定后开始导出
+        If dialog.ShowDialog() = DialogResult.OK Then
+            Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName, WdSaveFormat.wdFormatDocument)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 导出XML
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnExportXML_Click(ByVal control As Office.IRibbonControl)
+        Dim dialog = New SaveFileDialog()
+        dialog.Filter = "XML文件|*.xml"
+        dialog.FileName = "导出XML文件.xml"
+        dialog.Title = "请选择导出的XML文件"
+        '确定后开始导出
+        If dialog.ShowDialog() = DialogResult.OK Then
+            Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName, WdSaveFormat.wdFormatXML)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 导出PDF
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnExportPDF_Click(ByVal control As Office.IRibbonControl)
+        Dim dialog = New SaveFileDialog()
+        dialog.Filter = "PDF文件|*.pdf"
+        dialog.FileName = "导出PDF文件.pdf"
+        dialog.Title = "请选择导出的PDF文件"
+        '确定后开始导出
+        If dialog.ShowDialog() = DialogResult.OK Then
+            Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName, WdSaveFormat.wdFormatPDF)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 清空批注
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnRibbonRemoveComment_Click(ByVal control As Office.IRibbonControl)
+        If CommonModule.ShowAlert("确认要删除所有批注么？", "Question") = vbYes Then
+            Dim comments = Globals.ThisAddIn.Application.ActiveDocument.Comments
+            For Each comment As Microsoft.Office.Interop.Word.Comment In comments
+                comment.DeleteRecursively()
+            Next
         End If
     End Sub
 

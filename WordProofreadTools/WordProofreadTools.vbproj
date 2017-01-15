@@ -437,6 +437,18 @@
   <ItemGroup>
     <None Include="Resources\btn_index.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_remove_comment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_word.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_xml.png" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

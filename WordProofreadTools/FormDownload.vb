@@ -28,11 +28,14 @@ Public Class FormDownload
     ''' <param name="url">完整下载路径</param>
     ''' <param name="file">文件名</param>
     Public Sub StartDownload(url As String, file As String)
+        ' 读取程序安装目录
         Dim assemblyInfo = System.Reflection.Assembly.GetExecutingAssembly()
         Dim path = My.Computer.FileSystem.GetParentPath(assemblyInfo.Location)
-        MsgBox(path + "\temp")
+
         Try
+            ' 创建目标临时目录
             My.Computer.FileSystem.CreateDirectory(path + "\temp")
+            ' 开始异步下载
             CommonModule.localFile = path + "\temp\" + file
             WC.DownloadFileAsync(New Uri(url), CommonModule.localFile)
         Catch ex As Exception
@@ -48,21 +51,11 @@ Public Class FormDownload
     ''' <param name="e"></param>
     Private Sub WC_DownloadProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs) Handles WC.DownloadProgressChanged
         ProgressBar1.Value = e.ProgressPercentage
-
+        ' 下载完毕后加载文档并关闭当前窗口
         If (e.ProgressPercentage = 100) Then
             Globals.ThisAddIn.Application.Documents.Open(CommonModule.localFile)
             Me.Close()
         End If
-    End Sub
-
-    ''' <summary>
-    ''' 下载完毕
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub WC_DownloadFinished(ByVal sender As Object, ByVal e As DownloadDataCompletedEventArgs) Handles WC.DownloadFileCompleted
-        Globals.ThisAddIn.Application.Documents.Open(CommonModule.localFile)
-        Me.Close()
     End Sub
 
 End Class
