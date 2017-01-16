@@ -45,6 +45,7 @@ Public Class ThisAddIn
         If (String.IsNullOrEmpty(CommonModule.taskId) Or String.IsNullOrEmpty(CommonModule.token)) Then
             ' token或者taskId为空则作为离线模式
             CommonModule.ribbon.SetNormalState()
+            CommonModule.ribbon.SetProofreadState()
         Else
             ' 否则查询任务属性
             DoQueryTask()

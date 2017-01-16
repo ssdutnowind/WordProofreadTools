@@ -4,8 +4,7 @@
     <tabs>
       <tab idMso="TabAddIns" />
       <tab id="TabEdit" label="编辑加工" getVisible="GetEditTabVisible">
-        <group id="GroupTask1" label="任务管理">
-          <labelControl id="LabelEdit" getLabel="GetLabel"/>
+        <group id="GroupTask1" getLabel="GetLabel" >
           <button id="BtnUpload1" label="上传稿件&#13;" onAction="BtnRibbonUpload_Click" size="large" showImage="true" getImage="GetIcons" getEnabled="GetEditUploadEnable" />
         </group>
         <group id="GroupDocument" label="文档管理">
@@ -19,8 +18,7 @@
         <group id="GroupAssist" label="辅助工具" />
       </tab>
       <tab id="TabChecking" label="审稿校对" getVisible="GetCheckingTabVisible">
-        <group id="GroupTask2" label="任务管理">
-          <labelControl id="LabelChecking" getLabel="GetLabel"/>
+        <group id="GroupTask2" getLabel="GetLabel" >
           <button id="BtnUpload2" label="上传稿件&#13;" onAction="BtnRibbonUpload_Click" size="large" showImage="true" getImage="GetIcons" />
         </group>
         <group id="Group5" label="审稿工具">

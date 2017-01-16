@@ -103,8 +103,15 @@ Public Class Ribbon
         Me.ribbon.Invalidate()
     End Sub
 
+    ''' <summary>
+    ''' 设置校对模式
+    ''' </summary>
     Public Sub SetProofreadState()
-
+        Me.editTabVisible = True
+        Me.checkingTabVisible = True
+        Me.editUploadEnable = False
+        Me.buildinVisible = False
+        Me.ribbon.Invalidate()
     End Sub
 
 #End Region
@@ -184,7 +191,7 @@ Public Class Ribbon
             Case "8"
                 Return "三校"
             Case Else
-                Return ""
+                Return "任务管理"
         End Select
     End Function
 #End Region
@@ -215,12 +222,12 @@ Public Class Ribbon
     ''' </summary>
     ''' <param name="control"></param>
     Public Sub BtnRibbonUpload_Click(ByVal control As Office.IRibbonControl)
-        If (CommonModule.taskId) Then
+        If (Not String.IsNullOrEmpty(CommonModule.taskId)) Then
             Dim doc = Globals.ThisAddIn.Application.ActiveDocument
             ' 保存文档
             doc.Save()
 
-            CommonModule.localFile = doc.Path
+            CommonModule.localFile = doc.Path + "\" + doc.Name
             ' 获取文件大小
             Dim info = My.Computer.FileSystem.GetFileInfo(CommonModule.localFile)
             ' 大于100M
@@ -228,10 +235,11 @@ Public Class Ribbon
                 CommonModule.ShowAlert("上传文件不能大于100M！", "Warning")
                 Return
             End If
-            'Dim shapes = doc.Shapes
-            'For Each shape In shapes
 
-            'Next
+            ' 开始上传任务
+            Dim upload = New FormUpload()
+            upload.StartUpload(CommonModule.localFile)
+            upload.ShowDialog()
 
         End If
     End Sub
