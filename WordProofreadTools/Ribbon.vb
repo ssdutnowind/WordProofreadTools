@@ -78,6 +78,9 @@ Public Class Ribbon
         Me.checkingTabVisible = False
         Me.editUploadEnable = False
         Me.buildinVisible = True
+        If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
+            Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = False
+        End If
         Me.ribbon.Invalidate()
     End Sub
 
@@ -89,6 +92,9 @@ Public Class Ribbon
         Me.checkingTabVisible = False
         Me.editUploadEnable = True
         Me.buildinVisible = True
+        If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
+            Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = False
+        End If
         Me.ribbon.Invalidate()
     End Sub
 
@@ -100,6 +106,19 @@ Public Class Ribbon
         Me.checkingTabVisible = True
         Me.editUploadEnable = False
         Me.buildinVisible = False
+        If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
+            Dim doc = Globals.ThisAddIn.Application.ActiveDocument
+            ' 启用跟踪修订
+            Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = True
+            ' 显示修订内容
+            'doc.ActiveWindow.View.MarkupMode = WdRevisionsMode.wdBalloonRevisions
+            ' 显示修订和批注
+            'doc.ActiveWindow.View.ShowRevisionsAndComments = True
+            ' 显示插入和删除
+            'doc.ActiveWindow.View.ShowInsertionsAndDeletions = True
+            ' 修改批注和修订作者
+            Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
+        End If
         Me.ribbon.Invalidate()
     End Sub
 
@@ -111,6 +130,19 @@ Public Class Ribbon
         Me.checkingTabVisible = True
         Me.editUploadEnable = False
         Me.buildinVisible = False
+        If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
+            Dim doc = Globals.ThisAddIn.Application.ActiveDocument
+            ' 启用跟踪修订
+            Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = True
+            ' 显示修订内容
+            'doc.ActiveWindow.View.MarkupMode = WdRevisionsMode.wdBalloonRevisions
+            ' 显示修订和批注
+            'doc.ActiveWindow.View.ShowRevisionsAndComments = True
+            ' 显示插入和删除
+            'doc.ActiveWindow.View.ShowInsertionsAndDeletions = True
+            '修改批注和修订作者
+            Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
+        End If
         Me.ribbon.Invalidate()
     End Sub
 
@@ -175,12 +207,10 @@ Public Class Ribbon
     Public Function GetLabel(ByVal control As Office.IRibbonControl) As String
         Select Case CommonModule.taskType
             Case "1"
-                Return "立项"
-            Case "2"
                 Return "初审"
-            Case "3"
+            Case "2"
                 Return "复审"
-            Case "4"
+            Case "3"
                 Return "终审"
             Case "5"
                 Return "排版"
@@ -212,8 +242,7 @@ Public Class Ribbon
         Dim label = control.Tag
         Dim range = sel.Range()
         Dim comment = app.ActiveDocument.Comments.Add(range, label + "： ")
-        Dim author = control.Id.Replace("BtnChecking_", "") + "主编"
-        comment.Author = author
+        'comment.Author = CommonModule.nickName
 
     End Sub
 
@@ -238,7 +267,7 @@ Public Class Ribbon
 
             ' 开始上传任务
             Dim upload = New FormUpload()
-            upload.StartUpload(CommonModule.localFile)
+            'upload.StartUpload(CommonModule.localFile)
             upload.ShowDialog()
 
         End If

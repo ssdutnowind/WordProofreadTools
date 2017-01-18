@@ -68,7 +68,7 @@ Partial Class FormDownload
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "任务下载"
+        Me.Text = "协同编纂 - 任务下载"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

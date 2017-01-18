@@ -5,5 +5,11 @@
     <Setting Name="Server" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:3000/api/</Value>
     </Setting>
+    <Setting Name="QueryTaskUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">fzs.background.web/queryTask.action</Value>
+    </Setting>
+    <Setting Name="UploadTaskUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">fzs.background.web/uploadTaskFile.action</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

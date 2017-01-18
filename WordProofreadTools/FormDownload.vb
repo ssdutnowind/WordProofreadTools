@@ -1,4 +1,5 @@
-﻿Imports System.Net
+﻿Imports System.ComponentModel
+Imports System.Net
 
 Public Class FormDownload
 
@@ -45,16 +46,32 @@ Public Class FormDownload
     End Sub
 
     ''' <summary>
-    ''' 监听下载任务
+    ''' 监听下载进度
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub WC_DownloadProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs) Handles WC.DownloadProgressChanged
         ProgressBar1.Value = e.ProgressPercentage
-        ' 下载完毕后加载文档并关闭当前窗口
-        If (e.ProgressPercentage = 100) Then
+    End Sub
+
+    ''' <summary>
+    ''' 监听下载完成
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub WC_DownloadFileComplate(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs) Handles WC.DownloadFileCompleted
+        If e.Cancelled Then
+            ' 任务被取消
+            Me.Close()
+        ElseIf e.Error IsNot Nothing Then
+            Me.Hide()
+            CommonModule.ShowAlert("下载任务出错！" + vbCrLf + e.Error.Message, "Error")
+            Me.Close()
+        Else
+            ' 打开文件并关闭当前对话框
             Globals.ThisAddIn.Application.Documents.Open(CommonModule.localFile)
             Me.Close()
+            Globals.ThisAddIn.Application.Activate()
         End If
     End Sub
 

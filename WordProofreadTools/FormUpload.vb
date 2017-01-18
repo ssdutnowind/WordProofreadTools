@@ -1,4 +1,5 @@
-﻿Imports System.Net
+﻿Imports System.ComponentModel
+Imports System.Net
 
 Public Class FormUpload
 
@@ -30,16 +31,61 @@ Public Class FormUpload
     End Sub
 
     ''' <summary>
-    ''' 监听下载任务
+    ''' 开始上传
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles BtnUpload.Click
+        ' 检查备注
+        Dim comment = Me.TxtComment.Text
+        If (String.IsNullOrEmpty(comment)) Then
+            CommonModule.ShowAlert("请输入备注！", "Warning")
+            Return
+        End If
+
+        Try
+            Me.Panel1.Hide()
+            Me.BtnUpload.Hide()
+            Dim url = CommonModule.serverPath + My.Settings.Item("UploadTaskUrl")
+            ' 任务ID
+            WC.QueryString.Add("taskId", CommonModule.taskId)
+            ' 备注
+            WC.QueryString.Add("comment", comment)
+            ' 批注数量
+            WC.QueryString.Add("commentNum", Globals.ThisAddIn.Application.ActiveDocument.Comments.Count)
+            ' 开始上传
+            WC.UploadFileAsync(New Uri(url), CommonModule.localFile)
+        Catch ex As Exception
+            CommonModule.ShowAlert(ex.ToString(), "Error")
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' 监听上传进度
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub WC_UploadProgressChanged(ByVal sender As Object, ByVal e As UploadProgressChangedEventArgs) Handles WC.UploadProgressChanged
         ProgressBar1.Value = e.ProgressPercentage
-        ' 上传完毕后关闭当前窗口
-        If (e.ProgressPercentage = 100) Then
+    End Sub
+
+    ''' <summary>
+    ''' 监听下载完成
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub WC_UploadFileComplate(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs) Handles WC.UploadFileCompleted
+        If e.Cancelled Then
+            ' 任务被取消
             Me.Close()
-            CommonModule.ShowAlert("任务文件上传成功！")
+        ElseIf e.Error IsNot Nothing Then
+            Me.Hide()
+            CommonModule.ShowAlert("上传任务文件出错！" + vbCrLf + e.Error.Message, "Error")
+            Me.Close()
+        Else
+            Me.Hide()
+            CommonModule.ShowAlert("上传任务文件成功！")
+            Me.Close()
         End If
     End Sub
 End Class

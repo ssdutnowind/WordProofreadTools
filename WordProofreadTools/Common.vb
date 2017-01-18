@@ -13,6 +13,8 @@ Module CommonModule
     Public taskType As String = ""
     ' 任务文件路径
     Public taskFile As String = ""
+    ' 文件名
+    Public fileName As String = ""
     ' 本地临时文件
     Public localFile As String = ""
 

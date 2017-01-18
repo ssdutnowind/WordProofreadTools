@@ -26,17 +26,19 @@ Public Class ThisAddIn
 
         ' 参数判断
         For Each arg As String In Environment.GetCommandLineArgs
-            ' 如果有token参数
-            If (arg.IndexOf("token") >= 1) Then
+            ' 如果有taskId参数
+            If (arg.IndexOf("taskId") >= 1) Then
                 Dim token As String = ""
                 Dim task As String = ""
-                arg = arg.Substring(arg.LastIndexOf("/") + 1)
+                arg = arg.Substring(arg.LastIndexOf("?") + 1)
                 Dim params = arg.Split(",")
                 For Each param As String In params
                     If (param.IndexOf("token") >= 0) Then
                         CommonModule.token = param.Substring(6)
                     ElseIf (param.IndexOf("taskId") >= 0) Then
                         CommonModule.taskId = param.Substring(7)
+                    ElseIf (param.IndexOf("host") >= 0) Then
+                        CommonModule.serverPath = param.Substring(5) + "/"
                     End If
                 Next
             End If
@@ -45,7 +47,7 @@ Public Class ThisAddIn
         If (String.IsNullOrEmpty(CommonModule.taskId) Or String.IsNullOrEmpty(CommonModule.token)) Then
             ' token或者taskId为空则作为离线模式
             CommonModule.ribbon.SetNormalState()
-            CommonModule.ribbon.SetProofreadState()
+            'CommonModule.ribbon.SetProofreadState()
         Else
             ' 否则查询任务属性
             DoQueryTask()
@@ -64,7 +66,7 @@ Public Class ThisAddIn
         params.Add("token", CommonModule.token)
         ' 下发请求
         Dim request = New HttpRequest()
-        Dim response = request.DoSendRequest("queryTask", params)
+        Dim response = request.DoSendRequest(My.Settings.Item("queryTaskUrl"), params)
         If (String.IsNullOrEmpty(response)) Then
             CommonModule.ShowAlert("查询任务信息失败！", "Error")
             Return
@@ -90,12 +92,19 @@ Public Class ThisAddIn
                     CommonModule.ShowAlert("查询任务信息失败！", "Error")
                     Return
                 End Try
+                If (IsNothing(json) Or IsNothing(json.jsonResult)) Then
+                    ' 解析异常也提示失败
+                    CommonModule.ShowAlert("查询任务信息失败！", "Error")
+                End If
+
                 ' 昵称
-                CommonModule.nickName = json.data.nickName
+                CommonModule.nickName = json.jsonResult.nickName
                 ' 任务类型
-                CommonModule.taskType = json.data.taskType
+                CommonModule.taskType = json.jsonResult.taskType
                 ' 任务文件
-                CommonModule.taskFile = json.data.taskFile
+                CommonModule.taskFile = json.jsonResult.taskFile
+                ' 文件名
+                CommonModule.fileName = json.jsonResult.fileName
 
                 ' 数据读取完毕，开始初始化状态
                 AfterTaskDataReaded(True)
@@ -134,7 +143,12 @@ Public Class ThisAddIn
     ''' </summary>
     Private Sub StartDownloadTask()
         Dim file As String = CommonModule.taskFile
-        file = file.Substring(file.LastIndexOf("/"))
+        ' 如果没有返回fileName则从URL解析
+        If (String.IsNullOrEmpty(CommonModule.fileName)) Then
+            file = file.Substring(file.LastIndexOf("/"))
+        Else
+            file = CommonModule.fileName
+        End If
 
         Dim download = New FormDownload()
         download.StartDownload(CommonModule.taskFile, file)
@@ -169,6 +183,8 @@ Public Class ThisAddIn
                 CommonModule.WriteDocumentProperty("taskType", CommonModule.taskType)
                 CommonModule.WriteDocumentProperty("nickName", CommonModule.nickName)
                 doc.Save()
+                ' 为了正确设置修订状态，再调用一次
+                AfterTaskDataReaded(False)
             End If
 
         End If

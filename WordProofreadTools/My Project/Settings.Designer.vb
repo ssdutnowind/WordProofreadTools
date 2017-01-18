@@ -64,6 +64,30 @@ Partial Friend NotInheritable Class MySettings
             Me("Server") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("fzs.background.web/queryTask.action")>  _
+    Public Property QueryTaskUrl() As String
+        Get
+            Return CType(Me("QueryTaskUrl"),String)
+        End Get
+        Set
+            Me("QueryTaskUrl") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("fzs.background.web/uploadTaskFile.action")>  _
+    Public Property UploadTaskUrl() As String
+        Get
+            Return CType(Me("UploadTaskUrl"),String)
+        End Get
+        Set
+            Me("UploadTaskUrl") = value
+        End Set
+    End Property
 End Class
 
 Namespace My
