@@ -21,9 +21,6 @@ Public Class ThisAddIn
         ' 设置默认状态
         CommonModule.ribbon.SetNormalState()
 
-        ' 监听事件
-        applicationEvents = Globals.ThisAddIn.Application
-
         ' 参数判断
         For Each arg As String In Environment.GetCommandLineArgs
             ' 如果有taskId参数
@@ -39,15 +36,26 @@ Public Class ThisAddIn
                         CommonModule.taskId = param.Substring(7)
                     ElseIf (param.IndexOf("host") >= 0) Then
                         CommonModule.serverPath = param.Substring(5) + "/"
+                    ElseIf (param.IndexOf("userId") >= 0) Then
+                        CommonModule.userId = param.Substring(7)
                     End If
                 Next
             End If
         Next
 
+        ' 监听事件
+        applicationEvents = Globals.ThisAddIn.Application
+
         If (String.IsNullOrEmpty(CommonModule.taskId) Or String.IsNullOrEmpty(CommonModule.token)) Then
             ' token或者taskId为空则作为离线模式
             CommonModule.ribbon.SetNormalState()
             'CommonModule.ribbon.SetProofreadState()
+
+            ' 插件启动时已经有文档打开
+            If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
+                applicationEvents4_DocumentOpen(Nothing)
+            End If
+
         Else
             ' 否则查询任务属性
             DoQueryTask()
@@ -161,32 +169,33 @@ Public Class ThisAddIn
     ''' <param name="Doc"></param>
     Private Sub applicationEvents4_DocumentOpen(doc As Document) Handles applicationEvents.DocumentOpen
         CommonModule.Log("文档打开……")
+
         Dim document = Globals.ThisAddIn.Application.ActiveDocument
         If (String.IsNullOrEmpty(CommonModule.taskId)) Then
             CommonModule.Log("打开本地文件……")
             ' 没有taskId说明是本地打开文件，尝试读取response
             Dim taskId As String = CommonModule.ReadDocumentProperty("taskId")
+
             If (taskId <> Nothing) Then
                 CommonModule.Log("读取到自定义属性……")
                 CommonModule.taskId = CommonModule.ReadDocumentProperty("taskId")
                 CommonModule.taskType = CommonModule.ReadDocumentProperty("taskType")
                 CommonModule.nickName = CommonModule.ReadDocumentProperty("nickName")
+                CommonModule.userId = CommonModule.ReadDocumentProperty("userId")
                 ' 数据读取完毕，开始初始化状态
                 AfterTaskDataReaded(False)
             End If
         Else
             ' 有taskId说明是网络下载后打开
-            If (Not String.IsNullOrEmpty(CommonModule.taskId)) Then
-                ' 将应答写入自定义属性
-                CommonModule.Log("即将写入自定义属性……")
-                CommonModule.WriteDocumentProperty("taskId", CommonModule.taskId)
-                CommonModule.WriteDocumentProperty("taskType", CommonModule.taskType)
-                CommonModule.WriteDocumentProperty("nickName", CommonModule.nickName)
-                doc.Save()
-                ' 为了正确设置修订状态，再调用一次
-                AfterTaskDataReaded(False)
-            End If
-
+            ' 将应答写入自定义属性
+            CommonModule.Log("即将写入自定义属性……")
+            CommonModule.WriteDocumentProperty("taskId", CommonModule.taskId)
+            CommonModule.WriteDocumentProperty("taskType", CommonModule.taskType)
+            CommonModule.WriteDocumentProperty("nickName", CommonModule.nickName)
+            CommonModule.WriteDocumentProperty("userId", CommonModule.userId)
+            doc.Save()
+            ' 为了正确设置修订状态，再调用一次
+            AfterTaskDataReaded(False)
         End If
 
     End Sub
@@ -196,17 +205,20 @@ Public Class ThisAddIn
     ''' </summary>
     ''' <param name="doc"></param>
     ''' <param name="cancel"></param>
-    Private Sub applicationEvents4_DocumentOpen(doc As Document, ByRef cancel As Boolean) Handles applicationEvents.DocumentBeforeClose
+    Private Sub applicationEvents4_DocumentClose(doc As Document, ByRef cancel As Boolean) Handles applicationEvents.DocumentBeforeClose
         CommonModule.Log("文件关闭……")
-        ' 设置默认状态
-        CommonModule.ribbon.SetNormalState()
-        ' 清空文件相关全局数据
-        CommonModule.token = ""
-        CommonModule.taskId = ""
-        CommonModule.nickName = ""
-        CommonModule.taskType = ""
-        CommonModule.taskFile = ""
-        CommonModule.localFile = ""
+        If (Not String.IsNullOrEmpty(CommonModule.token)) Then
+            ' 设置默认状态
+            CommonModule.ribbon.SetNormalState()
+            ' 清空文件相关全局数据
+            CommonModule.token = ""
+            CommonModule.taskId = ""
+            CommonModule.nickName = ""
+            CommonModule.taskType = ""
+            CommonModule.taskFile = ""
+            CommonModule.localFile = ""
+            CommonModule.userId = ""
+        End If
     End Sub
 
     Private Sub ThisAddIn_Shutdown() Handles Me.Shutdown

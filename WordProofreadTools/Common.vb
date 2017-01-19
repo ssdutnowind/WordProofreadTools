@@ -9,6 +9,8 @@ Module CommonModule
     Public token As String = ""
     ' 昵称
     Public nickName As String = ""
+    ' 用户ID
+    Public userId As String = ""
     ' 任务类型
     Public taskType As String = ""
     ' 任务文件路径

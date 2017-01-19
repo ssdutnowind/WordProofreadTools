@@ -71,7 +71,7 @@ Public Class FormDownload
             ' 打开文件并关闭当前对话框
             Globals.ThisAddIn.Application.Documents.Open(CommonModule.localFile)
             Me.Close()
-            Globals.ThisAddIn.Application.Activate()
+            'Globals.ThisAddIn.Application.Activate()
         End If
     End Sub
 

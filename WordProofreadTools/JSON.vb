@@ -17,6 +17,7 @@ Public Class ResponseQueryTask
         Public taskType As String
         Public taskFile As String
         Public fileName As String
+        Public userId As String
     End Class
 
     Public jsonResult As QueryTask
