@@ -11,11 +11,60 @@
           <button id="BtnExportContents" label="导出目录" onAction="BtnRibbonExportContents_Click" showImage="true" getImage="GetIcons" />
           <button id="BtnExportIndex" label="导出索引" onAction="BtnRibbonExportIndex_Click" showImage="true" getImage="GetIcons" />
           <button id="BtnExportAbstract" label="导出摘要" onAction="BtnExportAbstract_Click" showImage="true" getImage="GetIcons" />
-          <button id="BtnExportDoc" label="导出Word" onAction="BtnExportDoc_Click" showImage="true" getImage="GetIcons" />
-          <button id="BtnExportXML" label="导出XML" onAction="BtnExportXML_Click" showImage="true" getImage="GetIcons" />
-          <button id="BtnExportPDF" label="导出PDF" onAction="BtnExportPDF_Click" showImage="true" getImage="GetIcons" />
+          <button id="BtnExportDoc" label="另存为Word" onAction="BtnExportDoc_Click" showImage="true" getImage="GetIcons" />
+          <button id="BtnExportXML" label="另存为XML" onAction="BtnExportXML_Click" showImage="true" getImage="GetIcons" />
+          <button id="BtnExportPDF" label="另存为PDF" onAction="BtnExportPDF_Click" showImage="true" getImage="GetIcons" />
         </group>
-        <group id="GroupAssist" label="辅助工具" />
+        <group id="GroupFormat" label="格式化" >
+          <button id="BtnFormatThousands" label="千分位&#13;" onAction="BtnRibbonFormatThousands_Click" size="large" showImage="true" getImage="GetIcons" />
+          <button id="BtnFormatPercent" label="百分比&#13;" onAction="BtnRibbonFormatPercent_Click" size="large" showImage="true" getImage="GetIcons" />
+          <splitButton id="SplitButton16" size="large">
+            <button id="BtnFormatNumber" label="数字转换&#13;" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" />
+            <menu id="SplitButton16__mnu">
+              <button id="BtnFormatNumber1" label="转为阿拉伯" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" />
+              <button id="BtnFormatNumber2" label="转为大写" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" />
+              <button id="BtnFormatNumber3" label="转为汉字" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" />
+            </menu>
+          </splitButton>
+        </group>
+        <group id="GroupAssist" label="标准单位" >
+          <splitButton id="SplitButton15" size="large">
+            <button id="BtnFormatMoney" label="插入货币符号&#13;" showImage="true" getImage="GetIcons" onAction="BtnInsertMoney_Click" />
+            <menu id="SplitButton15__mnu">
+              <button id="BtnFormatMoneyCny" label="人民币" showImage="true" getImage="GetIcons" onAction="BtnInsertMoney_Click" />
+              <button id="BtnFormatMoneyUsd" label="美元" showImage="true" getImage="GetIcons" onAction="BtnInsertMoney_Click" />
+              <button id="BtnFormatMoneyEur" label="欧元" showImage="true" getImage="GetIcons" onAction="BtnInsertMoney_Click" />
+              <button id="BtnFormatMoneyGbp" label="英镑" showImage="true" getImage="GetIcons" onAction="BtnInsertMoney_Click" />
+            </menu>
+          </splitButton>
+          <splitButton id="SplitButton17" size="large">
+            <button id="BtnInsertUnit" label="插入计量单位&#13;" showImage="true" getImage="GetIcons" onAction="BtnInsertUnit_Click" />
+            <menu id="SplitButton17__mnu" showImage ="false">
+              <button id="BtnInsertMeter1" label="毫米" tag="毫米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertMeter2" label="厘米" tag="厘米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertMeter3" label="分米" tag="分米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertMeter4" label="千米" tag="千米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <menuSeparator id="spprator17_1"/>
+              <button id="BtnInsertSquareMeter1" label="平方厘米" tag="平方厘米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertSquareMeter2" label="平方米" tag="平方厘米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertSquareMeter3" label="平方公里" tag="平方厘米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <menuSeparator id="spprator17_2"/>
+              <button id="BtnInsertStere1" label="立方厘米" tag="立方厘米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertStere2" label="立方分米" tag="立方分米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertStere3" label="立方米" tag="立方米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <menuSeparator id="spprator17_3"/>
+              <button id="BtnInsertLitre1" label="毫升" tag="毫升" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertLitre2" label="升" tag="升" showImage="false" onAction="BtnInsertUnion_Click" />
+              <menuSeparator id="spprator17_4"/>
+              <button id="BtnInsertGram1" label="毫克" tag="毫克" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertGram2" label="克" tag="克" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertGram3" label="千克" tag="千克" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertGram4" label="吨" tag="吨" showImage="false" onAction="BtnInsertUnion_Click" />
+
+
+            </menu>
+          </splitButton>
+        </group>
       </tab>
       <tab id="TabChecking" label="审稿校对" getVisible="GetCheckingTabVisible">
         <group id="GroupTask2" getLabel="GetLabel" >

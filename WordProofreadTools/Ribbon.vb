@@ -49,7 +49,7 @@ Public Class Ribbon
     ''' <summary>
     ''' 编辑Tab是否可见
     ''' </summary>
-    Private editTabVisible As Boolean = False
+    Private editTabVisible As Boolean = True
     Public Function GetEditTabVisible(control As IRibbonControl) As Boolean
         Return editTabVisible
     End Function
@@ -71,6 +71,15 @@ Public Class Ribbon
     End Function
 
     ''' <summary>
+    ''' 刷新Ribbon状态
+    ''' </summary>
+    Private Sub RefreshRibbon()
+        'If (Not IsNothing(Me.ribbon)) Then
+        Me.ribbon.Invalidate()
+        'End If
+    End Sub
+
+    ''' <summary>
     ''' 设置普通模式（非网站启动）
     ''' </summary>
     Public Sub SetNormalState()
@@ -81,7 +90,7 @@ Public Class Ribbon
         If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
             Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = False
         End If
-        Me.ribbon.Invalidate()
+        Me.RefreshRibbon()
     End Sub
 
     ''' <summary>
@@ -95,7 +104,7 @@ Public Class Ribbon
         If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
             Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = False
         End If
-        Me.ribbon.Invalidate()
+        Me.RefreshRibbon()
     End Sub
 
     ''' <summary>
@@ -119,7 +128,7 @@ Public Class Ribbon
             ' 修改批注和修订作者
             Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
         End If
-        Me.ribbon.Invalidate()
+        Me.RefreshRibbon()
     End Sub
 
     ''' <summary>
@@ -143,7 +152,7 @@ Public Class Ribbon
             '修改批注和修订作者
             Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
         End If
-        Me.ribbon.Invalidate()
+        Me.RefreshRibbon()
     End Sub
 
 #End Region
@@ -176,6 +185,30 @@ Public Class Ribbon
                 Return New Bitmap(My.Resources.btn_xml)
             Case "BtnExportPDF"
                 Return New Bitmap(My.Resources.btn_pdf)
+            Case "BtnFormatThousands"
+                Return New Bitmap(My.Resources.btn_format_thousands)
+            Case "BtnFormatNumber"
+                Return New Bitmap(My.Resources.btn_format_number1)
+            Case "BtnFormatNumber1"
+                Return New Bitmap(My.Resources.btn_format_number1)
+            Case "BtnFormatNumber2"
+                Return New Bitmap(My.Resources.btn_format_number2)
+            Case "BtnFormatNumber3"
+                Return New Bitmap(My.Resources.btn_format_number3)
+            Case "BtnFormatPercent"
+                Return New Bitmap(My.Resources.btn_format_percent)
+            Case "BtnInsertUnit"
+                Return New Bitmap(My.Resources.btn_format_units)
+            Case "BtnFormatMoney"
+                Return New Bitmap(My.Resources.btn_money_cny)
+            Case "BtnFormatMoneyCny"
+                Return New Bitmap(My.Resources.btn_money_cny)
+            Case "BtnFormatMoneyUsd"
+                Return New Bitmap(My.Resources.btn_money_usd)
+            Case "BtnFormatMoneyEur"
+                Return New Bitmap(My.Resources.btn_money_eur)
+            Case "BtnFormatMoneyGbp"
+                Return New Bitmap(My.Resources.btn_money_gbp)
             Case Else
                 Return Nothing
         End Select

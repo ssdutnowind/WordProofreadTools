@@ -458,6 +458,36 @@
   <ItemGroup>
     <None Include="Resources\btn_xml.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_format_thousands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_money_cny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_money_eur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_money_gbp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_money_usd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_format_number1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_format_number2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_format_number3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_format_percent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_format_units.png" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
