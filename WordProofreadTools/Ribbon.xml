@@ -21,9 +21,9 @@
           <splitButton id="SplitButton16" size="large">
             <button id="BtnFormatNumber" label="数字转换&#13;" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" />
             <menu id="SplitButton16__mnu">
-              <button id="BtnFormatNumber1" label="转为阿拉伯" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" />
-              <button id="BtnFormatNumber2" label="转为大写" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" />
-              <button id="BtnFormatNumber3" label="转为汉字" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" />
+              <button id="BtnFormatNumber1" label="转为阿拉伯" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" description ="将选中文本中数字转换为阿拉伯数字" />
+              <button id="BtnFormatNumber2" label="转为大写" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" description ="将选中文本中数字转换为大写数字" />
+              <button id="BtnFormatNumber3" label="转为汉字" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" description ="将选中文本中数字转换为汉字数字" />
             </menu>
           </splitButton>
         </group>

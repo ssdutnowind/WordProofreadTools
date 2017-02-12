@@ -10,10 +10,26 @@ Public Class ThisAddIn
     Public ribbon As Microsoft.Office.Core.IRibbonExtensibility
 
     ''' <summary>
+    ''' 全局异常处理函数
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="args"></param>
+    Private Sub GlobalExceptionHandler(sender As Object, args As UnhandledExceptionEventArgs)
+        Dim e As Exception = DirectCast(args.ExceptionObject, Exception)
+        Dim dialog = New FormErrorDialog()
+        dialog.SetErrorMessage(e)
+        dialog.ShowDialog()
+    End Sub
+
+    ''' <summary>
     ''' 插件初始化
     ''' </summary>
     Private Sub ThisAddIn_Startup() Handles Me.Startup
         CommonModule.Log("系统初始化……")
+        ' 处理全局异常
+        Dim currentDomain As AppDomain = AppDomain.CurrentDomain
+        AddHandler currentDomain.UnhandledException, AddressOf GlobalExceptionHandler
+
         ' 初始化配置
         CommonModule.serverPath = My.Settings.Item("Server")
         CommonModule.Log("[读取配置]服务器路径：" + CommonModule.serverPath)

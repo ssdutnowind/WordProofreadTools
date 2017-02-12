@@ -382,7 +382,7 @@ Public Class Ribbon
         dialog.Title = "请选择导出的Word文件"
         '确定后开始导出
         If dialog.ShowDialog() = DialogResult.OK Then
-            Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName, WdSaveFormat.wdFormatDocument)
+            Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName)
         End If
     End Sub
 
@@ -431,6 +431,105 @@ Public Class Ribbon
 
 #End Region
 
+#Region "格式化回调"
+
+    ''' <summary>
+    ''' 千分位格式化
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnRibbonFormatThousands_Click(ByVal control As Office.IRibbonControl)
+
+    End Sub
+
+    ''' <summary>
+    ''' 百分比格式化
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnRibbonFormatPercent_Click(ByVal control As Office.IRibbonControl)
+
+    End Sub
+
+    ''' <summary>
+    ''' 数字转换
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnFormatNumber_Click(ByVal control As Office.IRibbonControl)
+        ' 没找到正则等快捷方法，只能笨招了
+        Dim src As Array = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+        "一", "二", "三", "四", "五", "六", "七", "八", "九", "〇",
+        "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖", "零"}
+        Dim target As Array
+        If (control.Id = "BtnFormatNumber2") Then
+            ' 转为大写数字
+            target = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"}
+        ElseIf (control.Id = "BtnFormatNumber3") Then
+            ' 转为汉字数字
+            target = {"壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖", "零"}
+        Else
+            ' 转为阿拉伯数字
+            target = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+        End If
+
+        Dim application = Globals.ThisAddIn.Application
+        Dim FindObject As Word.Find = application.Selection.Find
+
+        For i As Integer = 0 To src.Length - 1
+            With FindObject
+                .ClearFormatting()
+                .Text = src(i)
+                .Replacement.ClearFormatting()
+                .Replacement.Text = target(i Mod 10)
+                .Execute(Replace:=Word.WdReplace.wdReplaceAll)
+            End With
+        Next
+
+    End Sub
+#End Region
+
+#Region "快速插入"
+
+    ''' <summary>
+    ''' 插入货币符号
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnInsertMoney_Click(ByVal control As Office.IRibbonControl)
+        Dim text As String
+        Select Case control.Id
+            Case "BtnFormatMoneyUsd"
+                text = "$"
+                Exit Select
+            Case "BtnFormatMoneyEur"
+                text = "€"
+                Exit Select
+            Case "BtnFormatMoneyGbp"
+                text = "£"
+                Exit Select
+            Case Else
+                text = "￥"
+        End Select
+        Dim app = Globals.ThisAddIn.Application
+        Dim selection = app.Selection
+        Dim range = selection.Range
+        range.InsertAfter(text)
+        range.Collapse(Word.WdCollapseDirection.wdCollapseEnd)
+        range.Select()
+    End Sub
+
+    ''' <summary>
+    ''' 插入计量单位
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnInsertUnion_Click(ByVal control As Office.IRibbonControl)
+        Dim text As String = control.Tag
+        Dim app = Globals.ThisAddIn.Application
+        Dim selection = app.Selection
+        Dim range = selection.Range
+        range.InsertAfter(text)
+        range.Collapse(Word.WdCollapseDirection.wdCollapseEnd)
+        range.Select()
+    End Sub
+
+#End Region
 
 #Region "事件"
 
