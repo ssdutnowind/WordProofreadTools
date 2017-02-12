@@ -438,7 +438,24 @@ Public Class Ribbon
     ''' </summary>
     ''' <param name="control"></param>
     Public Sub BtnRibbonFormatThousands_Click(ByVal control As Office.IRibbonControl)
+        Dim app = Globals.ThisAddIn.Application
+        Dim range As Word.Range = app.Selection.Range
+        Dim findObject As Word.Find = range.Find
 
+        Dim FindChar = "([0-9])([0-9]{3}[!0-9])"
+        Dim RepChar = "\1,\2"
+
+        'app.ScreenUpdating = False '关闭屏幕更新
+
+        With findObject
+            .ClearFormatting()
+            .MatchWildcards = True
+            .Replacement.ClearFormatting()
+            Do While (.Execute(FindText:=FindChar, Replace:=Word.WdReplace.wdReplaceAll, ReplaceWith:=RepChar))
+            Loop
+        End With
+        'range.Select()
+        'app.ScreenUpdating = False '开启屏幕更新
     End Sub
 
     ''' <summary>
@@ -456,6 +473,7 @@ Public Class Ribbon
     Public Sub BtnFormatNumber_Click(ByVal control As Office.IRibbonControl)
         ' 没找到正则等快捷方法，只能笨招了
         Dim src As Array = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+            "１", "２", "３", "４", "５", "６", "７", "８", "９", "０",
         "一", "二", "三", "四", "五", "六", "七", "八", "九", "〇",
         "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖", "零"}
         Dim target As Array
@@ -471,10 +489,10 @@ Public Class Ribbon
         End If
 
         Dim application = Globals.ThisAddIn.Application
-        Dim FindObject As Word.Find = application.Selection.Find
+        Dim findObject As Word.Find = application.Selection.Find
 
         For i As Integer = 0 To src.Length - 1
-            With FindObject
+            With findObject
                 .ClearFormatting()
                 .Text = src(i)
                 .Replacement.ClearFormatting()

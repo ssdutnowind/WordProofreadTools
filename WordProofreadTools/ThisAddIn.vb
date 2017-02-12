@@ -237,6 +237,9 @@ Public Class ThisAddIn
         End If
     End Sub
 
+    ''' <summary>
+    ''' 插件退出
+    ''' </summary>
     Private Sub ThisAddIn_Shutdown() Handles Me.Shutdown
 
     End Sub
