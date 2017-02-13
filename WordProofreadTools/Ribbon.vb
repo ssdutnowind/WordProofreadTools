@@ -323,6 +323,16 @@ Public Class Ribbon
                 Dim contents = contentList(1)
                 Dim fileName = dialog.FileName
                 Dim content = contents.Range.Text
+                ' 拆分之后trim掉末尾的[CR]，最后再用[CRLF]拼接
+                ' 将每行中最后一个Tab替换为“......”最后一个Tab为目录内容与页码之间的空白
+                Dim contentArray = content.Split(vbCr)
+                For i = 0 To contentArray.Length - 1
+                    contentArray(i) = contentArray(i).Trim()
+                    If (contentArray(i).Length > 2) Then
+                        contentArray(i) = contentArray(i).Substring(0, contentArray(i).LastIndexOf(vbTab)) + "......" + contentArray(i).Substring(contentArray(i).LastIndexOf(vbTab) + 1)
+                    End If
+                Next
+                content = String.Join(vbCrLf, contentArray)
                 Try
                     My.Computer.FileSystem.WriteAllText(fileName, content, False)
                     CommonModule.ShowAlert("导出目录成功！")
@@ -376,9 +386,16 @@ Public Class Ribbon
     ''' </summary>
     ''' <param name="control"></param>
     Public Sub BtnExportDoc_Click(ByVal control As Office.IRibbonControl)
+        Dim fileName = Globals.ThisAddIn.Application.ActiveDocument.Name
+        If (fileName.IndexOf(".") > 0) Then
+            fileName = fileName.Substring(0, fileName.LastIndexOf(".")) + ".docx"
+        Else
+            fileName += ".docx"
+        End If
+
         Dim dialog = New SaveFileDialog()
         dialog.Filter = "Word文件|*.docx"
-        dialog.FileName = "导出Word文件.docx"
+        dialog.FileName = fileName
         dialog.Title = "请选择导出的Word文件"
         '确定后开始导出
         If dialog.ShowDialog() = DialogResult.OK Then
@@ -391,9 +408,16 @@ Public Class Ribbon
     ''' </summary>
     ''' <param name="control"></param>
     Public Sub BtnExportXML_Click(ByVal control As Office.IRibbonControl)
+        Dim fileName = Globals.ThisAddIn.Application.ActiveDocument.Name
+        If (fileName.IndexOf(".") > 0) Then
+            fileName = fileName.Substring(0, fileName.LastIndexOf(".")) + ".xml"
+        Else
+            fileName += ".xml"
+        End If
+
         Dim dialog = New SaveFileDialog()
         dialog.Filter = "XML文件|*.xml"
-        dialog.FileName = "导出XML文件.xml"
+        dialog.FileName = fileName
         dialog.Title = "请选择导出的XML文件"
         '确定后开始导出
         If dialog.ShowDialog() = DialogResult.OK Then
@@ -406,9 +430,16 @@ Public Class Ribbon
     ''' </summary>
     ''' <param name="control"></param>
     Public Sub BtnExportPDF_Click(ByVal control As Office.IRibbonControl)
+        Dim fileName = Globals.ThisAddIn.Application.ActiveDocument.Name
+        If (fileName.IndexOf(".") > 0) Then
+            fileName = fileName.Substring(0, fileName.LastIndexOf(".")) + ".pdf"
+        Else
+            fileName += ".pdf"
+        End If
+
         Dim dialog = New SaveFileDialog()
         dialog.Filter = "PDF文件|*.pdf"
-        dialog.FileName = "导出PDF文件.pdf"
+        dialog.FileName = fileName
         dialog.Title = "请选择导出的PDF文件"
         '确定后开始导出
         If dialog.ShowDialog() = DialogResult.OK Then
@@ -426,6 +457,8 @@ Public Class Ribbon
             For Each comment As Microsoft.Office.Interop.Word.Comment In comments
                 comment.DeleteRecursively()
             Next
+
+            CommonModule.ShowAlert("所有批注已删除完毕！")
         End If
     End Sub
 
