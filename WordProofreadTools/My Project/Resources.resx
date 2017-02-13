@@ -238,8 +238,38 @@
   <data name="btn_contents" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btn_contents.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="btn_format_number1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_format_number1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_format_number2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_format_number2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_format_number3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_format_number3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_format_percent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_format_percent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_format_thousands" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_format_thousands.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_format_units" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_format_units.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="btn_index" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btn_index.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_money_cny" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_money_cny.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_money_eur" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_money_eur.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_money_gbp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_money_gbp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_money_usd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_money_usd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btn_pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btn_pdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

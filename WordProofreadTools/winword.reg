@@ -1,0 +1,12 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\MSWORD]
+@="URL:MSWORD Protocol Handler"
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\MSWORD\shell]
+
+[HKEY_CLASSES_ROOT\MSWORD\shell\open]
+
+[HKEY_CLASSES_ROOT\MSWORD\shell\open\command]
+@="WINWORD.exe /n /\"%1\""

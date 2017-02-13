@@ -49,7 +49,7 @@ Public Class Ribbon
     ''' <summary>
     ''' 编辑Tab是否可见
     ''' </summary>
-    Private editTabVisible As Boolean = False
+    Private editTabVisible As Boolean = True
     Public Function GetEditTabVisible(control As IRibbonControl) As Boolean
         Return editTabVisible
     End Function
@@ -71,6 +71,15 @@ Public Class Ribbon
     End Function
 
     ''' <summary>
+    ''' 刷新Ribbon状态
+    ''' </summary>
+    Private Sub RefreshRibbon()
+        'If (Not IsNothing(Me.ribbon)) Then
+        Me.ribbon.Invalidate()
+        'End If
+    End Sub
+
+    ''' <summary>
     ''' 设置普通模式（非网站启动）
     ''' </summary>
     Public Sub SetNormalState()
@@ -81,7 +90,7 @@ Public Class Ribbon
         If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
             Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = False
         End If
-        Me.ribbon.Invalidate()
+        Me.RefreshRibbon()
     End Sub
 
     ''' <summary>
@@ -95,7 +104,7 @@ Public Class Ribbon
         If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
             Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = False
         End If
-        Me.ribbon.Invalidate()
+        Me.RefreshRibbon()
     End Sub
 
     ''' <summary>
@@ -119,7 +128,7 @@ Public Class Ribbon
             ' 修改批注和修订作者
             Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
         End If
-        Me.ribbon.Invalidate()
+        Me.RefreshRibbon()
     End Sub
 
     ''' <summary>
@@ -143,7 +152,7 @@ Public Class Ribbon
             '修改批注和修订作者
             Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
         End If
-        Me.ribbon.Invalidate()
+        Me.RefreshRibbon()
     End Sub
 
 #End Region
@@ -176,6 +185,30 @@ Public Class Ribbon
                 Return New Bitmap(My.Resources.btn_xml)
             Case "BtnExportPDF"
                 Return New Bitmap(My.Resources.btn_pdf)
+            Case "BtnFormatThousands"
+                Return New Bitmap(My.Resources.btn_format_thousands)
+            Case "BtnFormatNumber"
+                Return New Bitmap(My.Resources.btn_format_number1)
+            Case "BtnFormatNumber1"
+                Return New Bitmap(My.Resources.btn_format_number1)
+            Case "BtnFormatNumber2"
+                Return New Bitmap(My.Resources.btn_format_number2)
+            Case "BtnFormatNumber3"
+                Return New Bitmap(My.Resources.btn_format_number3)
+            Case "BtnFormatPercent"
+                Return New Bitmap(My.Resources.btn_format_percent)
+            Case "BtnInsertUnit"
+                Return New Bitmap(My.Resources.btn_format_units)
+            Case "BtnFormatMoney"
+                Return New Bitmap(My.Resources.btn_money_cny)
+            Case "BtnFormatMoneyCny"
+                Return New Bitmap(My.Resources.btn_money_cny)
+            Case "BtnFormatMoneyUsd"
+                Return New Bitmap(My.Resources.btn_money_usd)
+            Case "BtnFormatMoneyEur"
+                Return New Bitmap(My.Resources.btn_money_eur)
+            Case "BtnFormatMoneyGbp"
+                Return New Bitmap(My.Resources.btn_money_gbp)
             Case Else
                 Return Nothing
         End Select
@@ -349,7 +382,7 @@ Public Class Ribbon
         dialog.Title = "请选择导出的Word文件"
         '确定后开始导出
         If dialog.ShowDialog() = DialogResult.OK Then
-            Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName, WdSaveFormat.wdFormatDocument)
+            Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName)
         End If
     End Sub
 
@@ -398,6 +431,123 @@ Public Class Ribbon
 
 #End Region
 
+#Region "格式化回调"
+
+    ''' <summary>
+    ''' 千分位格式化
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnRibbonFormatThousands_Click(ByVal control As Office.IRibbonControl)
+        Dim app = Globals.ThisAddIn.Application
+        Dim range As Word.Range = app.Selection.Range
+        Dim findObject As Word.Find = range.Find
+
+        Dim FindChar = "([0-9])([0-9]{3}[!0-9])"
+        Dim RepChar = "\1,\2"
+
+        'app.ScreenUpdating = False '关闭屏幕更新
+
+        With findObject
+            .ClearFormatting()
+            .MatchWildcards = True
+            .Replacement.ClearFormatting()
+            Do While (.Execute(FindText:=FindChar, Replace:=Word.WdReplace.wdReplaceAll, ReplaceWith:=RepChar))
+            Loop
+        End With
+        'range.Select()
+        'app.ScreenUpdating = False '开启屏幕更新
+    End Sub
+
+    ''' <summary>
+    ''' 百分比格式化
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnRibbonFormatPercent_Click(ByVal control As Office.IRibbonControl)
+
+    End Sub
+
+    ''' <summary>
+    ''' 数字转换
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnFormatNumber_Click(ByVal control As Office.IRibbonControl)
+        ' 没找到正则等快捷方法，只能笨招了
+        Dim src As Array = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+            "１", "２", "３", "４", "５", "６", "７", "８", "９", "０",
+        "一", "二", "三", "四", "五", "六", "七", "八", "九", "〇",
+        "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖", "零"}
+        Dim target As Array
+        If (control.Id = "BtnFormatNumber2") Then
+            ' 转为大写数字
+            target = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "〇"}
+        ElseIf (control.Id = "BtnFormatNumber3") Then
+            ' 转为汉字数字
+            target = {"壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖", "零"}
+        Else
+            ' 转为阿拉伯数字
+            target = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+        End If
+
+        Dim application = Globals.ThisAddIn.Application
+        Dim findObject As Word.Find = application.Selection.Find
+
+        For i As Integer = 0 To src.Length - 1
+            With findObject
+                .ClearFormatting()
+                .Text = src(i)
+                .Replacement.ClearFormatting()
+                .Replacement.Text = target(i Mod 10)
+                .Execute(Replace:=Word.WdReplace.wdReplaceAll)
+            End With
+        Next
+
+    End Sub
+#End Region
+
+#Region "快速插入"
+
+    ''' <summary>
+    ''' 插入货币符号
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnInsertMoney_Click(ByVal control As Office.IRibbonControl)
+        Dim text As String
+        Select Case control.Id
+            Case "BtnFormatMoneyUsd"
+                text = "$"
+                Exit Select
+            Case "BtnFormatMoneyEur"
+                text = "€"
+                Exit Select
+            Case "BtnFormatMoneyGbp"
+                text = "£"
+                Exit Select
+            Case Else
+                text = "￥"
+        End Select
+        Dim app = Globals.ThisAddIn.Application
+        Dim selection = app.Selection
+        Dim range = selection.Range
+        range.InsertAfter(text)
+        range.Collapse(Word.WdCollapseDirection.wdCollapseEnd)
+        range.Select()
+    End Sub
+
+    ''' <summary>
+    ''' 插入计量单位
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnInsertUnion_Click(ByVal control As Office.IRibbonControl)
+        Dim text As String = control.Tag
+        Dim app = Globals.ThisAddIn.Application
+        Dim selection = app.Selection
+        Dim range = selection.Range
+        range.InsertAfter(text)
+        range.Collapse(Word.WdCollapseDirection.wdCollapseEnd)
+        range.Select()
+    End Sub
+
+#End Region
 
 #Region "事件"
 
