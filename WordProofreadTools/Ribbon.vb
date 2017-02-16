@@ -89,6 +89,7 @@ Public Class Ribbon
         Me.buildinVisible = True
         If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
             Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = False
+            Globals.ThisAddIn.Application.ActiveDocument.Save()
         End If
         Me.RefreshRibbon()
     End Sub
@@ -103,6 +104,7 @@ Public Class Ribbon
         Me.buildinVisible = True
         If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
             Globals.ThisAddIn.Application.ActiveDocument.TrackRevisions = False
+            Globals.ThisAddIn.Application.ActiveDocument.Save()
         End If
         Me.RefreshRibbon()
     End Sub
@@ -288,6 +290,7 @@ Public Class Ribbon
             Dim doc = Globals.ThisAddIn.Application.ActiveDocument
             ' 保存文档
             doc.Save()
+            doc.Saved = True
 
             CommonModule.localFile = doc.Path + "\" + doc.Name
             ' 获取文件大小
@@ -473,9 +476,14 @@ Public Class Ribbon
     Public Sub BtnRibbonFormatThousands_Click(ByVal control As Office.IRibbonControl)
         Dim app = Globals.ThisAddIn.Application
         Dim range As Word.Range = app.Selection.Range
-        Dim findObject As Word.Find = range.Find
+        Dim findObject As Word.Find = app.Selection.Find
 
-        Dim FindChar = "([0-9])([0-9]{3}[!0-9])"
+        ' 没选中任何文本
+        If (String.IsNullOrEmpty(range.Text)) Then
+            Return
+        End If
+
+        Dim FindChar = "([0-9])([0-9]{3})"
         Dim RepChar = "\1,\2"
 
         'app.ScreenUpdating = False '关闭屏幕更新
@@ -483,9 +491,15 @@ Public Class Ribbon
         With findObject
             .ClearFormatting()
             .MatchWildcards = True
+            .Text = FindChar
             .Replacement.ClearFormatting()
-            Do While (.Execute(FindText:=FindChar, Replace:=Word.WdReplace.wdReplaceAll, ReplaceWith:=RepChar))
+            .Replacement.Text = RepChar
+            '.Execute(Replace:=Word.WdReplace.wdReplaceOne, Wrap:=Word.WdFindWrap.wdFindStop, Forward:=False)
+            Do While (.Execute(Replace:=Word.WdReplace.wdReplaceOne, Forward:=False, Wrap:=Word.WdFindWrap.wdFindStop))
+
             Loop
+            'Do While (.Execute(FindText:=FindChar, Replace:=Word.WdReplace.wdReplaceOne, ReplaceWith:=RepChar, Wrap:=Word.WdFindWrap.wdFindStop, Forward:=False))
+            'Loop
         End With
         'range.Select()
         'app.ScreenUpdating = False '开启屏幕更新
@@ -522,7 +536,13 @@ Public Class Ribbon
         End If
 
         Dim application = Globals.ThisAddIn.Application
+        Dim range = application.Selection.Range
         Dim findObject As Word.Find = application.Selection.Find
+
+        ' 没选中任何文本
+        If (String.IsNullOrEmpty(range.Text)) Then
+            Return
+        End If
 
         For i As Integer = 0 To src.Length - 1
             With findObject
@@ -530,7 +550,7 @@ Public Class Ribbon
                 .Text = src(i)
                 .Replacement.ClearFormatting()
                 .Replacement.Text = target(i Mod 10)
-                .Execute(Replace:=Word.WdReplace.wdReplaceAll)
+                .Execute(Replace:=Word.WdReplace.wdReplaceAll, Wrap:=Word.WdFindWrap.wdFindStop)
             End With
         Next
 

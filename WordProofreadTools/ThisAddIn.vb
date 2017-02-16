@@ -223,18 +223,19 @@ Public Class ThisAddIn
     ''' <param name="cancel"></param>
     Private Sub applicationEvents4_DocumentClose(doc As Document, ByRef cancel As Boolean) Handles applicationEvents.DocumentBeforeClose
         CommonModule.Log("文件关闭……")
-        If (Not String.IsNullOrEmpty(CommonModule.token)) Then
-            ' 设置默认状态
-            CommonModule.ribbon.SetNormalState()
-            ' 清空文件相关全局数据
-            CommonModule.token = ""
-            CommonModule.taskId = ""
-            CommonModule.nickName = ""
-            CommonModule.taskType = ""
-            CommonModule.taskFile = ""
-            CommonModule.localFile = ""
-            CommonModule.userId = ""
-        End If
+        'If (Not String.IsNullOrEmpty(CommonModule.token)) Then
+        '    ' 设置默认状态
+        '    CommonModule.ribbon.SetNormalState()
+        '    ' 清空文件相关全局数据
+        '    CommonModule.token = ""
+        '    CommonModule.taskId = ""
+        '    CommonModule.nickName = ""
+        '    CommonModule.taskType = ""
+        '    CommonModule.taskFile = ""
+        '    CommonModule.localFile = ""
+        '    CommonModule.userId = ""
+        'End If
+
     End Sub
 
     ''' <summary>

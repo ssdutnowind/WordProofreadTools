@@ -46,8 +46,8 @@
               <button id="BtnInsertMeter4" label="千米" tag="千米" showImage="false" onAction="BtnInsertUnion_Click" />
               <menuSeparator id="spprator17_1"/>
               <button id="BtnInsertSquareMeter1" label="平方厘米" tag="平方厘米" showImage="false" onAction="BtnInsertUnion_Click" />
-              <button id="BtnInsertSquareMeter2" label="平方米" tag="平方厘米" showImage="false" onAction="BtnInsertUnion_Click" />
-              <button id="BtnInsertSquareMeter3" label="平方公里" tag="平方厘米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertSquareMeter2" label="平方米" tag="平方米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertSquareMeter3" label="平方公里" tag="平方公里" showImage="false" onAction="BtnInsertUnion_Click" />
               <menuSeparator id="spprator17_2"/>
               <button id="BtnInsertStere1" label="立方厘米" tag="立方厘米" showImage="false" onAction="BtnInsertUnion_Click" />
               <button id="BtnInsertStere2" label="立方分米" tag="立方分米" showImage="false" onAction="BtnInsertUnion_Click" />

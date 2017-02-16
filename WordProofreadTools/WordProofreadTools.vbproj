@@ -521,7 +521,7 @@
     <ManifestKeyFile>WordProofreadTools_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D93220C75D036246A0CC62494BB3F48F6CE9E4DB</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>82F0C4CD15D744890D2C13E5BA92EE2EA0AB17F1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a Visual Basic project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
