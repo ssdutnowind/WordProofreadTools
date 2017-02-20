@@ -36,6 +36,7 @@ Public Class FormDownload
         Try
             ' 创建目标临时目录
             My.Computer.FileSystem.CreateDirectory(path + "\temp")
+            CommonModule.Log("目标路径：" + path + "\temp\" + file)
             ' 开始异步下载
             CommonModule.localFile = path + "\temp\" + file
             WC.DownloadFileAsync(New Uri(url), CommonModule.localFile)
@@ -63,15 +64,17 @@ Public Class FormDownload
         If e.Cancelled Then
             ' 任务被取消
             Me.Close()
+            CommonModule.Log("下载任务被取消")
         ElseIf e.Error IsNot Nothing Then
             Me.Hide()
+            CommonModule.Log("下载任务出错！" + vbCrLf + e.Error.Message)
             CommonModule.ShowAlert("下载任务出错！" + vbCrLf + e.Error.Message, "Error")
             Me.Close()
         Else
             ' 打开文件并关闭当前对话框
+            CommonModule.Log("下载完毕")
             Globals.ThisAddIn.Application.Documents.Open(CommonModule.localFile)
             Me.Close()
-            'Globals.ThisAddIn.Application.Activate()
         End If
     End Sub
 

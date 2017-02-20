@@ -22,31 +22,16 @@ Module CommonModule
 
     Public ribbon As Ribbon = Nothing
 
-    ''' <summary>
-    ''' 云端文件窗格
-    ''' </summary>
-    Public PaneCloudFiles As Microsoft.Office.Tools.CustomTaskPane = Nothing
-
-    ''' <summary>
-    ''' 显示云端文件窗格
-    ''' </summary>
-    Public Sub ShowCloudFilesPane()
-        CommonModule.PaneCloudFiles.Visible = True
-    End Sub
-
-    ''' <summary>
-    ''' 隐藏云端文件窗格
-    ''' </summary>
-    Public Sub HideCloudFilesPane()
-        CommonModule.PaneCloudFiles.Visible = False
-    End Sub
+    Public logs As String = ""
 
     ''' <summary>
     ''' 打印日志
     ''' </summary>
     ''' <param name="info"></param>
     Public Sub Log(info)
-        System.Diagnostics.Debug.WriteLine("[" + Date.Now.ToLocalTime + "] " + info)
+        info = "[" + Date.Now.ToLocalTime + "] " + info
+        CommonModule.logs += info + vbCrLf
+        System.Diagnostics.Debug.WriteLine(info)
     End Sub
 
     ''' <summary>

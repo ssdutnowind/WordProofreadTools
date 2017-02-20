@@ -83,6 +83,7 @@ Public Class Ribbon
     ''' 设置普通模式（非网站启动）
     ''' </summary>
     Public Sub SetNormalState()
+        CommonModule.Log("设置普通模式（非网站启动）")
         Me.editTabVisible = True
         Me.checkingTabVisible = False
         Me.editUploadEnable = False
@@ -98,6 +99,7 @@ Public Class Ribbon
     ''' 设置编辑模式（从网站启动）
     ''' </summary>
     Public Sub SetEditorState()
+        CommonModule.Log("设置编辑模式（从网站启动）")
         Me.editTabVisible = True
         Me.checkingTabVisible = False
         Me.editUploadEnable = True
@@ -113,6 +115,7 @@ Public Class Ribbon
     ''' 设置审核模式
     ''' </summary>
     Public Sub SetAuditState()
+        CommonModule.Log("设置审核模式")
         Me.editTabVisible = True
         Me.checkingTabVisible = True
         Me.editUploadEnable = False
@@ -128,6 +131,7 @@ Public Class Ribbon
             ' 显示插入和删除
             'doc.ActiveWindow.View.ShowInsertionsAndDeletions = True
             ' 修改批注和修订作者
+            CommonModule.Log("定义修订作者：" + CommonModule.nickName)
             Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
         End If
         Me.RefreshRibbon()
@@ -137,6 +141,7 @@ Public Class Ribbon
     ''' 设置校对模式
     ''' </summary>
     Public Sub SetProofreadState()
+        CommonModule.Log("设置校对模式")
         Me.editTabVisible = True
         Me.checkingTabVisible = True
         Me.editUploadEnable = False
@@ -152,6 +157,7 @@ Public Class Ribbon
             ' 显示插入和删除
             'doc.ActiveWindow.View.ShowInsertionsAndDeletions = True
             '修改批注和修订作者
+            CommonModule.Log("定义修订作者：" + CommonModule.nickName)
             Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
         End If
         Me.RefreshRibbon()
@@ -211,6 +217,8 @@ Public Class Ribbon
                 Return New Bitmap(My.Resources.btn_money_eur)
             Case "BtnFormatMoneyGbp"
                 Return New Bitmap(My.Resources.btn_money_gbp)
+            Case "BtnAbout"
+                Return New Bitmap(My.Resources.btn_about)
             Case Else
                 Return Nothing
         End Select
@@ -268,6 +276,16 @@ Public Class Ribbon
     End Sub
 
     ''' <summary>
+    ''' 关于
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnAbout_Click(ByVal control As Office.IRibbonControl)
+        CommonModule.Log("显示""关于""对话框")
+        Dim dialog = New FormAbout()
+        dialog.ShowDialog()
+    End Sub
+
+    ''' <summary>
     ''' 快速批注
     ''' </summary>
     ''' <param name="control"></param>
@@ -277,7 +295,7 @@ Public Class Ribbon
         Dim label = control.Tag
         Dim range = sel.Range()
         Dim comment = app.ActiveDocument.Comments.Add(range, label + "： ")
-        'comment.Author = CommonModule.nickName
+        CommonModule.Log("快速批注：" + label)
 
     End Sub
 
@@ -287,12 +305,16 @@ Public Class Ribbon
     ''' <param name="control"></param>
     Public Sub BtnRibbonUpload_Click(ByVal control As Office.IRibbonControl)
         If (Not String.IsNullOrEmpty(CommonModule.taskId)) Then
+            CommonModule.Log("准备上传任务文件……")
+
             Dim doc = Globals.ThisAddIn.Application.ActiveDocument
             ' 保存文档
             doc.Save()
             doc.Saved = True
+            CommonModule.Log("1.自动保存")
 
             CommonModule.localFile = doc.Path + "\" + doc.Name
+            CommonModule.Log("2.目标文件路径：" + CommonModule.localFile)
             ' 获取文件大小
             Dim info = My.Computer.FileSystem.GetFileInfo(CommonModule.localFile)
             ' 大于100M
@@ -300,10 +322,10 @@ Public Class Ribbon
                 CommonModule.ShowAlert("上传文件不能大于100M！", "Warning")
                 Return
             End If
-
+            CommonModule.Log("3.文件大小校验通过")
+            CommonModule.Log("4.打开""文件上传""对话框")
             ' 开始上传任务
             Dim upload = New FormUpload()
-            'upload.StartUpload(CommonModule.localFile)
             upload.ShowDialog()
 
         End If
@@ -338,6 +360,7 @@ Public Class Ribbon
                 content = String.Join(vbCrLf, contentArray)
                 Try
                     My.Computer.FileSystem.WriteAllText(fileName, content, False)
+                    CommonModule.Log("导出目录……")
                     CommonModule.ShowAlert("导出目录成功！")
                 Catch ex As Exception
                     CommonModule.ShowAlert(ex.Message, "Error")
@@ -366,6 +389,7 @@ Public Class Ribbon
                 Dim content = index.Range.Text
                 Try
                     My.Computer.FileSystem.WriteAllText(fileName, content, False)
+                    CommonModule.Log("导出索引……")
                     CommonModule.ShowAlert("导出索引成功！")
                 Catch ex As Exception
                     CommonModule.ShowAlert(ex.Message, "Error")
@@ -403,6 +427,7 @@ Public Class Ribbon
         '确定后开始导出
         If dialog.ShowDialog() = DialogResult.OK Then
             Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName)
+            CommonModule.Log("另存为Word……")
         End If
     End Sub
 
@@ -425,6 +450,7 @@ Public Class Ribbon
         '确定后开始导出
         If dialog.ShowDialog() = DialogResult.OK Then
             Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName, WdSaveFormat.wdFormatXML)
+            CommonModule.Log("另存为XML……")
         End If
     End Sub
 
@@ -447,6 +473,7 @@ Public Class Ribbon
         '确定后开始导出
         If dialog.ShowDialog() = DialogResult.OK Then
             Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName, WdSaveFormat.wdFormatPDF)
+            CommonModule.Log("另存为PDF……")
         End If
     End Sub
 
@@ -460,7 +487,7 @@ Public Class Ribbon
             For Each comment As Microsoft.Office.Interop.Word.Comment In comments
                 comment.DeleteRecursively()
             Next
-
+            CommonModule.Log("清空批注")
             CommonModule.ShowAlert("所有批注已删除完毕！")
         End If
     End Sub
@@ -544,6 +571,8 @@ Public Class Ribbon
             Return
         End If
 
+        CommonModule.Log("数字转换：" + control.Id)
+
         For i As Integer = 0 To src.Length - 1
             With findObject
                 .ClearFormatting()
@@ -578,6 +607,7 @@ Public Class Ribbon
             Case Else
                 text = "￥"
         End Select
+        CommonModule.Log("插入货币符号：" + control.Id)
         Dim app = Globals.ThisAddIn.Application
         Dim selection = app.Selection
         Dim range = selection.Range
@@ -591,6 +621,7 @@ Public Class Ribbon
     ''' </summary>
     ''' <param name="control"></param>
     Public Sub BtnInsertUnion_Click(ByVal control As Office.IRibbonControl)
+        CommonModule.Log("插入计量单位：" + control.Tag)
         Dim text As String = control.Tag
         Dim app = Globals.ThisAddIn.Application
         Dim selection = app.Selection

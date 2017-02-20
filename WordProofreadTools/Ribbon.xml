@@ -16,7 +16,7 @@
           <!--<button id="BtnExportAbstract" label="导出摘要" onAction="BtnExportAbstract_Click" showImage="true" getImage="GetIcons" />-->
         </group>
         <group id="GroupFormat" label="格式化" >
-          <button id="BtnFormatThousands" label="千分位&#13;" onAction="BtnRibbonFormatThousands_Click" size="large" showImage="true" getImage="GetIcons" />
+          <!--<button id="BtnFormatThousands" label="千分位&#13;" onAction="BtnRibbonFormatThousands_Click" size="large" showImage="true" getImage="GetIcons" />-->
           <!--<button id="BtnFormatPercent" label="百分比&#13;" onAction="BtnRibbonFormatPercent_Click" size="large" showImage="true" getImage="GetIcons" />-->
           <splitButton id="SplitButton16" size="large">
             <button id="BtnFormatNumber" label="数字转换&#13;" showImage="true" getImage="GetIcons" onAction="BtnFormatNumber_Click" />
@@ -60,10 +60,10 @@
               <button id="BtnInsertGram2" label="克" tag="克" showImage="false" onAction="BtnInsertUnion_Click" />
               <button id="BtnInsertGram3" label="千克" tag="千克" showImage="false" onAction="BtnInsertUnion_Click" />
               <button id="BtnInsertGram4" label="吨" tag="吨" showImage="false" onAction="BtnInsertUnion_Click" />
-
-
             </menu>
           </splitButton>
+          <separator id="spprator_about"/>
+          <button id="BtnAbout" label="关于&#13;" onAction="BtnAbout_Click" showImage="true" getImage="GetIcons" size="large" />
         </group>
       </tab>
       <tab id="TabChecking" label="审稿校对" getVisible="GetCheckingTabVisible">

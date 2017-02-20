@@ -166,6 +166,7 @@ Public Class ThisAddIn
     ''' 开始下载任务文件
     ''' </summary>
     Private Sub StartDownloadTask()
+        CommonModule.Log("开始下载任务文件……")
         Dim file As String = CommonModule.taskFile
         ' 如果没有返回fileName则从URL解析
         If (String.IsNullOrEmpty(CommonModule.fileName)) Then

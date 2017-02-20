@@ -52,19 +52,26 @@ Public Class FormUpload
             Dim tempFile = dir + "\" + Date.Now.ToString("yyyyMMddHHmmss") + ".docx"
 
             My.Computer.FileSystem.CopyFile(CommonModule.localFile, tempFile)
-
+            CommonModule.Log("5.生成文件副本：" + vbCrLf + tempFile)
+            CommonModule.Log("6.请求参数：")
             Dim url = CommonModule.serverPath + My.Settings.Item("UploadTaskUrl")
             ' 任务ID
             WC.QueryString.Add("taskId", CommonModule.taskId)
+            CommonModule.Log("  taskId:" + CommonModule.taskId)
             ' 用户ID
             WC.QueryString.Add("userId", CommonModule.userId)
+            CommonModule.Log("  userId:" + CommonModule.userId)
             ' 备注
             WC.QueryString.Add("comment", comment)
+            CommonModule.Log("  comment:" + comment)
             ' 批注数量
             WC.QueryString.Add("commentNum", Globals.ThisAddIn.Application.ActiveDocument.Comments.Count)
+            CommonModule.Log("  commentNum:" + Globals.ThisAddIn.Application.ActiveDocument.Comments.Count)
             ' 开始上传
+            CommonModule.Log("开始上传……")
             WC.UploadFileAsync(New Uri(url), tempFile)
         Catch ex As Exception
+            CommonModule.Log("上传出错：" + ex.ToString())
             CommonModule.ShowAlert(ex.ToString(), "Error")
         End Try
     End Sub
@@ -86,13 +93,16 @@ Public Class FormUpload
     Private Sub WC_UploadFileComplate(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs) Handles WC.UploadFileCompleted
         If e.Cancelled Then
             ' 任务被取消
+            CommonModule.Log("上传任务被取消")
             Me.Close()
         ElseIf e.Error IsNot Nothing Then
             Me.Hide()
+            CommonModule.Log("上传任务文件出错！" + vbCrLf + e.Error.Message)
             CommonModule.ShowAlert("上传任务文件出错！" + vbCrLf + e.Error.Message, "Error")
             Me.Close()
         Else
             Me.Hide()
+            CommonModule.Log("上传任务文件成功！")
             CommonModule.ShowAlert("上传任务文件成功！")
             Me.Close()
         End If

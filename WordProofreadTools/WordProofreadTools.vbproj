@@ -36,8 +36,8 @@
     <PublishUrl>e:\我的文档\桌面\VSTO\</PublishUrl>
     <InstallUrl />
     <TargetCulture>zh-chs</TargetCulture>
-    <ApplicationVersion>0.1.2.0</ApplicationVersion>
-    <AutoIncrementApplicationRevision>false</AutoIncrementApplicationRevision>
+    <ApplicationVersion>0.1.2.2</ApplicationVersion>
+    <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
@@ -207,6 +207,12 @@
   <ItemGroup>
     <AppDesigner Include="My Project\" />
     <Compile Include="Common.vb" />
+    <Compile Include="FormAbout.Designer.vb">
+      <DependentUpon>FormAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormCloudFiles.Designer.vb">
       <DependentUpon>FormCloudFiles.vb</DependentUpon>
     </Compile>
@@ -263,6 +269,9 @@
     <Compile Include="ThisAddIn.vb">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="FormAbout.resx">
+      <DependentUpon>FormAbout.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCloudFiles.resx">
       <DependentUpon>FormCloudFiles.vb</DependentUpon>
     </EmbeddedResource>
@@ -500,6 +509,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libs\Newtonsoft.Json.dll" />
+    <None Include="Resources\btn_about.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
