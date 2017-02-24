@@ -66,7 +66,7 @@ Public Class FormUpload
             CommonModule.Log("  comment:" + comment)
             ' 批注数量
             WC.QueryString.Add("commentNum", Globals.ThisAddIn.Application.ActiveDocument.Comments.Count)
-            CommonModule.Log("  commentNum:" + Globals.ThisAddIn.Application.ActiveDocument.Comments.Count)
+            CommonModule.Log("  commentNum:" + Globals.ThisAddIn.Application.ActiveDocument.Comments.Count.ToString())
             ' 开始上传
             CommonModule.Log("开始上传……")
             WC.UploadFileAsync(New Uri(url), tempFile)

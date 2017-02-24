@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WordProofreadTools", "WordProofreadTools\WordProofreadTools.vbproj", "{10BA419C-18CE-4C84-90FE-16E203ED7787}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClickOneSecurity", "ClickOneSecurity\ClickOneSecurity.vbproj", "{27602A24-0892-4BDE-965D-F9C660179067}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{10BA419C-18CE-4C84-90FE-16E203ED7787}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10BA419C-18CE-4C84-90FE-16E203ED7787}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10BA419C-18CE-4C84-90FE-16E203ED7787}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27602A24-0892-4BDE-965D-F9C660179067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27602A24-0892-4BDE-965D-F9C660179067}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27602A24-0892-4BDE-965D-F9C660179067}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27602A24-0892-4BDE-965D-F9C660179067}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

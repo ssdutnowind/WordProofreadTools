@@ -36,7 +36,7 @@
     <PublishUrl>e:\我的文档\桌面\VSTO\</PublishUrl>
     <InstallUrl />
     <TargetCulture>zh-chs</TargetCulture>
-    <ApplicationVersion>0.1.2.2</ApplicationVersion>
+    <ApplicationVersion>0.1.2.3</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -326,7 +326,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="winword.reg" />
-    <None Include="WordProofreadTools_TemporaryKey.pfx" />
+    <None Include="WordProofreadTools.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
@@ -528,10 +528,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>WordProofreadTools_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>WordProofreadTools.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>82F0C4CD15D744890D2C13E5BA92EE2EA0AB17F1</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>4A21A01898EF41356A87833A8E052A6F42368ABC</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a Visual Basic project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
