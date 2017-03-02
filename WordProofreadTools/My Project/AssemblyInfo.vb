@@ -9,10 +9,10 @@ Imports System.Security
 
 '查看程序集特性的值
 
-<Assembly: AssemblyTitle("Word编审工具")>
+<Assembly: AssemblyTitle("协同编纂工具")>
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("Word编审工具")>
+<Assembly: AssemblyProduct("协同编纂工具")>
 <Assembly: AssemblyCopyright("Copyright ©  2016")> 
 <Assembly: AssemblyTrademark("")> 
 
