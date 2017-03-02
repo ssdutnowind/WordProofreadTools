@@ -310,7 +310,6 @@ Public Class Ribbon
             Dim doc = Globals.ThisAddIn.Application.ActiveDocument
             ' 保存文档
             doc.Save()
-            doc.Saved = True
             CommonModule.Log("1.自动保存")
 
             CommonModule.localFile = doc.Path + "\" + doc.Name
@@ -426,7 +425,7 @@ Public Class Ribbon
         dialog.Title = "请选择导出的Word文件"
         '确定后开始导出
         If dialog.ShowDialog() = DialogResult.OK Then
-            Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName)
+            Globals.ThisAddIn.Application.ActiveDocument.SaveAs2(dialog.FileName, WdSaveFormat.wdFormatDocumentDefault)
             CommonModule.Log("另存为Word……")
         End If
     End Sub

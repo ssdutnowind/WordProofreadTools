@@ -22,5 +22,7 @@
         errMsg += err.StackTrace
 
         Me.txtErrorMessage.Text = errMsg
+        ' 记录异常信息
+        CommonModule.Log(errMsg)
     End Sub
 End Class

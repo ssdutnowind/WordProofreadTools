@@ -30,53 +30,58 @@ Public Class ThisAddIn
         Dim currentDomain As AppDomain = AppDomain.CurrentDomain
         AddHandler currentDomain.UnhandledException, AddressOf GlobalExceptionHandler
 
-        ' 初始化配置
-        CommonModule.serverPath = My.Settings.Item("Server")
-        CommonModule.Log("[读取配置]服务器路径：" + CommonModule.serverPath)
+        Try
+            ' 初始化配置
+            CommonModule.serverPath = My.Settings.Item("Server")
+            CommonModule.Log("[读取配置]服务器路径：" + CommonModule.serverPath)
 
-        ' 设置默认状态
-        CommonModule.ribbon.SetNormalState()
-
-        ' 参数判断
-        For Each arg As String In Environment.GetCommandLineArgs
-            ' 如果有taskId参数
-            If (arg.IndexOf("taskId") >= 1) Then
-                Dim token As String = ""
-                Dim task As String = ""
-                arg = arg.Substring(arg.LastIndexOf("?") + 1)
-                Dim params = arg.Split(",")
-                For Each param As String In params
-                    If (param.IndexOf("token") >= 0) Then
-                        CommonModule.token = param.Substring(6)
-                    ElseIf (param.IndexOf("taskId") >= 0) Then
-                        CommonModule.taskId = param.Substring(7)
-                    ElseIf (param.IndexOf("host") >= 0) Then
-                        CommonModule.serverPath = param.Substring(5) + "/"
-                    ElseIf (param.IndexOf("userId") >= 0) Then
-                        CommonModule.userId = param.Substring(7)
-                    End If
-                Next
-            End If
-        Next
-
-        ' 监听事件
-        applicationEvents = Globals.ThisAddIn.Application
-
-        If (String.IsNullOrEmpty(CommonModule.taskId) Or String.IsNullOrEmpty(CommonModule.token)) Then
-            ' token或者taskId为空则作为离线模式
+            ' 设置默认状态
             CommonModule.ribbon.SetNormalState()
-            'CommonModule.ribbon.SetProofreadState()
 
-            ' 插件启动时已经有文档打开
-            If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
-                applicationEvents4_DocumentOpen(Nothing)
+            ' 参数判断
+            For Each arg As String In Environment.GetCommandLineArgs
+                ' 如果有taskId参数
+                If (arg.IndexOf("taskId") >= 1) Then
+                    Dim token As String = ""
+                    Dim task As String = ""
+                    arg = arg.Substring(arg.LastIndexOf("?") + 1)
+                    Dim params = arg.Split(",")
+                    For Each param As String In params
+                        If (param.IndexOf("token") >= 0) Then
+                            CommonModule.token = param.Substring(6)
+                        ElseIf (param.IndexOf("taskId") >= 0) Then
+                            CommonModule.taskId = param.Substring(7)
+                        ElseIf (param.IndexOf("host") >= 0) Then
+                            CommonModule.serverPath = param.Substring(5) + "/"
+                        ElseIf (param.IndexOf("userId") >= 0) Then
+                            CommonModule.userId = param.Substring(7)
+                        End If
+                    Next
+                End If
+            Next
+
+            ' 监听事件
+            applicationEvents = Globals.ThisAddIn.Application
+
+            If (String.IsNullOrEmpty(CommonModule.taskId) Or String.IsNullOrEmpty(CommonModule.token)) Then
+                ' token或者taskId为空则作为离线模式
+                CommonModule.ribbon.SetNormalState()
+                'CommonModule.ribbon.SetProofreadState()
+
+                ' 插件启动时已经有文档打开
+                If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
+                    applicationEvents4_DocumentOpen(Nothing)
+                End If
+
+            Else
+                ' 否则查询任务属性
+                DoQueryTask()
             End If
-
-        Else
-            ' 否则查询任务属性
-            DoQueryTask()
-        End If
-
+        Catch ex As Exception
+            Dim dialog = New FormErrorDialog()
+            dialog.SetErrorMessage(ex)
+            dialog.ShowDialog()
+        End Try
     End Sub
 
     ''' <summary>
@@ -187,34 +192,39 @@ Public Class ThisAddIn
     Private Sub applicationEvents4_DocumentOpen(doc As Document) Handles applicationEvents.DocumentOpen
         CommonModule.Log("文档打开……")
 
-        Dim document = Globals.ThisAddIn.Application.ActiveDocument
-        If (String.IsNullOrEmpty(CommonModule.taskId)) Then
-            CommonModule.Log("打开本地文件……")
-            ' 没有taskId说明是本地打开文件，尝试读取response
-            Dim taskId As String = CommonModule.ReadDocumentProperty("taskId")
+        Try
+            Dim document = Globals.ThisAddIn.Application.ActiveDocument
+            If (String.IsNullOrEmpty(CommonModule.taskId)) Then
+                CommonModule.Log("打开本地文件……")
+                ' 没有taskId说明是本地打开文件，尝试读取response
+                Dim taskId As String = CommonModule.ReadDocumentProperty("taskId")
 
-            If (taskId <> Nothing) Then
-                CommonModule.Log("读取到自定义属性……")
-                CommonModule.taskId = CommonModule.ReadDocumentProperty("taskId")
-                CommonModule.taskType = CommonModule.ReadDocumentProperty("taskType")
-                CommonModule.nickName = CommonModule.ReadDocumentProperty("nickName")
-                CommonModule.userId = CommonModule.ReadDocumentProperty("userId")
-                ' 数据读取完毕，开始初始化状态
+                If (taskId <> Nothing) Then
+                    CommonModule.Log("读取到自定义属性……")
+                    CommonModule.taskId = CommonModule.ReadDocumentProperty("taskId")
+                    CommonModule.taskType = CommonModule.ReadDocumentProperty("taskType")
+                    CommonModule.nickName = CommonModule.ReadDocumentProperty("nickName")
+                    CommonModule.userId = CommonModule.ReadDocumentProperty("userId")
+                    ' 数据读取完毕，开始初始化状态
+                    AfterTaskDataReaded(False)
+                End If
+            Else
+                ' 有taskId说明是网络下载后打开
+                ' 将应答写入自定义属性
+                CommonModule.Log("即将写入自定义属性……")
+                CommonModule.WriteDocumentProperty("taskId", CommonModule.taskId)
+                CommonModule.WriteDocumentProperty("taskType", CommonModule.taskType)
+                CommonModule.WriteDocumentProperty("nickName", CommonModule.nickName)
+                CommonModule.WriteDocumentProperty("userId", CommonModule.userId)
+                doc.Save()
+                ' 为了正确设置修订状态，再调用一次
                 AfterTaskDataReaded(False)
             End If
-        Else
-            ' 有taskId说明是网络下载后打开
-            ' 将应答写入自定义属性
-            CommonModule.Log("即将写入自定义属性……")
-            CommonModule.WriteDocumentProperty("taskId", CommonModule.taskId)
-            CommonModule.WriteDocumentProperty("taskType", CommonModule.taskType)
-            CommonModule.WriteDocumentProperty("nickName", CommonModule.nickName)
-            CommonModule.WriteDocumentProperty("userId", CommonModule.userId)
-            doc.Save()
-            ' 为了正确设置修订状态，再调用一次
-            AfterTaskDataReaded(False)
-        End If
-
+        Catch ex As Exception
+            Dim dialog = New FormErrorDialog()
+            dialog.SetErrorMessage(ex)
+            dialog.ShowDialog()
+        End Try
     End Sub
 
     ''' <summary>

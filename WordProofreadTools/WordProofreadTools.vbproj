@@ -36,7 +36,7 @@
     <PublishUrl>e:\我的文档\桌面\VSTO\</PublishUrl>
     <InstallUrl />
     <TargetCulture>zh-chs</TargetCulture>
-    <ApplicationVersion>0.1.2.4</ApplicationVersion>
+    <ApplicationVersion>0.1.2.6</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -44,8 +44,8 @@
     <ProductName>Word编审工具</ProductName>
     <PublisherName />
     <SupportUrl />
-    <FriendlyName>Word编审工具</FriendlyName>
-    <OfficeApplicationDescription />
+    <FriendlyName>协同编纂工具</FriendlyName>
+    <OfficeApplicationDescription>富媒体协同编纂系统的配套Word加载项</OfficeApplicationDescription>
     <LoadBehavior>3</LoadBehavior>
   </PropertyGroup>
   <ItemGroup>
@@ -532,6 +532,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>4A21A01898EF41356A87833A8E052A6F42368ABC</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>WordProofreadTools.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a Visual Basic project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

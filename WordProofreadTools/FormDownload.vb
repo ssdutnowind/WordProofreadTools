@@ -73,7 +73,13 @@ Public Class FormDownload
         Else
             ' 打开文件并关闭当前对话框
             CommonModule.Log("下载完毕")
-            Globals.ThisAddIn.Application.Documents.Open(CommonModule.localFile)
+            Try
+                Globals.ThisAddIn.Application.Documents.Open(FileName:=CommonModule.localFile, Format:=Word.WdOpenFormat.wdOpenFormatDocument, ConfirmConversions:=True)
+            Catch ex As Exception
+                CommonModule.ShowAlert("加载Word文件出错：" + vbCrLf + ex.Message, "error")
+                Globals.ThisAddIn.Application.Quit()
+            End Try
+
             Me.Close()
         End If
     End Sub
