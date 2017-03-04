@@ -41,7 +41,8 @@ Public Class FormDownload
             CommonModule.localFile = path + "\temp\" + file
             WC.DownloadFileAsync(New Uri(url), CommonModule.localFile)
         Catch ex As Exception
-            MsgBox(ex.ToString())
+            CommonModule.Log("下载任务出错：" + vbCrLf + ex.Message)
+            CommonModule.ShowAlert("下载任务出错：" + vbCrLf + ex.Message, "error")
         End Try
 
     End Sub
@@ -76,6 +77,7 @@ Public Class FormDownload
             Try
                 Globals.ThisAddIn.Application.Documents.Open(FileName:=CommonModule.localFile, ConfirmConversions:=True)
             Catch ex As Exception
+                CommonModule.Log("加载Word文件出错：" + vbCrLf + ex.Message)
                 CommonModule.ShowAlert("加载Word文件出错：" + vbCrLf + ex.Message, "error")
                 Globals.ThisAddIn.Application.Quit()
             End Try

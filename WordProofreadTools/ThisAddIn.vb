@@ -180,6 +180,13 @@ Public Class ThisAddIn
             file = CommonModule.fileName
         End If
 
+        ' 检查非法文件名
+        If (file Like "*[\/:*?""<|>]*") Then
+            CommonModule.Log("文件名非法：" + file)
+            CommonModule.ShowAlert("任务文件（" + file + "）名包含非法字符，请联系管理员！", "Error")
+            Return
+        End If
+
         Dim download = New FormDownload()
         download.StartDownload(CommonModule.taskFile, file)
         download.ShowDialog()
@@ -193,6 +200,11 @@ Public Class ThisAddIn
         CommonModule.Log("文档打开……")
 
         Try
+            ' 不知为何触发该事件时也出现过无打开文档的异常
+            If (Globals.ThisAddIn.Application.Documents.Count = 0) Then
+                Return
+            End If
+
             Dim document = Globals.ThisAddIn.Application.ActiveDocument
             If (String.IsNullOrEmpty(CommonModule.taskId)) Then
                 CommonModule.Log("打开本地文件……")
