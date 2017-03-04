@@ -62,6 +62,9 @@
               <button id="BtnInsertGram4" label="吨" tag="吨" showImage="false" onAction="BtnInsertUnion_Click" />
             </menu>
           </splitButton>
+          </group>
+        <group id="GroupSystem" label="系统" >
+          <button id="BtnFileManager" label="缓存文件管理&#13;" onAction="BtnFileManager_Click" size="large" showImage="true" getImage="GetIcons" />
           <separator id="spprator_about"/>
           <button id="BtnAbout" label="关于&#13;" onAction="BtnAbout_Click" showImage="true" getImage="GetIcons" size="large" />
         </group>

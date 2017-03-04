@@ -241,6 +241,9 @@
   <data name="btn_contents" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btn_contents.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="btn_file_manager" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_file_manager.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="btn_format_number1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btn_format_number1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

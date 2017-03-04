@@ -231,6 +231,12 @@
     <Compile Include="FormErrorDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormLocalFiles.Designer.vb">
+      <DependentUpon>FormLocalFiles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLocalFiles.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormLogin.Designer.vb">
       <DependentUpon>FormLogin.vb</DependentUpon>
     </Compile>
@@ -281,6 +287,9 @@
     <EmbeddedResource Include="FormErrorDialog.resx">
       <DependentUpon>FormErrorDialog.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormLocalFiles.resx">
+      <DependentUpon>FormLocalFiles.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.vb</DependentUpon>
     </EmbeddedResource>
@@ -294,7 +303,6 @@
       <DependentUpon>FormTemplate.vb</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.vb</DependentUpon>
     </None>
@@ -331,9 +339,7 @@
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Templates\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Ribbon.xml">
       <SubType>Designer</SubType>
@@ -509,6 +515,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libs\Newtonsoft.Json.dll" />
+    <None Include="Resources\btn_file_manager.png" />
     <None Include="Resources\btn_about.png" />
   </ItemGroup>
   <PropertyGroup>

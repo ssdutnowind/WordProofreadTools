@@ -219,6 +219,8 @@ Public Class Ribbon
                 Return New Bitmap(My.Resources.btn_money_gbp)
             Case "BtnAbout"
                 Return New Bitmap(My.Resources.btn_about)
+            Case "BtnFileManager"
+                Return New Bitmap(My.Resources.btn_file_manager)
             Case Else
                 Return Nothing
         End Select
@@ -489,6 +491,15 @@ Public Class Ribbon
             CommonModule.Log("清空批注")
             CommonModule.ShowAlert("所有批注已删除完毕！")
         End If
+    End Sub
+
+    ''' <summary>
+    ''' 打开文件管理窗口
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnFileManager_Click(ByVal control As Office.IRibbonControl)
+        Dim form = New FormLocalFiles()
+        form.ShowDialog()
     End Sub
 
 #End Region
