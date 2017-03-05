@@ -25,7 +25,7 @@ Public Class ThisAddIn
     ''' 插件初始化
     ''' </summary>
     Private Sub ThisAddIn_Startup() Handles Me.Startup
-        CommonModule.Log("系统初始化……")
+        CommonModule.Log("[初始化] 系统初始化……")
         ' 处理全局异常
         Dim currentDomain As AppDomain = AppDomain.CurrentDomain
         AddHandler currentDomain.UnhandledException, AddressOf GlobalExceptionHandler
@@ -33,7 +33,7 @@ Public Class ThisAddIn
         Try
             ' 初始化配置
             CommonModule.serverPath = My.Settings.Item("Server")
-            CommonModule.Log("[读取配置]服务器路径：" + CommonModule.serverPath)
+            CommonModule.Log("[初始化] 默认服务器路径：" + CommonModule.serverPath)
 
             ' 设置默认状态
             CommonModule.ribbon.SetNormalState()
@@ -171,7 +171,7 @@ Public Class ThisAddIn
     ''' 开始下载任务文件
     ''' </summary>
     Private Sub StartDownloadTask()
-        CommonModule.Log("开始下载任务文件……")
+        CommonModule.Log("[初始化] 开始下载任务文件……")
         Dim file As String = CommonModule.taskFile
         ' 如果没有返回fileName则从URL解析
         If (String.IsNullOrEmpty(CommonModule.fileName)) Then
@@ -182,7 +182,7 @@ Public Class ThisAddIn
 
         ' 检查非法文件名
         If (file Like "*[\/:*?""<|>]*") Then
-            CommonModule.Log("文件名非法：" + file)
+            CommonModule.Log("[初始化] 文件名非法：" + file)
             CommonModule.ShowAlert("任务文件（" + file + "）名包含非法字符，请联系管理员！", "Error")
             Return
         End If
@@ -197,7 +197,7 @@ Public Class ThisAddIn
     ''' </summary>
     ''' <param name="Doc"></param>
     Private Sub applicationEvents4_DocumentOpen(doc As Document) Handles applicationEvents.DocumentOpen
-        CommonModule.Log("文档打开……")
+        CommonModule.Log("[初始化] 文档打开……")
 
         Try
             ' 不知为何触发该事件时也出现过无打开文档的异常
@@ -207,31 +207,46 @@ Public Class ThisAddIn
 
             Dim document = Globals.ThisAddIn.Application.ActiveDocument
             If (String.IsNullOrEmpty(CommonModule.taskId)) Then
-                CommonModule.Log("打开本地文件……")
+                CommonModule.Log("[初始化] 打开本地文件……")
                 ' 没有taskId说明是本地打开文件，尝试读取response
                 Dim taskId As String = CommonModule.ReadDocumentProperty("taskId")
 
                 If (taskId <> Nothing) Then
-                    CommonModule.Log("读取到自定义属性……")
+                    CommonModule.Log("[初始化] 读取到自定义属性：")
                     CommonModule.taskId = CommonModule.ReadDocumentProperty("taskId")
                     CommonModule.taskType = CommonModule.ReadDocumentProperty("taskType")
                     CommonModule.nickName = CommonModule.ReadDocumentProperty("nickName")
                     CommonModule.userId = CommonModule.ReadDocumentProperty("userId")
+                    CommonModule.serverPath = CommonModule.ReadDocumentProperty("serverPath")
+                    CommonModule.Log("  taskId" + CommonModule.taskId)
+                    CommonModule.Log("  taskType" + CommonModule.taskType)
+                    CommonModule.Log("  nickName" + CommonModule.nickName)
+                    CommonModule.Log("  userId" + CommonModule.userId)
+                    CommonModule.Log("  serverPath" + CommonModule.serverPath)
                     ' 数据读取完毕，开始初始化状态
                     AfterTaskDataReaded(False)
                 End If
             Else
                 ' 有taskId说明是网络下载后打开
                 ' 将应答写入自定义属性
-                CommonModule.Log("即将写入自定义属性……")
+                CommonModule.Log("[初始化] 即将写入自定义属性：")
                 CommonModule.WriteDocumentProperty("taskId", CommonModule.taskId)
                 CommonModule.WriteDocumentProperty("taskType", CommonModule.taskType)
                 CommonModule.WriteDocumentProperty("nickName", CommonModule.nickName)
                 CommonModule.WriteDocumentProperty("userId", CommonModule.userId)
-                doc.Save()
+                CommonModule.WriteDocumentProperty("serverPath", CommonModule.serverPath)
+                CommonModule.Log("  taskId" + CommonModule.taskId)
+                CommonModule.Log("  taskType" + CommonModule.taskType)
+                CommonModule.Log("  nickName" + CommonModule.nickName)
+                CommonModule.Log("  userId" + CommonModule.userId)
+                CommonModule.Log("  serverPath" + CommonModule.serverPath)
+                If (Not doc.ReadOnly) Then
+                    doc.Save()
+                End If
+
                 ' 为了正确设置修订状态，再调用一次
                 AfterTaskDataReaded(False)
-            End If
+                End If
         Catch ex As Exception
             Dim dialog = New FormErrorDialog()
             dialog.SetErrorMessage(ex)
@@ -245,7 +260,7 @@ Public Class ThisAddIn
     ''' <param name="doc"></param>
     ''' <param name="cancel"></param>
     Private Sub applicationEvents4_DocumentClose(doc As Document, ByRef cancel As Boolean) Handles applicationEvents.DocumentBeforeClose
-        CommonModule.Log("文件关闭……")
+        CommonModule.Log("[初始化] 文件关闭……")
         'If (Not String.IsNullOrEmpty(CommonModule.token)) Then
         '    ' 设置默认状态
         '    CommonModule.ribbon.SetNormalState()

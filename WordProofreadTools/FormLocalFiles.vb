@@ -38,14 +38,16 @@ Public Class FormLocalFiles
         Dim result = CommonModule.ShowAlert("确定要删除全部选择的文件么？", "Question")
         If (result = DialogResult.Yes) Then
             Try
+                CommonModule.Log("[缓存文件管理] 删除文件：")
                 For Each row As DataGridViewRow In Me.DataGridView1.Rows
                     If (row.Cells.Item("ColumnCheck").Value) Then
+                        CommonModule.Log(row.Cells.Item("ColumnPath").Value)
                         My.Computer.FileSystem.DeleteFile(row.Cells.Item("ColumnPath").Value)
                         row.Visible = False
                     End If
                 Next
             Catch ex As Exception
-                CommonModule.Log("删除文件出错：" + vbCrLf + ex.Message)
+                CommonModule.Log("[缓存文件管理] 删除文件出错：" + vbCrLf + ex.Message)
                 CommonModule.ShowAlert("删除文件出错：" + vbCrLf + ex.Message, "error")
             End Try
         End If
@@ -89,20 +91,25 @@ Public Class FormLocalFiles
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub FormLocalFiles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CommonModule.Log("[缓存文件管理] 打开缓存文件管理对话框")
         Dim assemblyInfo = System.Reflection.Assembly.GetExecutingAssembly()
         localPath = My.Computer.FileSystem.GetParentPath(assemblyInfo.Location) + "\temp"
+        CommonModule.Log("[缓存文件管理] 缓存文件路径：" + localPath)
         Dim fileName = ""
         If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
             fileName = Globals.ThisAddIn.Application.ActiveDocument.FullName
+            CommonModule.Log("[缓存文件管理] 当前打开文件路径：" + fileName)
         End If
 
         ' 判断文件夹是否存在
         If My.Computer.FileSystem.DirectoryExists(localPath) Then
+            CommonModule.Log("[缓存文件管理] 文件列表：")
             Dim files = My.Computer.FileSystem.GetFiles(localPath, FileIO.SearchOption.SearchTopLevelOnly, "*.doc")
             Dim fileInfo As IO.FileInfo
             Dim row As Integer = 0
             ' 遍历检索到的所有文件
             For Each file In files
+                CommonModule.Log(file)
                 fileInfo = My.Computer.FileSystem.GetFileInfo(file)
                 ' 非当前文件、隐藏文件、系统文件才添加到列表
                 If ((fileName.Equals(fileInfo.FullName) Or (fileInfo.Attributes And FileAttribute.Hidden) Or (fileInfo.Attributes And FileAttribute.System))) Then
@@ -149,6 +156,7 @@ Public Class FormLocalFiles
             Dim result = CommonModule.ShowAlert("确定要打开文件：" + name + "？", "Question")
             If (result = DialogResult.Yes) Then
                 Dim path = Me.DataGridView1.Rows.Item(e.RowIndex).Cells.Item("ColumnPath").Value
+                CommonModule.Log("[缓存文件管理] 打开文件：" + path)
                 Try
                     ' 打开文档
                     If (Globals.ThisAddIn.Application.Documents.Count > 0) Then
@@ -158,8 +166,8 @@ Public Class FormLocalFiles
                     Globals.ThisAddIn.Application.Documents.Open(FileName:=path, ConfirmConversions:=True)
                     Me.Close()
                 Catch ex As Exception
-                    CommonModule.Log("加载Word文件出错：" + vbCrLf + ex.Message)
-                    CommonModule.ShowAlert("加载Word文件出错：" + vbCrLf + ex.Message, "error")
+                    CommonModule.Log("[缓存文件管理] 打开文件出错：" + vbCrLf + ex.Message)
+                    CommonModule.ShowAlert("打开文件出错：" + vbCrLf + ex.Message, "error")
                 End Try
             End If
         End If
