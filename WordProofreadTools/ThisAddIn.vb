@@ -124,16 +124,24 @@ Public Class ThisAddIn
                 If (IsNothing(json) Or IsNothing(json.jsonResult)) Then
                     ' 解析异常也提示失败
                     CommonModule.ShowAlert("查询任务信息失败！", "Error")
+                    CommonModule.Log("[初始化] 解析应答报文失败：")
                 End If
 
                 ' 昵称
                 CommonModule.nickName = json.jsonResult.nickName
+                ' Word限制昵称长度52个字符
+                If (CommonModule.nickName.Length > 52) Then
+                    CommonModule.nickName = CommonModule.nickName.Substring(0, 52)
+                    CommonModule.Log("[初始化] 昵称过长，截取为：" + CommonModule.nickName)
+                End If
                 ' 任务类型
                 CommonModule.taskType = json.jsonResult.taskType
                 ' 任务文件
                 CommonModule.taskFile = json.jsonResult.taskFile
                 ' 文件名
                 CommonModule.fileName = json.jsonResult.fileName
+                ' 替换半角冒号，其余字符不管，到时会报错
+                CommonModule.fileName = CommonModule.fileName.Replace(":", "：")
 
                 ' 数据读取完毕，开始初始化状态
                 AfterTaskDataReaded(True)
@@ -183,7 +191,7 @@ Public Class ThisAddIn
         ' 检查非法文件名
         If (file Like "*[\/:*?""<|>]*") Then
             CommonModule.Log("[初始化] 文件名非法：" + file)
-            CommonModule.ShowAlert("任务文件（" + file + "）名包含非法字符，请联系管理员！", "Error")
+            CommonModule.ShowAlert("任务文件名（" + file + "）包含非法字符，请联系管理员！", "Error")
             Return
         End If
 
@@ -218,11 +226,11 @@ Public Class ThisAddIn
                     CommonModule.nickName = CommonModule.ReadDocumentProperty("nickName")
                     CommonModule.userId = CommonModule.ReadDocumentProperty("userId")
                     CommonModule.serverPath = CommonModule.ReadDocumentProperty("serverPath")
-                    CommonModule.Log("  taskId" + CommonModule.taskId)
-                    CommonModule.Log("  taskType" + CommonModule.taskType)
-                    CommonModule.Log("  nickName" + CommonModule.nickName)
-                    CommonModule.Log("  userId" + CommonModule.userId)
-                    CommonModule.Log("  serverPath" + CommonModule.serverPath)
+                    CommonModule.Log("  taskId：" + CommonModule.taskId)
+                    CommonModule.Log("  taskType：" + CommonModule.taskType)
+                    CommonModule.Log("  nickName：" + CommonModule.nickName)
+                    CommonModule.Log("  userId：" + CommonModule.userId)
+                    CommonModule.Log("  serverPath：" + CommonModule.serverPath)
                     ' 数据读取完毕，开始初始化状态
                     AfterTaskDataReaded(False)
                 End If
@@ -235,11 +243,11 @@ Public Class ThisAddIn
                 CommonModule.WriteDocumentProperty("nickName", CommonModule.nickName)
                 CommonModule.WriteDocumentProperty("userId", CommonModule.userId)
                 CommonModule.WriteDocumentProperty("serverPath", CommonModule.serverPath)
-                CommonModule.Log("  taskId" + CommonModule.taskId)
-                CommonModule.Log("  taskType" + CommonModule.taskType)
-                CommonModule.Log("  nickName" + CommonModule.nickName)
-                CommonModule.Log("  userId" + CommonModule.userId)
-                CommonModule.Log("  serverPath" + CommonModule.serverPath)
+                CommonModule.Log("  taskId：" + CommonModule.taskId)
+                CommonModule.Log("  taskType：" + CommonModule.taskType)
+                CommonModule.Log("  nickName：" + CommonModule.nickName)
+                CommonModule.Log("  userId：" + CommonModule.userId)
+                CommonModule.Log("  serverPath：" + CommonModule.serverPath)
                 If (Not doc.ReadOnly) Then
                     doc.Save()
                 End If

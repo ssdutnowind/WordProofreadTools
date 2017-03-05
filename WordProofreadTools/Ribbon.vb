@@ -138,7 +138,8 @@ Public Class Ribbon
             'doc.ActiveWindow.View.ShowInsertionsAndDeletions = True
             ' 修改批注和修订作者
             CommonModule.Log("[Ribbon] 定义修订作者：" + CommonModule.nickName)
-            Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
+            Globals.ThisAddIn.Application.UserName = CommonModule.nickName
+            'Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
             If (Not doc.ReadOnly) Then
                 doc.Save()
             End If
@@ -167,7 +168,8 @@ Public Class Ribbon
             'doc.ActiveWindow.View.ShowInsertionsAndDeletions = True
             '修改批注和修订作者
             CommonModule.Log("[Ribbon] 定义修订作者：" + CommonModule.nickName)
-            Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
+            Globals.ThisAddIn.Application.UserName = CommonModule.nickName
+            'Globals.ThisAddIn.Application.UserInitials = CommonModule.nickName
             If (Not doc.ReadOnly) Then
                 doc.Save()
             End If

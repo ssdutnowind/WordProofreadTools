@@ -6,6 +6,8 @@ Public Class FormUpload
 
     Private WithEvents WC As New WebClient
 
+    Private tempFile As String = String.Empty
+
     ''' <summary>
     ''' 关闭按钮，默认禁用
     ''' </summary>
@@ -13,22 +15,6 @@ Public Class FormUpload
     ''' <param name="e"></param>
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
-    End Sub
-
-    ''' <summary>
-    ''' 上传文件到服务器
-    ''' </summary>
-    ''' <param name="file">文件名</param>
-    Public Sub StartUpload(file As String)
-        Try
-            Dim url = CommonModule.serverPath + ""
-            WC.QueryString.Add("taskId", CommonModule.taskId)
-
-            WC.UploadFileAsync(New Uri(url), file)
-        Catch ex As Exception
-            MsgBox(ex.ToString())
-        End Try
-
     End Sub
 
     ''' <summary>
@@ -55,7 +41,7 @@ Public Class FormUpload
 
             ' 当前Word进程无法直接再打开文件，所以拷贝一份
             Dim dir = My.Computer.FileSystem.GetParentPath(CommonModule.localFile)
-            Dim tempFile = dir + "\" + Date.Now.ToString("yyyyMMddHHmmss") + ".docx"
+            tempFile = dir + "\" + Date.Now.ToString("yyyyMMddHHmmss") + ".docx"
 
             My.Computer.FileSystem.CopyFile(CommonModule.localFile, tempFile)
             CommonModule.Log("[上传] 5.生成文件副本：" + vbCrLf + tempFile)
@@ -112,6 +98,13 @@ Public Class FormUpload
             CommonModule.ShowAlert("上传任务文件成功！")
             Me.Close()
         End If
+
+        Try
+            CommonModule.Log("[上传] 删除临时文件：" + tempFile)
+            My.Computer.FileSystem.DeleteFile(tempFile)
+        Catch ex As Exception
+            CommonModule.Log("[上传] 删除临时文件失败：" + vbCrLf + ex.Message)
+        End Try
     End Sub
 
 End Class

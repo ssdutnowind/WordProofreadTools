@@ -19,20 +19,20 @@ Public Class HttpRequest
         End If
         ' 请求对象
         Dim request As WebRequest
-        CommonModule.Log("下发请求=====")
+        CommonModule.Log("[HttpRequest] 下发请求……")
         If (method = "GET") Then
             If (postData.Length) Then
                 path += "?" + postData
             End If
             request = WebRequest.Create(path)
             request.Method = "GET"
-            CommonModule.Log("请求地址：" + path)
+            CommonModule.Log("[HttpRequest] 请求地址：" + path)
         Else
             request = WebRequest.Create(path)
             ' 请求方法
             request.Method = "POST"
-            CommonModule.Log("请求地址：" + path)
-            CommonModule.Log("请求数据：" + postData)
+            CommonModule.Log("[HttpRequest] 请求地址：" + path)
+            CommonModule.Log("[HttpRequest] 请求数据：" + postData)
             Dim byteArray As Byte() = Encoding.UTF8.GetBytes(postData)
             ' ContentType
             request.ContentType = "application/x-www-form-urlencoded"
@@ -53,12 +53,12 @@ Public Class HttpRequest
         End Try
 
         ' Display the status.
-        CommonModule.Log("应答状态：" + CType(response, HttpWebResponse).StatusDescription)
+        CommonModule.Log("[HttpRequest] 应答状态：" + CType(response, HttpWebResponse).StatusDescription)
         Dim dataStream = response.GetResponseStream()
         Dim reader As New StreamReader(dataStream)
         Dim responseFromServer As String = reader.ReadToEnd()
         ' Display the content.
-        CommonModule.Log("应答内容：" + responseFromServer)
+        CommonModule.Log("[HttpRequest] 应答内容：" + responseFromServer)
         ' Clean up the streams.
         reader.Close()
         dataStream.Close()
