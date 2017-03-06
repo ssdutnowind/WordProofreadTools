@@ -97,7 +97,8 @@ Public Class ThisAddIn
         Dim request = New HttpRequest()
         Dim response = request.DoSendRequest(My.Settings.Item("queryTaskUrl"), params)
         If (String.IsNullOrEmpty(response)) Then
-            CommonModule.ShowAlert("查询任务信息失败！", "Error")
+            CommonModule.Log("[任务查询] 查询任务信息失败！应答报文为空。")
+            CommonModule.ShowAlert("查询任务信息失败！" + vbCrLf + "解析服务器返回的应答报文出错。", "Error")
             Return
         Else
             ' 解析应答
@@ -108,7 +109,8 @@ Public Class ThisAddIn
                 jsonPublic = JsonConvert.DeserializeObject(Of ResponsePublic)(response)
             Catch ex As Exception
                 ' 解析异常也提示失败
-                CommonModule.ShowAlert("查询任务信息失败！", "Error")
+                CommonModule.Log("[任务查询] 查询任务信息失败！" + vbCrLf + ex.Message)
+                CommonModule.ShowAlert("查询任务信息失败！" + vbCrLf + "解析服务器返回的应答报文出错。", "Error")
                 Return
             End Try
 
@@ -124,29 +126,38 @@ Public Class ThisAddIn
                 If (IsNothing(json) Or IsNothing(json.jsonResult)) Then
                     ' 解析异常也提示失败
                     CommonModule.ShowAlert("查询任务信息失败！", "Error")
-                    CommonModule.Log("[初始化] 解析应答报文失败：")
+                    CommonModule.Log("[任务查询] 解析应答报文失败：消息体解析结果为空。")
+                End If
+
+                ' 应答报文检查
+                If (String.IsNullOrEmpty(json.jsonResult.nickName) Or String.IsNullOrEmpty(json.jsonResult.taskType) Or
+                    String.IsNullOrEmpty(json.jsonResult.taskFile) Or String.IsNullOrEmpty(json.jsonResult.fileName)) Then
+                    CommonModule.ShowAlert("查询任务信息失败，服务器应答报文格式错误！", "Error")
+                    CommonModule.Log("[任务查询] 查询任务信息失败，服务器应答报文格式错误，必要参数为空。")
+                    Return
                 End If
 
                 ' 昵称
                 CommonModule.nickName = json.jsonResult.nickName
-                ' Word限制昵称长度52个字符
-                If (CommonModule.nickName.Length > 52) Then
-                    CommonModule.nickName = CommonModule.nickName.Substring(0, 52)
-                    CommonModule.Log("[初始化] 昵称过长，截取为：" + CommonModule.nickName)
-                End If
-                ' 任务类型
-                CommonModule.taskType = json.jsonResult.taskType
-                ' 任务文件
-                CommonModule.taskFile = json.jsonResult.taskFile
-                ' 文件名
-                CommonModule.fileName = json.jsonResult.fileName
-                ' 替换半角冒号，其余字符不管，到时会报错
-                CommonModule.fileName = CommonModule.fileName.Replace(":", "：")
+                    ' Word限制昵称长度52个字符、缩写长度8个字符
+                    If (CommonModule.nickName.Length > 8) Then
+                        CommonModule.nickName = CommonModule.nickName.Substring(0, 8)
+                        CommonModule.Log("[任务查询] 昵称过长，截取为：" + CommonModule.nickName)
+                    End If
+                    ' 任务类型
+                    CommonModule.taskType = json.jsonResult.taskType
+                    ' 任务文件
+                    CommonModule.taskFile = json.jsonResult.taskFile
+                    ' 文件名
+                    CommonModule.fileName = json.jsonResult.fileName
+                    ' 替换半角冒号，其余字符不管，到时会报错
+                    CommonModule.fileName = CommonModule.fileName.Replace(":", "：")
 
-                ' 数据读取完毕，开始初始化状态
-                AfterTaskDataReaded(True)
-            Else
-                ' 服务器返回异常消息
+                    ' 数据读取完毕，开始初始化状态
+                    AfterTaskDataReaded(True)
+                Else
+                    ' 服务器返回异常消息
+                    CommonModule.Log("[任务查询] 服务器返回异常：" + jsonPublic.msg)
                 CommonModule.ShowAlert(jsonPublic.msg, "Error")
                 Return
             End If
