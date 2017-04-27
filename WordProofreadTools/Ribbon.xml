@@ -15,7 +15,7 @@
           <button id="BtnExportIndex" label="导出索引" onAction="BtnRibbonExportIndex_Click" showImage="true" getImage="GetIcons" />
           <!--<button id="BtnExportAbstract" label="导出摘要" onAction="BtnExportAbstract_Click" showImage="true" getImage="GetIcons" />-->
         </group>
-        <group id="GroupFormat" label="格式化" >
+        <group id="GroupFormat" label="标准化" >
           <!--<button id="BtnFormatThousands" label="千分位&#13;" onAction="BtnRibbonFormatThousands_Click" size="large" showImage="true" getImage="GetIcons" />-->
           <!--<button id="BtnFormatPercent" label="百分比&#13;" onAction="BtnRibbonFormatPercent_Click" size="large" showImage="true" getImage="GetIcons" />-->
           <splitButton id="SplitButton16" size="large">
@@ -27,7 +27,7 @@
             </menu>
           </splitButton>
         </group>
-        <group id="GroupAssist" label="插入标准单位" >
+        <group id="GroupAssist" label="插入符号" >
           <splitButton id="SplitButton15" size="large">
             <button id="BtnFormatMoney" label="货币符号&#13;" showImage="true" getImage="GetIcons" onAction="BtnInsertMoney_Click" />
             <menu id="SplitButton15__mnu">
@@ -62,7 +62,10 @@
               <button id="BtnInsertGram4" label="吨" tag="吨" showImage="false" onAction="BtnInsertUnion_Click" />
             </menu>
           </splitButton>
-          </group>
+
+          <gallery idMso="InsertBuildingBlocksEquationsGallery" size="large"></gallery>
+          <gallery idMso="SymbolInsertGallery" size="large"></gallery>
+        </group>
         <group id="GroupSystem" label="系统" >
           <button id="BtnFileManager" label="缓存文件管理&#13;" onAction="BtnFileManager_Click" size="large" showImage="true" getImage="GetIcons" />
           <separator id="spprator_about"/>

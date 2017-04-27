@@ -594,6 +594,11 @@ Public Class Ribbon
         If (String.IsNullOrEmpty(range.Text)) Then
             Return
         End If
+        ' 选择数字过少会出问题，所以加个限制
+        If (range.Text.Length < 3) Then
+            CommonModule.ShowAlert("请选择三个以上有效字符！")
+            Return
+        End If
 
         CommonModule.Log("[Ribbon] 数字转换：" + control.Id)
 

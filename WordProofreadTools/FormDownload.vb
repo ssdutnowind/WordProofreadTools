@@ -36,6 +36,7 @@ Public Class FormDownload
         Try
             ' 创建目标临时目录
             My.Computer.FileSystem.CreateDirectory(path + "\temp")
+            CommonModule.Log("远程路径：" + url)
             CommonModule.Log("目标路径：" + path + "\temp\" + file)
             ' 开始异步下载
             CommonModule.localFile = path + "\temp\" + file
