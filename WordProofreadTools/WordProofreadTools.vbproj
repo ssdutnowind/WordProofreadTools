@@ -249,6 +249,12 @@
     <Compile Include="FormProofread.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSymbol.Designer.vb">
+      <DependentUpon>FormSymbol.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSymbol.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormTaskProperty.Designer.vb">
       <DependentUpon>FormTaskProperty.vb</DependentUpon>
     </Compile>
@@ -296,6 +302,9 @@
     <EmbeddedResource Include="FormProofread.resx">
       <DependentUpon>FormProofread.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormSymbol.resx">
+      <DependentUpon>FormSymbol.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormTaskProperty.resx">
       <DependentUpon>FormTaskProperty.vb</DependentUpon>
     </EmbeddedResource>
@@ -335,6 +344,7 @@
     </Compile>
     <None Include="winword.reg" />
     <None Include="WordProofreadTools.pfx" />
+    <None Include="WordProofreadTools_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
@@ -515,6 +525,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libs\Newtonsoft.Json.dll" />
+    <None Include="Resources\btn_paper_size.png" />
     <None Include="Resources\btn_file_manager.png" />
     <None Include="Resources\btn_about.png" />
   </ItemGroup>
@@ -535,16 +546,16 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>WordProofreadTools.pfx</ManifestKeyFile>
+    <ManifestKeyFile>WordProofreadTools_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>4A21A01898EF41356A87833A8E052A6F42368ABC</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2E76C42D9C9A5D3487479F000695C65400DD63D9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>WordProofreadTools.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>WordProofreadTools_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a Visual Basic project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

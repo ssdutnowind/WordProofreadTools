@@ -235,6 +235,8 @@ Public Class Ribbon
                 Return New Bitmap(My.Resources.btn_about)
             Case "BtnFileManager"
                 Return New Bitmap(My.Resources.btn_file_manager)
+            Case "BtnPaperSize"
+                Return New Bitmap(My.Resources.btn_paper_size)
             Case Else
                 Return Nothing
         End Select
@@ -658,6 +660,18 @@ Public Class Ribbon
         range.InsertAfter(text)
         range.Collapse(Word.WdCollapseDirection.wdCollapseEnd)
         range.Select()
+    End Sub
+
+    ''' <summary>
+    ''' 插入国际化单位
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnInsertGlobalSymbol_Click(ByVal control As Office.IRibbonControl)
+        CommonModule.Log("[Ribbon] 插入国际化单位：" + control.Tag)
+        Dim tab As String = control.Tag
+        Dim dialog = New FormSymbol()
+        dialog.TabControl1.SelectedIndex = tab
+        dialog.Show()
     End Sub
 
 #End Region

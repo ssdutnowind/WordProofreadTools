@@ -38,9 +38,13 @@
             </menu>
           </splitButton>
           <splitButton id="SplitButton17" size="large">
-            <button id="BtnInsertUnit" label="计量单位&#13;" showImage="true" getImage="GetIcons" onAction="BtnInsertUnit_Click" />
+            <button id="BtnInsertUnit" label="单位符号&#13;" showImage="true" getImage="GetIcons" onAction="BtnInsertUnit_Click" />
             <menu id="SplitButton17__mnu" showImage ="false">
-              <button id="BtnInsertMeter1" label="毫米" tag="毫米" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertSymbol1" label="基本单位" tag="0" showImage="false" onAction="BtnInsertGlobalSymbol_Click" />
+              <button id="BtnInsertSymbol2" label="导出单位" tag="1" showImage="false" onAction="BtnInsertGlobalSymbol_Click" />
+              <button id="BtnInsertSymbol3" label="十进制单位词头" tag="2" showImage="false" onAction="BtnInsertGlobalSymbol_Click" />
+              <button id="BtnInsertSymbol4" label="计量单位" tag="3" showImage="false" onAction="BtnInsertGlobalSymbol_Click" />
+              <!--<button id="BtnInsertMeter1" label="毫米" tag="毫米" showImage="false" onAction="BtnInsertUnion_Click" />
               <button id="BtnInsertMeter2" label="厘米" tag="厘米" showImage="false" onAction="BtnInsertUnion_Click" />
               <button id="BtnInsertMeter3" label="分米" tag="分米" showImage="false" onAction="BtnInsertUnion_Click" />
               <button id="BtnInsertMeter4" label="千米" tag="千米" showImage="false" onAction="BtnInsertUnion_Click" />
@@ -59,12 +63,34 @@
               <button id="BtnInsertGram1" label="毫克" tag="毫克" showImage="false" onAction="BtnInsertUnion_Click" />
               <button id="BtnInsertGram2" label="克" tag="克" showImage="false" onAction="BtnInsertUnion_Click" />
               <button id="BtnInsertGram3" label="千克" tag="千克" showImage="false" onAction="BtnInsertUnion_Click" />
-              <button id="BtnInsertGram4" label="吨" tag="吨" showImage="false" onAction="BtnInsertUnion_Click" />
+              <button id="BtnInsertGram4" label="吨" tag="吨" showImage="false" onAction="BtnInsertUnion_Click" />-->
             </menu>
           </splitButton>
 
           <gallery idMso="InsertBuildingBlocksEquationsGallery" size="large"></gallery>
           <gallery idMso="SymbolInsertGallery" size="large"></gallery>
+        </group>
+        <group id="GroupComposing" label="排版" >
+          <gallery idMso="PageSizeGallery" size="large"></gallery>
+          <gallery idMso="PageOrientationGallery" size="large"></gallery>
+          <gallery idMso="PageMarginsGallery" size="large"></gallery>
+          <gallery idMso="TableColumnsGallery" size="large"></gallery>
+          <splitButton id="SplitButton18" size="large">
+            <button id="BtnPaperSize" label="内置纸张&#13;" showImage="true" getImage="GetIcons" />
+            <menu id="SplitButton18__mnu" showImage ="false">
+              <button id="BtnSetPaperSize1" label="12开（200*235）" tag="200*235" showImage="false" onAction="BtnSetPaperSize_Click" />
+              <button id="BtnSetPaperSize2" label="12开（222*222）" tag="222*222" showImage="false" onAction="BtnSetPaperSize_Click" />
+              <button id="BtnSetPaperSize3" label="12开（256*260）" tag="256*260" showImage="false" onAction="BtnSetPaperSize_Click" />
+              <button id="BtnSetPaperSize4" label="12开（285*285）" tag="285*285" showImage="false" onAction="BtnSetPaperSize_Click" />
+
+              <button id="BtnSetPaperSize5" label="16开（170*240）" tag="170*240" showImage="false" onAction="BtnSetPaperSize_Click" />
+              <button id="BtnSetPaperSize6" label="16开（185*260）" tag="185*260" showImage="false" onAction="BtnSetPaperSize_Click" />
+              <button id="BtnSetPaperSize7" label="16开（210*260）" tag="210*260" showImage="false" onAction="BtnSetPaperSize_Click" />
+              <button id="BtnSetPaperSize8" label="16开（210*285）" tag="210*285" showImage="false" onAction="BtnSetPaperSize_Click" />
+              <button id="BtnSetPaperSize9" label="24开（180*210）" tag="180*210" showImage="false" onAction="BtnSetPaperSize_Click" />
+              <button id="BtnSetPaperSize10" label="32开（148*210）" tag="148*210" showImage="false" onAction="BtnSetPaperSize_Click" />
+            </menu>
+          </splitButton>
         </group>
         <group id="GroupSystem" label="系统" >
           <button id="BtnFileManager" label="缓存文件管理&#13;" onAction="BtnFileManager_Click" size="large" showImage="true" getImage="GetIcons" />
