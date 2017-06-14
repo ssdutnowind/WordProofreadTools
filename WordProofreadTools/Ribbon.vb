@@ -676,6 +676,23 @@ Public Class Ribbon
 
 #End Region
 
+#Region "页面大小"
+    ''' <summary>
+    ''' 插入国际化单位
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnSetPaperSize_Click(ByVal control As Office.IRibbonControl)
+        CommonModule.Log("[Ribbon] 设置页面尺寸：" + control.Tag)
+        Dim size As String() = control.Tag.Split(",")
+
+        Dim doc = Globals.ThisAddIn.Application.ActiveDocument
+        doc.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
+        doc.PageSetup.PageWidth = 1230
+
+    End Sub
+
+#End Region
+
 #Region "事件"
 
     'Public Sub OnUserLogin(ByVal sender As Object) Handles loginForm.UserLogin
