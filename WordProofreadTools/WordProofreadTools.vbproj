@@ -343,7 +343,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="winword.reg" />
-    <None Include="WordProofreadTools.pfx" />
     <None Include="WordProofreadTools_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -549,7 +548,7 @@
     <ManifestKeyFile>WordProofreadTools_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2E76C42D9C9A5D3487479F000695C65400DD63D9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>3D6897B71E36AA52D51647672A7B4207B7AD9BFF</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
