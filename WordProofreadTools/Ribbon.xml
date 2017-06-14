@@ -75,22 +75,7 @@
           <gallery idMso="PageOrientationGallery" size="large"></gallery>
           <gallery idMso="PageMarginsGallery" size="large"></gallery>
           <gallery idMso="TableColumnsGallery" size="large"></gallery>
-          <splitButton id="SplitButton18" size="large">
-            <button id="BtnPaperSize" label="内置纸张&#13;" showImage="true" getImage="GetIcons" />
-            <menu id="SplitButton18__mnu" showImage ="false">
-              <button id="BtnSetPaperSize1" label="12开（200*235）" tag="200*235" showImage="false" onAction="BtnSetPaperSize_Click" />
-              <button id="BtnSetPaperSize2" label="12开（222*222）" tag="222*222" showImage="false" onAction="BtnSetPaperSize_Click" />
-              <button id="BtnSetPaperSize3" label="12开（256*260）" tag="256*260" showImage="false" onAction="BtnSetPaperSize_Click" />
-              <button id="BtnSetPaperSize4" label="12开（285*285）" tag="285*285" showImage="false" onAction="BtnSetPaperSize_Click" />
-
-              <button id="BtnSetPaperSize5" label="16开（170*240）" tag="170*240" showImage="false" onAction="BtnSetPaperSize_Click" />
-              <button id="BtnSetPaperSize6" label="16开（185*260）" tag="185*260" showImage="false" onAction="BtnSetPaperSize_Click" />
-              <button id="BtnSetPaperSize7" label="16开（210*260）" tag="210*260" showImage="false" onAction="BtnSetPaperSize_Click" />
-              <button id="BtnSetPaperSize8" label="16开（210*285）" tag="210*285" showImage="false" onAction="BtnSetPaperSize_Click" />
-              <button id="BtnSetPaperSize9" label="24开（180*210）" tag="180*210" showImage="false" onAction="BtnSetPaperSize_Click" />
-              <button id="BtnSetPaperSize10" label="32开（148*210）" tag="148*210" showImage="false" onAction="BtnSetPaperSize_Click" />
-            </menu>
-          </splitButton>
+          
         </group>
         <group id="GroupSystem" label="系统" >
           <button id="BtnFileManager" label="缓存文件管理&#13;" onAction="BtnFileManager_Click" size="large" showImage="true" getImage="GetIcons" />

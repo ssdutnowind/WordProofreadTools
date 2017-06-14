@@ -676,6 +676,33 @@ Public Class Ribbon
 
 #End Region
 
+#Region "排版"
+    ''' <summary>
+    ''' 纸张大小
+    ''' </summary>
+    ''' <param name="control"></param>
+    Public Sub BtnSetPaperSize_Click(ByVal control As Office.IRibbonControl)
+        CommonModule.Log("[Ribbon] 设置纸张大小：" + control.Tag)
+        Dim charVar As Char = "*"
+        Dim app = Globals.ThisAddIn.Application
+        Dim size = control.Tag.Split(charVar)
+        Dim width = app.CentimetersToPoints(Double.Parse(size(0)))
+        Dim height = app.CentimetersToPoints(Double.Parse(size(1)))
+        'Dim width = Single.Parse(size(0))
+        'Dim height = Single.Parse(size(1))
+        'app.ActiveDocument.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
+        For Each sec As Section In app.ActiveDocument.Sections
+            sec.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
+            sec.PageSetup.PageWidth = width
+            sec.PageSetup.PageHeight = height
+        Next
+        'app.ActiveDocument.PageSetup.PageWidth = width
+        'app.ActiveDocument.PageSetup.PageHeight = height
+
+    End Sub
+#End Region
+
+
 #Region "事件"
 
     'Public Sub OnUserLogin(ByVal sender As Object) Handles loginForm.UserLogin
