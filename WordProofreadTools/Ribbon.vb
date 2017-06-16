@@ -686,19 +686,13 @@ Public Class Ribbon
         Dim charVar As Char = "*"
         Dim app = Globals.ThisAddIn.Application
         Dim size = control.Tag.Split(charVar)
-        Dim width = app.CentimetersToPoints(Double.Parse(size(0)))
-        Dim height = app.CentimetersToPoints(Double.Parse(size(1)))
-        'Dim width = Single.Parse(size(0))
-        'Dim height = Single.Parse(size(1))
-        'app.ActiveDocument.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
-        For Each sec As Section In app.ActiveDocument.Sections
-            sec.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
-            sec.PageSetup.PageWidth = width
-            sec.PageSetup.PageHeight = height
-        Next
-        'app.ActiveDocument.PageSetup.PageWidth = width
-        'app.ActiveDocument.PageSetup.PageHeight = height
-
+        Dim width = app.MillimetersToPoints(Double.Parse(size(0)))
+        Dim height = app.MillimetersToPoints(Double.Parse(size(1)))
+        If (Not IsNothing(app.ActiveDocument)) Then
+            app.ActiveDocument.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
+            app.ActiveDocument.PageSetup.PageWidth = width
+            app.ActiveDocument.PageSetup.PageHeight = height
+        End If
     End Sub
 #End Region
 

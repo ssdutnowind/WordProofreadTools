@@ -33,10 +33,10 @@
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>e:\我的文档\桌面\VSTO\</PublishUrl>
+    <PublishUrl>E:\个人目录\桌面\VSTO\</PublishUrl>
     <InstallUrl />
     <TargetCulture>zh-chs</TargetCulture>
-    <ApplicationVersion>0.1.2.21</ApplicationVersion>
+    <ApplicationVersion>0.1.2.32</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -548,7 +548,7 @@
     <ManifestKeyFile>WordProofreadTools_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3D6897B71E36AA52D51647672A7B4207B7AD9BFF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>E6613ADC9FF7758FC06F6078717DBDC64A5CA0D2</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
