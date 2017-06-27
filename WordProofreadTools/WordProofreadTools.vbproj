@@ -548,7 +548,7 @@
     <ManifestKeyFile>WordProofreadTools_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3D6897B71E36AA52D51647672A7B4207B7AD9BFF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0D67146654CEE9ABF5935775AA2014756ED73868</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

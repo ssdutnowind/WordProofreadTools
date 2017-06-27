@@ -75,7 +75,12 @@ Public Class Ribbon
     ''' </summary>
     Private Sub RefreshRibbon()
         'If (Not IsNothing(Me.ribbon)) Then
-        Me.ribbon.Invalidate()
+        Try
+            Me.ribbon.Invalidate()
+        Catch ex As Exception
+
+        End Try
+
         'End If
     End Sub
 
@@ -685,20 +690,17 @@ Public Class Ribbon
         CommonModule.Log("[Ribbon] 设置纸张大小：" + control.Tag)
         Dim charVar As Char = "*"
         Dim app = Globals.ThisAddIn.Application
+        Dim doc = app.ActiveDocument
         Dim size = control.Tag.Split(charVar)
-        Dim width = app.CentimetersToPoints(Double.Parse(size(0)))
-        Dim height = app.CentimetersToPoints(Double.Parse(size(1)))
-        'Dim width = Single.Parse(size(0))
-        'Dim height = Single.Parse(size(1))
-        'app.ActiveDocument.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
-        For Each sec As Section In app.ActiveDocument.Sections
-            sec.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
-            sec.PageSetup.PageWidth = width
-            sec.PageSetup.PageHeight = height
-        Next
-        'app.ActiveDocument.PageSetup.PageWidth = width
-        'app.ActiveDocument.PageSetup.PageHeight = height
-
+        Dim width = app.MillimetersToPoints(Double.Parse(size(0)))
+        Dim height = app.MillimetersToPoints(Double.Parse(size(1)))
+        Try
+            doc.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
+            doc.PageSetup.PageWidth = width
+            doc.PageSetup.PageHeight = height
+        Catch ex As Exception
+            CommonModule.ShowAlert(ex.Message)
+        End Try
     End Sub
 #End Region
 

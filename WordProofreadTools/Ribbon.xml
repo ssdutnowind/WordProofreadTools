@@ -71,10 +71,12 @@
           <gallery idMso="SymbolInsertGallery" size="large"></gallery>
         </group>
         <group id="GroupComposing" label="排版" >
+          <gallery idMso="TableColumnsGallery" size="large"></gallery>
+          <separator id="spprator_page"/>
           <gallery idMso="PageSizeGallery" size="large"></gallery>
           <gallery idMso="PageOrientationGallery" size="large"></gallery>
           <gallery idMso="PageMarginsGallery" size="large"></gallery>
-          <gallery idMso="TableColumnsGallery" size="large"></gallery>
+          
           <splitButton id="SplitButton18" size="large">
             <button id="BtnPaperSize" label="内置纸张&#13;" showImage="true" getImage="GetIcons" />
             <menu id="SplitButton18__mnu" showImage ="false">
