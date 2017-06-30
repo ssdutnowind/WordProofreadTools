@@ -74,9 +74,11 @@ Public Class Ribbon
     ''' 刷新Ribbon状态
     ''' </summary>
     Private Sub RefreshRibbon()
-        'If (Not IsNothing(Me.ribbon)) Then
-        Me.ribbon.Invalidate()
-        'End If
+        Try
+            Me.ribbon.Invalidate()
+        Catch ex As Exception
+            ' 不处理
+        End Try
     End Sub
 
     ''' <summary>

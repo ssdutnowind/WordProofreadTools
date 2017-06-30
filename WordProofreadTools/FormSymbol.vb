@@ -117,21 +117,21 @@
         End If
     End Sub
 
-    Private Sub DataGridView2_CellContentClick(sender As Object, e As Windows.Forms.DataGridViewCellEventArgs)
+    Private Sub DataGridView2_CellContentClick(sender As Object, e As Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView2.CellContentClick
         If (e.ColumnIndex = 3) Then
             Dim symbol = Me.DataGridView2.Rows.Item(e.RowIndex).Cells(2).Value
             InsertSymbol(symbol)
         End If
     End Sub
 
-    Private Sub DataGridView3_CellContentClick(sender As Object, e As Windows.Forms.DataGridViewCellEventArgs)
+    Private Sub DataGridView3_CellContentClick(sender As Object, e As Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView3.CellContentClick
         If (e.ColumnIndex = 3) Then
             Dim symbol = Me.DataGridView3.Rows.Item(e.RowIndex).Cells(2).Value
             InsertSymbol(symbol)
         End If
     End Sub
 
-    Private Sub DataGridView4_CellContentClick(sender As Object, e As Windows.Forms.DataGridViewCellEventArgs)
+    Private Sub DataGridView4_CellContentClick(sender As Object, e As Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView4.CellContentClick
         If (e.ColumnIndex = 3) Then
             Dim symbol = Me.DataGridView4.Rows.Item(e.RowIndex).Cells(2).Value
             InsertSymbol(symbol)
