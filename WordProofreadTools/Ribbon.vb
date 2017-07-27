@@ -696,8 +696,33 @@ Public Class Ribbon
             app.ActiveDocument.PageSetup.PageHeight = height
         End If
     End Sub
-#End Region
 
+    Public Sub BtnSetStyle_Click(ByVal control As Office.IRibbonControl)
+        Dim styleName = control.Tag
+        Dim app = Globals.ThisAddIn.Application
+        Dim doc = app.ActiveDocument
+        Dim find As Boolean = False
+        ' 遍历查找目标样式
+        If (Not IsNothing(doc)) Then
+            Dim style As Style, paragraph As Paragraph
+            For Each style In doc.Styles
+                ' 找到了对应的样式
+                If (style.NameLocal = styleName) Then
+                    find = True
+                    Dim selection = app.Selection
+                    Dim range = selection.Range
+                    For Each paragraph In range.Paragraphs
+                        paragraph.Style = style
+                    Next
+                End If
+            Next
+
+            If (Not find) Then
+                CommonModule.ShowAlert("你所使用的模板不正确或者当前模板不支持该样式！")
+            End If
+        End If
+    End Sub
+#End Region
 
 #Region "事件"
 
