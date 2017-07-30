@@ -239,6 +239,8 @@ Public Class Ribbon
                 Return New Bitmap(My.Resources.btn_file_manager)
             Case "BtnPaperSize"
                 Return New Bitmap(My.Resources.btn_paper_size)
+            Case "BtnBuiltinStyle"
+                Return New Bitmap(My.Resources.btn_style)
             Case Else
                 Return Nothing
         End Select

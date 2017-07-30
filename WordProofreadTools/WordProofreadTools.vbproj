@@ -524,6 +524,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libs\Newtonsoft.Json.dll" />
+    <None Include="Resources\btn_style.png" />
     <None Include="Resources\btn_paper_size.png" />
     <None Include="Resources\btn_file_manager.png" />
     <None Include="Resources\btn_about.png" />
