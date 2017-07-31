@@ -33,10 +33,10 @@
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>e:\我的文档\桌面\VSTO\</PublishUrl>
+    <PublishUrl>E:\个人目录\桌面\VSTO\</PublishUrl>
     <InstallUrl />
     <TargetCulture>zh-chs</TargetCulture>
-    <ApplicationVersion>0.1.2.21</ApplicationVersion>
+    <ApplicationVersion>0.1.2.33</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -524,6 +524,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libs\Newtonsoft.Json.dll" />
+    <None Include="Resources\btn_style.png" />
     <None Include="Resources\btn_paper_size.png" />
     <None Include="Resources\btn_file_manager.png" />
     <None Include="Resources\btn_about.png" />
@@ -548,7 +549,7 @@
     <ManifestKeyFile>WordProofreadTools_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>0D67146654CEE9ABF5935775AA2014756ED73868</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>E6613ADC9FF7758FC06F6078717DBDC64A5CA0D2</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

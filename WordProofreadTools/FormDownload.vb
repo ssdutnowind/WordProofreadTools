@@ -35,6 +35,7 @@ Public Class FormDownload
 
         Try
             ' 创建目标临时目录
+            url = url.Replace("\", "/")
             My.Computer.FileSystem.CreateDirectory(path + "\temp")
             CommonModule.Log("远程路径：" + url)
             CommonModule.Log("目标路径：" + path + "\temp\" + file)
@@ -80,7 +81,6 @@ Public Class FormDownload
             Catch ex As Exception
                 CommonModule.Log("加载Word文件出错：" + vbCrLf + ex.Message)
                 CommonModule.ShowAlert("加载Word文件出错：" + vbCrLf + ex.Message, "error")
-                Globals.ThisAddIn.Application.Quit()
             End Try
 
             Me.Close()

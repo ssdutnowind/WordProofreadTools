@@ -74,14 +74,11 @@ Public Class Ribbon
     ''' 刷新Ribbon状态
     ''' </summary>
     Private Sub RefreshRibbon()
-        'If (Not IsNothing(Me.ribbon)) Then
         Try
             Me.ribbon.Invalidate()
         Catch ex As Exception
-
+            ' 不处理
         End Try
-
-        'End If
     End Sub
 
     ''' <summary>
@@ -242,6 +239,8 @@ Public Class Ribbon
                 Return New Bitmap(My.Resources.btn_file_manager)
             Case "BtnPaperSize"
                 Return New Bitmap(My.Resources.btn_paper_size)
+            Case "BtnBuiltinStyle"
+                Return New Bitmap(My.Resources.btn_style)
             Case Else
                 Return Nothing
         End Select
@@ -690,20 +689,42 @@ Public Class Ribbon
         CommonModule.Log("[Ribbon] 设置纸张大小：" + control.Tag)
         Dim charVar As Char = "*"
         Dim app = Globals.ThisAddIn.Application
-        Dim doc = app.ActiveDocument
         Dim size = control.Tag.Split(charVar)
         Dim width = app.MillimetersToPoints(Double.Parse(size(0)))
         Dim height = app.MillimetersToPoints(Double.Parse(size(1)))
-        Try
-            doc.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
-            doc.PageSetup.PageWidth = width
-            doc.PageSetup.PageHeight = height
-        Catch ex As Exception
-            CommonModule.ShowAlert(ex.Message)
-        End Try
+        If (Not IsNothing(app.ActiveDocument)) Then
+            app.ActiveDocument.PageSetup.PaperSize = WdPaperSize.wdPaperCustom
+            app.ActiveDocument.PageSetup.PageWidth = width
+            app.ActiveDocument.PageSetup.PageHeight = height
+        End If
+    End Sub
+
+    Public Sub BtnSetStyle_Click(ByVal control As Office.IRibbonControl)
+        Dim styleName = control.Tag
+        Dim app = Globals.ThisAddIn.Application
+        Dim doc = app.ActiveDocument
+        Dim find As Boolean = False
+        ' 遍历查找目标样式
+        If (Not IsNothing(doc)) Then
+            Dim style As Style, paragraph As Paragraph
+            For Each style In doc.Styles
+                ' 找到了对应的样式
+                If (style.NameLocal = styleName) Then
+                    find = True
+                    Dim selection = app.Selection
+                    Dim range = selection.Range
+                    For Each paragraph In range.Paragraphs
+                        paragraph.Style = style
+                    Next
+                End If
+            Next
+
+            If (Not find) Then
+                CommonModule.ShowAlert("你所使用的模板不正确或者当前模板不支持该样式！")
+            End If
+        End If
     End Sub
 #End Region
-
 
 #Region "事件"
 

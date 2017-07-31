@@ -93,6 +93,17 @@
               <button id="BtnSetPaperSize10" label="32开（148*210）" tag="148*210" showImage="false" onAction="BtnSetPaperSize_Click" />
             </menu>
           </splitButton>
+          <splitButton id="SplitButton19" size="large">
+            <button id="BtnBuiltinStyle" label="段落样式&#13;" showImage="true" getImage="GetIcons" />
+            <menu id="SplitButton19__mnu" showImage ="false">
+              <button id="BtnSetStyle1" label="一级标题" tag="[模板]一级标题" showImage="false" onAction="BtnSetStyle_Click" />
+              <button id="BtnSetStyle2" label="二级标题" tag="[模板]二级标题" showImage="false" onAction="BtnSetStyle_Click" />
+              <button id="BtnSetStyle3" label="三级标题" tag="[模板]三级标题" showImage="false" onAction="BtnSetStyle_Click" />
+              <button id="BtnSetStyle4" label="四级标题" tag="[模板]四级标题" showImage="false" onAction="BtnSetStyle_Click" />
+              <button id="BtnSetStyle5" label="正文段落" tag="[模板]正文段落" showImage="false" onAction="BtnSetStyle_Click" />
+              <button id="BtnSetStyle6" label="图表注" tag="[模板]图表标注" showImage="false" onAction="BtnSetStyle_Click" />
+            </menu>
+          </splitButton>
         </group>
         <group id="GroupSystem" label="系统" >
           <button id="BtnFileManager" label="缓存文件管理&#13;" onAction="BtnFileManager_Click" size="large" showImage="true" getImage="GetIcons" />
